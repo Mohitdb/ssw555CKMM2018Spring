@@ -25,7 +25,7 @@ public class GedcomParse {
 	public static void parse() throws IOException {
 		
 		//read file
-		FileReader fileReader = new FileReader("C:\\Users\\Caroline Squillante\\workspace\\SSW555\\src\\proj02test.ged");
+		FileReader fileReader = new FileReader("C:\\Users\\Caroline Squillante\\workspace\\SSW555\\src\\proj02test.ged"); // TODO: Change path for our testing file
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 		
 		// Creating Object to insert later into array list
@@ -176,6 +176,8 @@ public class GedcomParse {
 							indi.alive = false;
 							isBirth = false;
 						}
+						
+						// TODO: Need to implement for rest of the tags
 						
 					}
 				}
