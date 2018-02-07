@@ -5,6 +5,10 @@
  */
 //package gedcomparse;
 
+/**
+ *
+ * @author mohit
+ */
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,8 +19,7 @@ import java.util.HashMap;
  *
  * @author MANAN MANASVI
  */
-public class GedcomParse
-{
+public class GedcomParse {
 
     static String reader = null;
     static HashMap<String, String> indiHash = new HashMap<>();
@@ -27,11 +30,11 @@ public class GedcomParse
 	 * prints out each line in the form <level>|<tag>|<valid?> : Y or N|<arguments>
      */
     @SuppressWarnings("resource")
-    public static void parse() throws IOException
-    {
+    public static void parse() throws IOException {
 
         //read file
-        FileReader fileReader = new FileReader("D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\New Folder\\GedcomParse\\project1_MananSatra.ged"); // TODO: Change path for our testing file
+        //FileReader fileReader = new FileReader("D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\New Folder\\GedcomParse\\project1_MananSatra.ged"); // TODO: Change path for our testing file
+        FileReader fileReader = new FileReader("C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         // Creating Object to insert later into array list
@@ -49,10 +52,9 @@ public class GedcomParse
         boolean isEmpty = true;
         String hashValueIndi = "";
         String hashValueFam = "";
-        
+
         //while loop to check to see if each line is valid and formats the information accordingly
-        while ((reader = bufferedReader.readLine()) != null)
-        {
+        while ((reader = bufferedReader.readLine()) != null) {
             //System.out.println("--> " + reader);
 
             String[] lst = reader.split(" ", 0);
@@ -63,36 +65,28 @@ public class GedcomParse
             String arguments = "";
 
             //check for invalid level # (cannot be greater than 2)
-            if (Integer.parseInt(level) >= 3)
-            {
+            if (Integer.parseInt(level) >= 3) {
                 isValid = "N";
                 tag = lst[1];
-                if (lst.length > 2)
-                {
-                    for (int i = 2; i < lst.length; i++)
-                    {
+                if (lst.length > 2) {
+                    for (int i = 2; i < lst.length; i++) {
                         arguments = arguments + lst[i] + " ";
                     }
                 }
             }
 
             //checks all level 0s; valid tag can be INDI, FAM, HEAD, TRLR, NOTE
-            if (Integer.parseInt(level) == 0)
-            {
-                if (lst[1].contains("HEAD") || lst[1].contains("TRLR") || lst[1].contains("NOTE"))
-                {
+            if (Integer.parseInt(level) == 0) {
+                if (lst[1].contains("HEAD") || lst[1].contains("TRLR") || lst[1].contains("NOTE")) {
                     tag = lst[1];
                     isValid = "Y";
-                    if (lst.length > 2)
-                    {
-                        for (int i = 2; i < lst.length; i++)
-                        {
+                    if (lst.length > 2) {
+                        for (int i = 2; i < lst.length; i++) {
                             arguments = arguments + lst[i] + " ";
                         }
                     }
                     //checks special case for INDI and FAM
-                } else if (lst[2].contains("INDI") || lst[2].contains("FAM"))
-                {
+                } else if (lst[2].contains("INDI") || lst[2].contains("FAM")) {
 
                     hashValueIndi = indi.individualID + "\t" + indi.name + "\t" + indi.gender + "\t" + indi.birth + "\t" + indi.alive;
                     indiHash.putIfAbsent(indi.individualID, hashValueIndi);
@@ -100,17 +94,14 @@ public class GedcomParse
                     famHash.putIfAbsent(fam.famID, hashValueFam);
 
 //                    hashValueIndi="";
-                    if (isEmpty)
-                    {
+                    if (isEmpty) {
                         //don't add to arraylist coz objects are empty
                         isEmpty = false;
-                    } else
-                    {
+                    } else {
                         //add to arraylist
 
                         // Insert Data into ArrayLists
-                        if (isIndi == true)
-                        {
+                        if (isIndi == true) {
                             //individualArray.add(indi);
                             //System.out.println("Inside if");
                             // Reinitializing the Object
@@ -124,8 +115,7 @@ public class GedcomParse
                             indi.gender = "";
                             indi.individualID = "";
                             indi.spouse = new ArrayList<String>();
-                        } else
-                        {
+                        } else {
                             //familyArray.add(fam);
 
                             // Reinitializing the Object
@@ -141,14 +131,12 @@ public class GedcomParse
                     }
 
                     // Inserts Individual ID to individual object
-                    if (lst[2].contains("INDI"))
-                    {
+                    if (lst[2].contains("INDI")) {
                         indi.individualID = lst[1].substring(1, lst[1].length() - 1);
 //                        System.out.println(indi.individualID);
                         isIndi = true;
                     } // Inserts Family ID to Family object
-                    else if (lst[2].contains("FAM"))
-                    {
+                    else if (lst[2].contains("FAM")) {
                         fam.famID = lst[1].substring(1, lst[1].length() - 1);
 //                        System.out.println(fam.famID);
                         isIndi = false;
@@ -158,8 +146,7 @@ public class GedcomParse
                     arguments = lst[1];
                     isValid = "Y";
 
-                } else
-                {
+                } else {
                     tag = lst[1];
                     arguments = lst[2];
                     isValid = "N";
@@ -167,88 +154,102 @@ public class GedcomParse
             }
 
             //checks all level 1s; valid tag can be NAME, SEX, BIRT, DEAT, FAMC, FAMS, MARR, HUSB, WIFE, CHIL, DIV
-            String[] validTags =
-            {
-                "NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"
-            };
-            if (Integer.parseInt(level) == 1)
-            {
+            String[] validTags
+                    = {
+                        "NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"
+                    };
+            if (Integer.parseInt(level) == 1) {
                 boolean val = false;
-                for (String t : validTags)
-                {
-                    if (lst[1].contains(t))
-                    {
+                for (String t : validTags) {
+                    if (lst[1].contains(t)) {
                         val = true;
 
-                        if (lst[1].contains("NAME"))
-                        {
+                        if (lst[1].contains("NAME")) {
                             indi.name = lst[2];
                             hashValueIndi = hashValueIndi.concat("\t" + indi.name);
-                        } else if (lst[1].contains("SEX"))
-                        {
+                        } else if (lst[1].contains("SEX")) {
                             indi.gender = lst[2];
                             hashValueIndi = hashValueIndi.concat("\t" + indi.gender);
-                        } else if (lst[1].contains("BIRT"))
-                        {
+                        } else if (lst[1].contains("BIRT")) {
                             isBirth = true;
                             hashValueIndi = hashValueIndi.concat("\t" + indi.birth);
-                        } else if (lst[1].contains("DEAT"))
-                        {
+                        } else if (lst[1].contains("DEAT")) {
                             indi.alive = false;
                             isBirth = false;
                             hashValueIndi = hashValueIndi.concat("\t" + indi.death);
+                        } else if (lst[1].contains("HUSB")) {
+                            fam.husbID = lst[2];
+                            //System.out.println(fam.husbID);
+                            fam.husbID = fam.husbID.replace("@", "");
+                            
+                            //fam.husbID=fam.husbID.substring(0, fam.husbID.indexOf("@"));
+                            //System.out.println(fam.husbID);
+                            //hashValueFam = hashValueFam.concat("\t" + )
+                            for (String key : indiHash.keySet()) {
+                                //System.out.println(key);
+                                if (fam.husbID.equals(key)) {
+                                    
+                                    String temp = indiHash.get(key);
+                                    //System.out.println(temp);
+                                    temp = temp.substring(temp.indexOf("\t") + 1);
+                                    //System.out.println(temp);
+                                    fam.husbName = temp.substring(0, temp.indexOf("\t"));
+                                    hashValueFam = hashValueFam.concat("\t" + fam.husbName);
+                                    //famHash.put(fam.famID,temp);
+                                }
+                                //System.out.println(indiHash.get(key));
+                            }
+                        } else if (lst[1].contains("WIFE")) {
+                            fam.wifeID = lst[2];
+                            fam.wifeID = fam.wifeID.replace("@", "");
+                            
+                            //System.out.println(fam.wifeID);
+                            for (String key : indiHash.keySet()) {
+                                if (key.equals(fam.wifeID)) {
+                                    String temp = indiHash.get(key);
+                                    temp = temp.substring(temp.indexOf("\t") + 1);
+                                    fam.wifeName = temp.substring(0, temp.indexOf("\t"));
+                                    hashValueFam = hashValueFam.concat("\t" + fam.wifeName);
+                                    //famHash.put(fam.famID,temp);
+                                }
+                                //System.out.println(indiHash.get(key));
+                            }
                         }
-//                        else if (lst[1].contains("HUSB"))
-//                        {
-//                            fam.husbID= lst[2];
-//                            hashValueFam = hashValueFam.concat("\t" + )
-//                        }
                         // TODO: Need to implement for rest of the tags
                     }
                 }
 
                 tag = lst[1];
-                if (lst.length > 2)
-                {
-                    for (int i = 2; i < lst.length; i++)
-                    {
+                if (lst.length > 2) {
+                    for (int i = 2; i < lst.length; i++) {
                         arguments = arguments + lst[i] + " ";
                     }
                 }
-                if (val == true)
-                {
+                if (val == true) {
                     isValid = "Y";
-                } else
-                {
+                } else {
                     isValid = "N";
                 }
             }
 
             //checks all level 2s; valid tag can be DATE
-            if (Integer.parseInt(level) == 2)
-            {
-                if (lst[1].contains("DATE"))
-                {
+            if (Integer.parseInt(level) == 2) {
+                if (lst[1].contains("DATE")) {
                     tag = lst[1];
                     isValid = "Y";
-                    if (lst.length > 2)
-                    {
-                        for (int i = 2; i < lst.length; i++)
-                        {
+                    if (lst.length > 2) {
+                        for (int i = 2; i < lst.length; i++) {
                             arguments = arguments + lst[i] + " ";
                         }
 
                         // Checks if date is birth date or death date and inserts date accordingly
-                        if (isBirth == true)
-                        {
+                        if (isBirth == true) {
                             indi.birth = arguments;
-                        } else
-                        {
+                        } else {
                             indi.death = arguments;
                         }
                     }
-                } else
-                {
+                } else {
                     tag = lst[1];
                     arguments = lst[2];
                     isValid = "N";
@@ -263,16 +264,20 @@ public class GedcomParse
 
     }
 
-    public static void main(String[] args) throws IOException
-    {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
         parse();
         System.out.println("Individual's Entries:");
         indiHash.remove("");
-        for (String key : indiHash.keySet())
-        {
+        for (String key : indiHash.keySet()) {
 //            if(key!="")
             System.out.println(indiHash.get(key));
+        }
+        System.out.println("Family Entries:");
+        famHash.remove("");
+        for (String key : famHash.keySet()) {
+//            if(key!="")
+            System.out.println(famHash.get(key));
         }
 //        System.out.println("Family Entries:");
 //        for (String key:famHash.keySet())
