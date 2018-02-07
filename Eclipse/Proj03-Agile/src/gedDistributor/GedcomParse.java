@@ -34,7 +34,7 @@ public class GedcomParse {
 
         //read file
         //FileReader fileReader = new FileReader("D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\New Folder\\GedcomParse\\project1_MananSatra.ged"); // TODO: Change path for our testing file
-        FileReader fileReader = new FileReader("C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged");
+        FileReader fileReader = new FileReader("C:\\Users\\Caroline Squillante\\workspace\\gedcom\\src\\ssw555project01.ged");
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         // Creating Object to insert later into array list
@@ -90,7 +90,7 @@ public class GedcomParse {
 
                     hashValueIndi = indi.individualID + "\t" + indi.name + "\t" + indi.gender + "\t" + indi.birth + "\t" + indi.alive;
                     indiHash.putIfAbsent(indi.individualID, hashValueIndi);
-                    hashValueFam = fam.famID + "\t" + fam.husbName + "\t" + fam.wifeName;
+                    hashValueFam = fam.famID + "\t" + fam.husbID + "\t" +fam.husbName + "\t" + fam.wifeID + "\t" + fam.wifeName + "\t" ;
                     famHash.putIfAbsent(fam.famID, hashValueFam);
 
 //                    hashValueIndi="";
@@ -268,12 +268,15 @@ public class GedcomParse {
         // TODO code application logic here
         parse();
         System.out.println("Individual's Entries:");
+        System.out.println("ID" + "\t"+ "Name" + "\t"+ "Gender" + "\t"+ "Birthday" + "\t" + "Alive");
         indiHash.remove("");
+        
         for (String key : indiHash.keySet()) {
 //            if(key!="")
             System.out.println(indiHash.get(key));
         }
         System.out.println("Family Entries:");
+        System.out.println("ID" + "\t"+ "H ID" + "\t"+ "H Name" + "\t"+ "W ID" + "\t" + "W name");
         famHash.remove("");
         for (String key : famHash.keySet()) {
 //            if(key!="")
