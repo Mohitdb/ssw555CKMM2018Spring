@@ -1,4 +1,4 @@
-//package gedDistributor;
+package gedDistributor;
 
 import java.util.ArrayList;
 
