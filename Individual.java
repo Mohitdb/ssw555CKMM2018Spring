@@ -1,4 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package GedcomParse;
+
+/**
+ *
+ * @author mohit
+ */
 
 import java.util.ArrayList;
 
@@ -10,7 +20,7 @@ public class Individual
 		String birth;
 		int age;
 		boolean alive;
-		String isAlive;
+                String isAlive;
 		String death;
 		ArrayList<String> child;
 		ArrayList<String> spouse;
@@ -23,7 +33,7 @@ public class Individual
 			birth = "";
 			age = 0;
 			alive = true;
-			isAlive = "True";
+                        isAlive = "True";
 			death = "";
 			child = new ArrayList<String>();
 			spouse = new ArrayList<String>();
@@ -52,16 +62,6 @@ public class Individual
 		public void setGender(String gender) {
 			this.gender = gender;
 		}
-		
-		public String getisAlive()
-		{
-			return isAlive;
-		}
-		
-		public void setisAlive(String isAlive)
-		{
-			this.isAlive = isAlive;
-		}
 
 		public String getBirth() {
 			return birth;
@@ -71,8 +71,8 @@ public class Individual
 			this.birth = birth;
 		}
 
-		public String getAge() {
-			return String.valueOf(age);
+		public int getAge() {
+			return age;
 		}
 
 		public void setAge(int age) {
@@ -110,5 +110,15 @@ public class Individual
 		public void setSpouse(ArrayList<String> spouse) {
 			this.spouse = spouse;
 		}
+                
+ 		public String getisAlive()
+ 		{
+ 			return isAlive;
+ 		}
+ 		
+ 		public void setisAlive(String isAlive)
+ 		{
+ 			this.isAlive = isAlive;
+ 		}
 		
 }

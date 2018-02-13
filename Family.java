@@ -1,13 +1,13 @@
 package GedcomParse;
 
+//import static gedcomparse.GedcomParse.famHash;
 import java.util.ArrayList;
 
 public class Family 
 {
 	String famID;
 	String married;
-	boolean divorced;
-	String IsDivorced;
+	String divorced;
 	String husbID;
 	String husbName;
 	String wifeID;
@@ -18,8 +18,7 @@ public class Family
 	{
 		famID = "";
 		married = "";
-		divorced = false;
-		IsDivorced = "false";
+		divorced = "";
 		husbID = "";
 		husbName = "";
 		wifeID = "";
@@ -34,16 +33,6 @@ public class Family
 	public void setFamID(String famID) {
 		this.famID = famID;
 	}
-	
-	public void setIsDivorced(String isDivorced)
-	{
-		this.IsDivorced = IsDivorced;
-	}
-	
-	public String getIsDivorced()
-	{
-		return IsDivorced;
-	}
 
 	public String getMarried() {
 		return married;
@@ -53,11 +42,11 @@ public class Family
 		this.married = married;
 	}
 
-	public boolean isDivorced() {
+	public String isDivorced() {
 		return divorced;
 	}
 
-	public void setDivorced(boolean divorced) {
+	public void setDivorced(String divorced) {
 		this.divorced = divorced;
 	}
 
