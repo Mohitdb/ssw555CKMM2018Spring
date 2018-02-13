@@ -273,6 +273,7 @@ public class GedcomParse {
 						// Checks if date is birth date or death date and inserts date accordingly
 						if (isIndi==true && isBirth == true ) {
 							indi.birth = arguments;
+							indi.death = "NA";
                                                         //immDate=false;
 						} else if(isIndi==true && isBirth == false){
 							indi.death = arguments;
