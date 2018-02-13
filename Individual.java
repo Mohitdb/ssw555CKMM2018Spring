@@ -10,6 +10,7 @@ public class Individual
 		String birth;
 		int age;
 		boolean alive;
+		String isAlive;
 		String death;
 		ArrayList<String> child;
 		ArrayList<String> spouse;
@@ -22,6 +23,7 @@ public class Individual
 			birth = "";
 			age = 0;
 			alive = true;
+			isAlive = "True";
 			death = "";
 			child = new ArrayList<String>();
 			spouse = new ArrayList<String>();
@@ -49,6 +51,16 @@ public class Individual
 
 		public void setGender(String gender) {
 			this.gender = gender;
+		}
+		
+		public String getisAlive()
+		{
+			return isAlive;
+		}
+		
+		public void setisAlive(String isAlive)
+		{
+			this.isAlive = isAlive;
 		}
 
 		public String getBirth() {

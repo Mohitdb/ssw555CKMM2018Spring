@@ -92,6 +92,7 @@ public class GedcomParse
                     hashValueIndi.add(indi.getName());
                     hashValueIndi.add(indi.getGender());
                     hashValueIndi.add(indi.getBirth());
+                    hashValueIndi.add(indi.getisAlive());
                     hashValueIndi.add(indi.getDeath().toString());
 
                     indiHash.putIfAbsent(indi.getIndividualID(), hashValueIndi);
@@ -176,10 +177,12 @@ public class GedcomParse
                         } else if (lst[1].contains("BIRT"))
                         {
                             isBirth = true;
+                            indi.setisAlive("True");
 
                         } else if (lst[1].contains("DEAT"))
                         {
                             indi.setAlive(false);
+                            indi.setisAlive("False");
                             isBirth = false;
 
                         } else if (lst[1].contains("HUSB"))
@@ -264,6 +267,8 @@ public class GedcomParse
         hashValueFam.add(fam.getWifeName());
 
         famHash.putIfAbsent(fam.getFamID(), hashValueFam);
+        
+        
 
     }
 
