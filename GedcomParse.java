@@ -14,7 +14,7 @@ import java.util.HashMap;
 //import dnl.utils.text.table.TextTable;
 public class GedcomParse
 {
-
+    static Manan s1=new Manan();
     static String reader = null;
     static String[] validTags
             =
@@ -58,7 +58,7 @@ public class GedcomParse
             hashValueFam = new ArrayList<String>();
 
             String[] lst = reader.split(" ", 0);
-
+            
             String level = lst[0];
             String tag = "";
             Boolean isValid;
@@ -264,12 +264,13 @@ public class GedcomParse
         hashValueFam.add(fam.getWifeName());
 
         famHash.putIfAbsent(fam.getFamID(), hashValueFam);
-
+       s1.birthBeforeDeath(indiHash);
     }
 
     public static void main(String[] args) throws IOException
     {
         // TODO code application logic here
+        
         parse();
 
 //        String[] indivColNames =
@@ -293,25 +294,28 @@ public class GedcomParse
         System.out.println("Individual's Entries:");
         //Object[] individual = new Object[20];
         int i = 0;
-        for (String key : indiHash.keySet())
-        {
-//            individual = indiHash.get(key).toArray();
-//            for (int j = 0; i < individual.length; i++)
-//            {
-//                data[i][j] = individual[j];
-//            }
-//            i++;
-            System.out.println(indiHash.get(key));
-        }
+//        for (String key : indiHash.keySet())
+//        {
+////            individual = indiHash.get(key).toArray();
+////            for (int j = 0; i < individual.length; i++)
+////            {
+////                data[i][j] = individual[j];
+////            }
+////            i++;
+//            System.out.println(indiHash.get(key));
+//        }
 
         //tt.printTable(); 
-        System.out.println("Family Entries:");
-//        System.out.println("ID" + "\t" + "H ID" + "\t" + "H Name" + "\t" + "W ID" + "\t" + "W name");
-        famHash.remove("");
-        for (String key : famHash.keySet())
-        {
-            System.out.println(famHash.get(key));
-        }
+//        System.out.println("Family Entries:");
+////        System.out.println("ID" + "\t" + "H ID" + "\t" + "H Name" + "\t" + "W ID" + "\t" + "W name");
+//        famHash.remove("");
+//        for (String key : famHash.keySet())
+//        {
+//            System.out.println(famHash.get(key));
+//        }
+        
+       
+       
     }
 
 }
