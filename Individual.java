@@ -71,8 +71,8 @@ public class Individual
 			this.birth = birth;
 		}
 
-		public int getAge() {
-			return age;
+		public String getAge() {
+			return String.valueOf(age);
 		}
 
 		public void setAge(int age) {

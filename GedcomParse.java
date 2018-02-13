@@ -92,6 +92,7 @@ public class GedcomParse
                     hashValueIndi.add(indi.getName());
                     hashValueIndi.add(indi.getGender());
                     hashValueIndi.add(indi.getBirth());
+                    hashValueIndi.add(indi.getAge());
                     hashValueIndi.add(indi.getisAlive());
                     hashValueIndi.add(indi.getDeath().toString());
 
