@@ -7,6 +7,7 @@ public class Family
 	String famID;
 	String married;
 	boolean divorced;
+	String IsDivorced;
 	String husbID;
 	String husbName;
 	String wifeID;
@@ -18,6 +19,7 @@ public class Family
 		famID = "";
 		married = "";
 		divorced = false;
+		IsDivorced = "false";
 		husbID = "";
 		husbName = "";
 		wifeID = "";
@@ -31,6 +33,16 @@ public class Family
 
 	public void setFamID(String famID) {
 		this.famID = famID;
+	}
+	
+	public void setIsDivorced(String isDivorced)
+	{
+		this.IsDivorced = IsDivorced;
+	}
+	
+	public String getIsDivorced()
+	{
+		return IsDivorced;
 	}
 
 	public String getMarried() {
