@@ -11,13 +11,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import dnl.utils.text.table.TextTable;
-
+//import dnl.utils.text.table.TextTable;
 public class GedcomParse
 {
 
     static String reader = null;
-
+    static String[] validTags
+            =
+            {
+                "NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"
+            };
     public static HashMap<String, ArrayList<String>> indiHash = new HashMap<>();
     public static HashMap<String, ArrayList<String>> famHash = new HashMap<>();
 
@@ -25,10 +28,10 @@ public class GedcomParse
     public static void parse() throws IOException
     {
 
-        String carolinePath="C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
-        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParser\\src\\GedcomParse\\project1_MananSatra.ged";
-        String mohitPath="";
-        String karanPath="";
+        String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
+        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\src\\GedcomParse\\project1_MananSatra.ged";
+        String mohitPath = "";
+        String karanPath = "";
         FileReader fileReader = new FileReader(mananPath);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -85,8 +88,6 @@ public class GedcomParse
                     //checks special case for INDI and FAM
                 } else if (lst[2].contains("INDI") || lst[2].contains("FAM"))
                 {
-
-                    //Individual indi = new Individual();
                     hashValueIndi.add(indi.getIndividualID().toString());
                     hashValueIndi.add(indi.getName());
                     hashValueIndi.add(indi.getGender());
@@ -95,8 +96,6 @@ public class GedcomParse
 
                     indiHash.putIfAbsent(indi.getIndividualID(), hashValueIndi);
 
-                    //Family fam = new Family();
-                    //System.out.println(fam.famID);
                     hashValueFam.add(fam.getFamID().toString());
                     hashValueFam.add(fam.getHusbID());
                     hashValueFam.add(fam.getHusbName());
@@ -113,10 +112,6 @@ public class GedcomParse
                     {
                         if (isIndi == true)
                         {
-                            //individualArray.add(indi);
-                            //System.out.println("Inside if");
-                            // Reinitializing the Object
-
                             indi.name = "";
                             indi.age = 0;
                             indi.alive = true;
@@ -128,9 +123,6 @@ public class GedcomParse
                             indi.spouse = new ArrayList<String>();
                         } else
                         {
-                            //familyArray.add(fam);
-
-                            // Reinitializing the Object
                             fam.famID = "";
                             fam.married = "";
                             fam.divorced = false;
@@ -164,12 +156,6 @@ public class GedcomParse
                 }
             }
 
-            //checks all level 1s; valid tag can be NAME, SEX, BIRT, DEAT, FAMC, FAMS, MARR, HUSB, WIFE, CHIL, DIV
-            String[] validTags
-                    =
-                    {
-                        "NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"
-                    };
             if (Integer.parseInt(level) == 1)
             {
                 boolean val = false;
@@ -199,11 +185,6 @@ public class GedcomParse
                         } else if (lst[1].contains("HUSB"))
                         {
                             fam.setHusbID(lst[2].replace("@", ""));
-                            //System.out.println(fam.husbID);
-
-                            //fam.husbID=fam.husbID.substring(0, fam.husbID.indexOf("@"));
-                            //System.out.println(fam.husbID);
-                            //hashValueFam = hashValueFam.concat("\t" + )
                             for (String key : indiHash.keySet())
                             {
                                 //System.out.println(key);
@@ -211,36 +192,22 @@ public class GedcomParse
                                 {
 
                                     ArrayList<String> temp = indiHash.get(key);
-                                    //System.out.println(temp);
-                                    //temp = temp.substring(temp.indexOf("\t") + 1);
-                                    //System.out.println(temp.get(1));
                                     fam.setHusbName(temp.get(1));
-                                    //hashValueFam = hashValueFam.concat("\t" + fam.husbName);
-                                    //famHash.put(fam.famID,temp);
                                 }
-                                //System.out.println(indiHash.get(key));
                             }
                         } else if (lst[1].contains("WIFE"))
                         {
                             fam.wifeID = lst[2];
                             fam.wifeID = fam.wifeID.replace("@", "");
-
-                            //System.out.println(fam.wifeID);
                             for (String key : indiHash.keySet())
                             {
                                 if (key.equals(fam.wifeID))
                                 {
                                     ArrayList<String> temp = indiHash.get(key);
                                     fam.setWifeName(temp.get(1));
-                                    //temp = temp.substring(temp.indexOf("\t") + 1);
-                                    //fam.wifeName = temp.substring(0, temp.indexOf("\t"));
-                                    //hashValueFam = hashValueFam.concat("\t" + fam.wifeName);
-                                    //famHash.put(fam.famID,temp);
                                 }
-                                //System.out.println(indiHash.get(key));
                             }
                         }
-                        // TODO: Need to implement for rest of the tags
                     }
                 }
 
@@ -260,8 +227,6 @@ public class GedcomParse
                     isValid = false;
                 }
             }
-
-            //checks all level 2s; valid tag can be DATE
             if (Integer.parseInt(level) == 2)
             {
                 if (lst[1].contains("DATE"))
@@ -275,7 +240,6 @@ public class GedcomParse
                             arguments = arguments + lst[i] + " ";
                         }
 
-                        // Checks if date is birth date or death date and inserts date accordingly
                         if (isBirth == true)
                         {
                             indi.birth = arguments;
@@ -291,8 +255,6 @@ public class GedcomParse
                     isValid = false;
                 }
             }
-            //            indiHash.putIfAbsent(indi.individualID, hashValueIndi);
-
         }
 
         hashValueFam.add(fam.getFamID().toString());
@@ -310,48 +272,44 @@ public class GedcomParse
         // TODO code application logic here
         parse();
 
-        String[] indivColNames =
-        {
-            "ID",
-            "Name",
-            "Gender",
-            "Birthday",
-            "Alive"
-        };
-        int indiColNum = indivColNames.length;
-        int indiSize = indiHash.size();
-        System.out.println("Individual's Entries:");
-        Object[][] data = new Object[indiSize][indiColNum];
-
-        TextTable tt = new TextTable(indivColNames, data);
+//        String[] indivColNames =
+//        {
+//            "ID",
+//            "Name",
+//            "Gender",
+//            "Birthday",
+//            "Alive"
+//        };
+//        int indiColNum = indivColNames.length;
+//        int indiSize = indiHash.size();
+        //Object[][] data = new Object[indiSize][indiColNum];
+        //TextTable tt = new TextTable(indivColNames, data);
         // this adds the numbering on the left 
         // sort by the first column 
         //tt.setSort(0);
         //tt.
         //tt.
-
-        //WORK IN PROGRESS
         indiHash.remove("");
-        Object[] individual = new Object[20];
-
+        System.out.println("Individual's Entries:");
+        //Object[] individual = new Object[20];
         int i = 0;
         for (String key : indiHash.keySet())
         {
-            individual = indiHash.get(key).toArray();
-            for (int j = 0; i < individual.length; i++)
-            {
-                data[i][j] = individual[j];
-            }
-            i++;
+//            individual = indiHash.get(key).toArray();
+//            for (int j = 0; i < individual.length; i++)
+//            {
+//                data[i][j] = individual[j];
+//            }
+//            i++;
+            System.out.println(indiHash.get(key));
         }
 
         //tt.printTable(); 
         System.out.println("Family Entries:");
-        System.out.println("ID" + "\t" + "H ID" + "\t" + "H Name" + "\t" + "W ID" + "\t" + "W name");
+//        System.out.println("ID" + "\t" + "H ID" + "\t" + "H Name" + "\t" + "W ID" + "\t" + "W name");
         famHash.remove("");
         for (String key : famHash.keySet())
         {
-
             System.out.println(famHash.get(key));
         }
     }
