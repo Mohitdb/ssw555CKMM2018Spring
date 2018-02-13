@@ -31,8 +31,8 @@ public class GedcomParse
         String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
         String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\src\\GedcomParse\\project1_MananSatra.ged";
         String mohitPath = "";
-        String karanPath = "";
-        FileReader fileReader = new FileReader(mananPath);
+        String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\project1_MananSatra.ged";
+        FileReader fileReader = new FileReader(karanPath);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         // Creating Object to insert later into array list
