@@ -1,4 +1,4 @@
-package gedDistributor;
+package GedcomParse;
 
 import java.util.ArrayList;
 
