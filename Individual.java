@@ -18,7 +18,7 @@ public class Individual
 		String name;
 		String gender;
 		String birth;
-		int age;
+		long age;
 		boolean alive;
                 String isAlive;
 		String death;
@@ -75,7 +75,7 @@ public class Individual
 			return String.valueOf(age);
 		}
 
-		public void setAge(int age) {
+		public void setAge(long age) {
 			this.age = age;
 		}
 

@@ -12,8 +12,14 @@ package GedcomParse;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.text.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 //import dnl.utils.text.table.TextTable;
 
@@ -28,16 +34,17 @@ public class GedcomParse {
 	= {
 			"NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"
 	};
+	
 
 	@SuppressWarnings("resource")
 	public static void parse() throws IOException {
 
 		//read file
 		// TODO: Change path for our testing file
-                String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
-                String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\src\\GedcomParse\\project1_MananSatra.ged";
-                String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged";
-                String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\project1_MananSatra.ged";
+        String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
+        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\src\\GedcomParse\\project1_MananSatra.ged";
+        String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged";
+        String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\project1_MananSatra.ged";
 		FileReader fileReader = new FileReader(karanPath);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -233,16 +240,17 @@ public class GedcomParse {
 								//System.out.println(indiHash.get(key));
 							}
 						}
-                                                else if (lst[1].contains("MARR"))
-                                                {
+                        else if (lst[1].contains("MARR"))
+                        {
                                                     
-                                                    isMarried=true;
-                                                    immDate=true;
-                                                }
-                                                else if(lst[1].contains("DIV"))
-                                                {
-                                                    isMarried=false;
-                                                }
+                             isMarried=true;
+                             immDate=true;
+                        }
+                       
+                        else if(lst[1].contains("DIV"))
+                        {
+                        	  isMarried=false;
+                        }
 						// TODO: Need to implement for rest of the tags
 					}
 				}
@@ -261,6 +269,11 @@ public class GedcomParse {
 			}
 
 			//checks all level 2s; valid tag can be DATE
+			String[] long_date;
+			String monthNumber;
+			Date birthDate = null;
+			Date deathDate = null;
+			long Age = 0;
 			if (Integer.parseInt(level) == 2) {
 				if (lst[1].contains("DATE")) {
 					tag = lst[1];
@@ -269,14 +282,34 @@ public class GedcomParse {
 						for (int i = 2; i < lst.length; i++) {
 							arguments = arguments + lst[i] + " ";
 						}
+						
+						 long_date = arguments.split(" ");
+						 
+						 monthNumber = dateNumber(long_date[1]);
+						 
+						 arguments = long_date[2] + "-" + monthNumber + "-" + long_date[0];
 
 						// Checks if date is birth date or death date and inserts date accordingly
 						if (isIndi==true && isBirth == true ) {
 							indi.birth = arguments;
+							SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+							try {
+								birthDate = simpleDateFormat.parse(arguments);
+							} catch (ParseException e) {
+								e.printStackTrace();
+							}
 							indi.death = "NA";
-                                                        //immDate=false;
+							
+						//immDate=false;
 						} else if(isIndi==true && isBirth == false){
 							indi.death = arguments;
+							SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+							try {
+								deathDate = simpleDateFormat.parse(arguments);
+							} catch (ParseException e) {
+								e.printStackTrace();
+							}
+							
 						}else if (isIndi==false && isMarried==true && immDate==true){
                                                         fam.married= arguments;
                                                         immDate=false;
@@ -285,11 +318,35 @@ public class GedcomParse {
                                                 {
                                                         fam.divorced=arguments;
                                                 }
-				} else {
+				}
+					else {
 					tag = lst[1];
 					arguments = lst[2];
 					isValid = false;
 				}
+					if (deathDate == null)
+					{
+						SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+						deathDate = new Date();
+						simpleDateFormat.format(deathDate);
+						
+						//in milliseconds
+						long diff = deathDate.getTime() - birthDate.getTime();
+
+						Age = diff / (24 * 60 * 60 * 1000) % 365;
+							
+						indi.age = Age;
+					}
+					
+					else 
+					{
+						//in milliseconds
+						long diff = deathDate.getTime() - birthDate.getTime();
+
+						Age = diff / (24 * 60 * 60 * 1000) % 365;
+							
+						indi.age = Age;
+					}
 			}
 			//            indiHash.putIfAbsent(indi.individualID, hashValueIndi);
 			
@@ -299,16 +356,53 @@ public class GedcomParse {
 		
 
 	}
-                hashValueFam.add(fam.getFamID().toString());
+        
+		hashValueFam.add(fam.getFamID().toString());
 		hashValueFam.add(fam.getHusbID());
 		hashValueFam.add(fam.getHusbName());
 		hashValueFam.add(fam.getWifeID());
 		hashValueFam.add(fam.getWifeName());
-                hashValueFam.add(fam.getMarried());
+        hashValueFam.add(fam.getMarried());
 		hashValueFam.add(fam.isDivorced());
-                //hashValueFam.add()
+        
+		//hashValueFam.add()
 		famHash.putIfAbsent(fam.getFamID(), hashValueFam);
-        }
+       
+	}
+	
+	public static String dateNumber(String monthName)
+	{
+		switch (monthName)
+		{
+			case "JAN":
+				return "01";
+			case "FEB":
+				return "02";
+			case "MAR":
+				return "03";
+			case "APR":
+				return "04";
+			case "MAY":
+				return "05";
+			case "JUN":
+				return "06";
+			case "JUL":
+				return "07";
+			case "AUG":
+				return "08";
+			case "SEP":
+				return "09";
+			case "OCT":
+				return "10";
+			case "NOV":
+				return "11";
+			case "DEC":
+				return "12";
+			default:
+				return "00";
+		}
+	}
+	
 	public static void main(String[] args) throws IOException {
 		// TODO code application logic here
 		parse();
