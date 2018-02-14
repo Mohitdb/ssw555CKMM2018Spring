@@ -271,9 +271,9 @@ public class GedcomParse {
 			//checks all level 2s; valid tag can be DATE
 			String[] long_date;
 			String monthNumber;
-			Date birthDate = null;
-			Date deathDate = null;
-			long Age = 0;
+			Date birthDate = new Date();
+			Date deathDate = new Date();
+			double Age = 0;
 			if (Integer.parseInt(level) == 2) {
 				if (lst[1].contains("DATE")) {
 					tag = lst[1];
@@ -331,21 +331,21 @@ public class GedcomParse {
 						simpleDateFormat.format(deathDate);
 						
 						//in milliseconds
-						long diff = deathDate.getTime() - birthDate.getTime();
+						double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
 
-						Age = diff / (24 * 60 * 60 * 1000) % 365;
+						Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
 							
-						indi.age = Age;
+						indi.age = (int) Age;
 					}
 					
 					else 
 					{
 						//in milliseconds
-						long diff = deathDate.getTime() - birthDate.getTime();
+						double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
 
-						Age = diff / (24 * 60 * 60 * 1000) % 365;
+						Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
 							
-						indi.age = Age;
+						indi.age = (int) Age;
 					}
 			}
 			//            indiHash.putIfAbsent(indi.individualID, hashValueIndi);
