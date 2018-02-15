@@ -264,7 +264,7 @@ public class GedcomParse
         hashValueFam.add(fam.getWifeName());
 
         famHash.putIfAbsent(fam.getFamID(), hashValueFam);
-       s1.birthBeforeDeath(indiHash);
+       String res=s1.birthBeforeDeath(indiHash);
     }
 
     public static void main(String[] args) throws IOException
