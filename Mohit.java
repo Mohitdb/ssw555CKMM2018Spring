@@ -17,7 +17,7 @@ public class Mohit {
 
     ArrayList<String> famvalues;
     ArrayList<String> indivalues;
-    HashMap<String, Integer> monthmap = new HashMap<>();
+    HashMap<String, Float> monthmap = new HashMap<>();
         
 
     public String[] birthBeforeMarriage(HashMap<String, ArrayList<String>> indiHashmap, HashMap<String, ArrayList<String>> famHashmap) {
