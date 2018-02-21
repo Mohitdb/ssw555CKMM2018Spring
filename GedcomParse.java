@@ -257,16 +257,18 @@ public class GedcomParse {
 								//System.out.println(indiHash.get(key));
 							}
 						}
-                                                else if (lst[1].contains("MARR"))
-                                                {
+                            
+						else if (lst[1].contains("MARR"))
+                        {
                                                     
-                                                    isMarried=true;
-                                                    immDate=true;
-                                                }
-                                                else if(lst[1].contains("DIV"))
-                                                {
-                                                    isMarried=false;
-                                                }
+                            isMarried=true;
+                            immDate=true;
+                        }
+                        
+						else if(lst[1].contains("DIV"))
+                        {
+                             isMarried=false;
+                        }
 						// TODO: Need to implement for rest of the tags
 					}
 				}
