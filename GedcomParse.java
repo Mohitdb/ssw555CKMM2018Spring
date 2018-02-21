@@ -299,6 +299,12 @@ public class GedcomParse {
 						for (int i = 2; i < lst.length; i++) {
 							arguments = arguments + lst[i] + " ";
 						}
+						
+						 long_date = arguments.split(" ");
+						 
+						monthNumber = dateNumber(long_date[1]);
+												 
+						arguments = long_date[2] + "-" + monthNumber + "-" + long_date[0];
 
 						// Checks if date is birth date or death date and inserts date accordingly
 						if (isIndi==true && isBirth == true ) {
@@ -365,10 +371,6 @@ public class GedcomParse {
 			}
 			//            indiHash.putIfAbsent(indi.individualID, hashValueIndi);
 			
-			
-				
-			
-
 		}
 		
 		
