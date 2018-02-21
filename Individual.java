@@ -20,7 +20,7 @@ public class Individual
 		String birth;
 		int age;
 		boolean alive;
-                String isAlive;
+        String isAlive;
 		String death;
 		ArrayList<String> child;
 		ArrayList<String> spouse;

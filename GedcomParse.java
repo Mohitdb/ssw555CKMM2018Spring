@@ -12,10 +12,19 @@ package GedcomParse;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.*;
+import java.util.Date;
 
-//import dnl.utils.text.table.TextTable;
+
+//import dnl.utils.text.table.+import java.text.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.*;
 
 public class GedcomParse {
 
@@ -39,7 +48,7 @@ public class GedcomParse {
         String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\src\\GedcomParse\\project1_MananSatra.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\project1_MananSatra.ged";
-		FileReader fileReader = new FileReader(mohitPath);
+		FileReader fileReader = new FileReader(karanPath);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 		// Creating Object to insert later into array list
@@ -118,7 +127,7 @@ public class GedcomParse {
 					hashValueFam.add(fam.getHusbName());
 					hashValueFam.add(fam.getWifeID());
 					hashValueFam.add(fam.getWifeName());
-                                        hashValueFam.add(fam.getMarried());
+                    hashValueFam.add(fam.getMarried());
 					hashValueFam.add(fam.isDivorced());
 
 					famHash.putIfAbsent(fam.getFamID(), hashValueFam);
@@ -217,7 +226,7 @@ public class GedcomParse {
 									
 									if (gender == "F")
 									{
-										System.out.println("Individual " + temp.get(0) + " is registered as an Husband but is a female.");
+										System.out.println("Error: Individual " + temp.get(0) + " is registered as an Husband but is a female.");
 									}
 									//hashValueFam = hashValueFam.concat("\t" + fam.husbName);
 									//famHash.put(fam.famID,temp);
@@ -238,7 +247,7 @@ public class GedcomParse {
 									
 									if (gender == "M")
 									{
-										System.out.println("Individual " + temp.get(0) + " is registered as an Wife but is a male.");
+										System.out.println("Error: Individual " + temp.get(0) + " is registered as an Wife but is a male.");
 									}
 									//temp = temp.substring(temp.indexOf("\t") + 1);
 									//fam.wifeName = temp.substring(0, temp.indexOf("\t"));
@@ -276,6 +285,12 @@ public class GedcomParse {
 			}
 
 			//checks all level 2s; valid tag can be DATE
+			
+			String[] long_date;
+					String monthNumber;
+					Date birthDate = null;
+					Date deathDate = null;
+					long Age = 0;
 			if (Integer.parseInt(level) == 2) {
 				if (lst[1].contains("DATE")) {
 					tag = lst[1];
@@ -288,9 +303,28 @@ public class GedcomParse {
 						// Checks if date is birth date or death date and inserts date accordingly
 						if (isIndi==true && isBirth == true ) {
 							indi.birth = arguments;
+							
+							SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+							try 
+							{
+								birthDate = simpleDateFormat.parse(arguments);
+							} catch (ParseException e) 
+							
+							{
+								e.printStackTrace();
+							}
+							indi.death = "NA";
                                                         //immDate=false;
 						} else if(isIndi==true && isBirth == false){
 							indi.death = arguments;
+							
+							SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+							try {
+								deathDate = simpleDateFormat.parse(arguments);
+								} catch (ParseException e) {
+									e.printStackTrace();
+								}
+							
 						}else if (isIndi==false && isMarried==true && immDate==true){
                                                         fam.married= arguments;
                                                         immDate=false;
@@ -304,9 +338,35 @@ public class GedcomParse {
 					arguments = lst[2];
 					isValid = false;
 				}
+					
+					if (deathDate == null)
+					{
+						SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+						deathDate = new Date();
+					simpleDateFormat.format(deathDate);
+												
+												//in milliseconds
+												long diff = deathDate.getTime() - birthDate.getTime();
+						
+												Age = diff / (24 * 60 * 60 * 1000) % 365;
+													
+												indi.age = (int) Age;
+											}
+											
+										else 
+											{
+												//in milliseconds
+												long diff = deathDate.getTime() - birthDate.getTime();
+						
+												Age = diff / (24 * 60 * 60 * 1000) % 365;
+													
+												indi.age = (int) Age;
+											}
 			}
 			//            indiHash.putIfAbsent(indi.individualID, hashValueIndi);
 			
+			
+				
 			
 
 		}
