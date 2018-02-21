@@ -288,9 +288,9 @@ public class GedcomParse {
 			
 			String[] long_date;
 					String monthNumber;
-					Date birthDate = null;
-					Date deathDate = null;
-					long Age = 0;
+					Date birthDate = new Date();
+					Date deathDate = new Date();
+					double Age = 0;
 			if (Integer.parseInt(level) == 2) {
 				if (lst[1].contains("DATE")) {
 					tag = lst[1];
@@ -349,25 +349,25 @@ public class GedcomParse {
 					{
 						SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
 						deathDate = new Date();
-					simpleDateFormat.format(deathDate);
+						simpleDateFormat.format(deathDate);
 												
-												//in milliseconds
-												long diff = deathDate.getTime() - birthDate.getTime();
+						//in milliseconds
+						double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
 						
-												Age = diff / (24 * 60 * 60 * 1000) % 365;
+						Age = diff / (24 * 60 * 60 * 1000) % 365;
 													
-												indi.age = (int) Age;
-											}
+						indi.age = (int) Age;
+					}
 											
-										else 
-											{
-												//in milliseconds
-												long diff = deathDate.getTime() - birthDate.getTime();
+					else 
+					{
+						//in milliseconds
+						double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
 						
-												Age = diff / (24 * 60 * 60 * 1000) % 365;
+						Age = diff / (24 * 60 * 60 * 1000) % 365;
 													
-												indi.age = (int) Age;
-											}
+						indi.age = (int) Age;
+					}
 			}
 			//            indiHash.putIfAbsent(indi.individualID, hashValueIndi);
 			
