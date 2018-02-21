@@ -354,7 +354,7 @@ public class GedcomParse {
 						//in milliseconds
 						double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
 						
-						Age = diff / (24 * 60 * 60 * 1000) % 365;
+						Age = diff / (24.0 * 60.0* 60.0 * 1000.0) % 365.0;
 													
 						indi.age = (int) Age;
 					}
@@ -364,7 +364,7 @@ public class GedcomParse {
 						//in milliseconds
 						double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
 						
-						Age = diff / (24 * 60 * 60 * 1000) % 365;
+						Age = diff / (24.0 * 60.0 * 60.0 * 1000.0) % 365.0;
 													
 						indi.age = (int) Age;
 					}
