@@ -101,8 +101,9 @@ public class GedcomParse {
 					hashValueIndi.add(indi.getName());
 					hashValueIndi.add(indi.getGender());
 					hashValueIndi.add(indi.getBirth());
-                                        hashValueIndi.add(indi.getisAlive());
-             				hashValueIndi.add(indi.getDeath().toString());
+                    hashValueIndi.add(indi.getDeath().toString());
+                    hashValueIndi.add(indi.getAge());
+                    hashValueIndi.add(indi.getisAlive());
                                         
 
 					indiHash.putIfAbsent(indi.getIndividualID(), hashValueIndi);
@@ -210,6 +211,12 @@ public class GedcomParse {
 									//temp = temp.substring(temp.indexOf("\t") + 1);
 									//System.out.println(temp.get(1));
 									fam.setHusbName(temp.get(1));
+									String gender = temp.get(2);
+									
+									if (gender == "F")
+									{
+										System.out.println("Individual " + temp.get(0) + " is registered as an Husband but is a female.");
+									}
 									//hashValueFam = hashValueFam.concat("\t" + fam.husbName);
 									//famHash.put(fam.famID,temp);
 								}
@@ -225,6 +232,12 @@ public class GedcomParse {
 								if (key.equals(fam.wifeID)) {
 									ArrayList<String> temp = indiHash.get(key);
 									fam.setWifeName(temp.get(1));
+									String gender = temp.get(2);
+									
+									if (gender == "M")
+									{
+										System.out.println("Individual " + temp.get(0) + " is registered as an Wife but is a male.");
+									}
 									//temp = temp.substring(temp.indexOf("\t") + 1);
 									//fam.wifeName = temp.substring(0, temp.indexOf("\t"));
 									//hashValueFam = hashValueFam.concat("\t" + fam.wifeName);
@@ -292,6 +305,7 @@ public class GedcomParse {
 			}
 			//            indiHash.putIfAbsent(indi.individualID, hashValueIndi);
 			
+			
 
 		}
 		
@@ -309,6 +323,7 @@ public class GedcomParse {
 		famHash.putIfAbsent(fam.getFamID(), hashValueFam);
                 String res[]=s1.birthBeforeMarriage(indiHash,famHash);
                 s1.marriageAfter14(indiHash, famHash);
+				String resBirthBeforeDeath=m.birthBeforeDeath(indiHash);
         }
 	public static void main(String[] args) throws IOException {
 		// TODO code application logic here

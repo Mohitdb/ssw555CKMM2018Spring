@@ -33,7 +33,7 @@ public class Individual
 			birth = "";
 			age = 0;
 			alive = true;
-                        isAlive = "True";
+            isAlive = "True";
 			death = "";
 			child = new ArrayList<String>();
 			spouse = new ArrayList<String>();
@@ -71,8 +71,8 @@ public class Individual
 			this.birth = birth;
 		}
 
-		public int getAge() {
-			return age;
+		public String getAge() {
+			return String.valueOf(age);
 		}
 
 		public void setAge(int age) {
