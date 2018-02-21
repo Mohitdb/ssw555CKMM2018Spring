@@ -35,16 +35,18 @@ public class GedcomParse {
 
 		//read file
 		// TODO: Change path for our testing file
-                String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
-                String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\src\\GedcomParse\\project1_MananSatra.ged";
-                String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged";
-                String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\project1_MananSatra.ged";
+        String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
+        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\src\\GedcomParse\\project1_MananSatra.ged";
+        String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged";
+        String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\project1_MananSatra.ged";
 		FileReader fileReader = new FileReader(mohitPath);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
 
 		// Creating Object to insert later into array list
 		Family fam = new Family();
 		Individual indi = new Individual();
+		
+		Manan m = new Manan();
 
 		// Flag to check if date is birth date or death date
 		boolean isBirth = true;
@@ -312,12 +314,12 @@ public class GedcomParse {
 		
 
 	}
-                hashValueFam.add(fam.getFamID().toString());
+        hashValueFam.add(fam.getFamID().toString());
 		hashValueFam.add(fam.getHusbID());
 		hashValueFam.add(fam.getHusbName());
 		hashValueFam.add(fam.getWifeID());
 		hashValueFam.add(fam.getWifeName());
-                hashValueFam.add(fam.getMarried());
+        hashValueFam.add(fam.getMarried());
 		hashValueFam.add(fam.isDivorced());
                 //hashValueFam.add()
 		famHash.putIfAbsent(fam.getFamID(), hashValueFam);
