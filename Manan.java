@@ -16,6 +16,7 @@ public class Manan
         hashIndi.remove("");
         String res="";
         int birthMonthNumber, deathMonthNumber;
+        System.out.println("\nManan's User story US03:");
         System.out.println("BIRTH\t\tDEATH\t\tCORRECT/INCORRECT");
         System.out.println("-----------\t-----------\t------------------");
         for (String key : hashIndi.keySet())
@@ -65,6 +66,7 @@ public class Manan
                 System.out.println(tempArrayList.get(3) + "\t" + "N/A" + "\t\tCORRECT");
             }
         }
+        System.out.println();
         return res;
     }
 
