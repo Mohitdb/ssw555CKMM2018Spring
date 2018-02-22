@@ -10,62 +10,90 @@ public class FindAges {
 	{
 		String monthNumber;
 		String month;
+		Date today = new Date();
 		String formattedBirthDate;
 		String formattedDeathDate;
+		String newDate = "";
 		Date birthDate = new Date();
 		Date deathDate = new Date();
 		double Age = 0;
 		String[] birth;
 		String[] death;
 		
-		birth = date1.split(" ");
-		death = date2.split(" ");
-		
-		monthNumber = dateNumber(birth[1]);
-		month = dateNumber(death[1]);
-		
-		formattedBirthDate = birth[2] + "-" + monthNumber + "-" + birth[0];
-		formattedDeathDate = death[2] + "-" + month + "-" + death[0];
-		
 		SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
-
-		try {
-			birthDate = simpleDateFormat.parse(formattedBirthDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
 		
-		try {
-			deathDate = simpleDateFormat.parse(formattedDeathDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		if (deathDate == null)
+		if (date2 == "NA")
 		{
-			SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
-			deathDate = new Date();
-			DateFormat.format(deathDate);
+			today = new Date();
 			
-			//in milliseconds
-			double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
+			birth = date1.split(" ");
+			
+			monthNumber = dateNumber(birth[1]);
+			
+			formattedBirthDate = birth[2] + "-" + monthNumber + "-" + birth[0];
 
-			Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
-			
-			System.out.println("The age is " + (int) Age + " when born on " + date1 + " and died on " + date2 + " (if not dead current date is death date)!");
-			return (int) Age;
+			try {
+				birthDate = simpleDateFormat.parse(formattedBirthDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+				
+				//in milliseconds
+				double diff = Math.abs(today.getTime() - birthDate.getTime());
+
+				Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+				
+				return (int) Age;
 		}
 		
-		else 
+		else
 		{
-			//in milliseconds
-			double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
-
-			Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+			birth = date1.split(" ");
+			death = date2.split(" ");
 			
-			System.out.println("The age is " + (int) Age + " when born on " + date1 + " and died on " + date2 + " (if not dead current date is death date)!");
-			return (int) Age;
+			monthNumber = dateNumber(birth[1]);
+			month = dateNumber(death[1]);
+			
+			formattedBirthDate = birth[2] + "-" + monthNumber + "-" + birth[0];
+			formattedDeathDate = death[2] + "-" + month + "-" + death[0];
+
+			try {
+				birthDate = simpleDateFormat.parse(formattedBirthDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				deathDate = simpleDateFormat.parse(formattedDeathDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			if (deathDate == null)
+			{
+				SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+				deathDate = new Date();
+				DateFormat.format(deathDate);
+				
+				//in milliseconds
+				double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
+
+				Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+				
+				return (int) Age;
+			}
+			
+			else 
+			{
+				//in milliseconds
+				double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
+
+				Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+				
+				return (int) Age;
+			}
 		}
+		
 	}
 	
 	public static String dateNumber(String monthName)

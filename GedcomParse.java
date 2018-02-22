@@ -66,11 +66,11 @@ public class GedcomParse {
 		// Flag to bypass empty objects
 		boolean isEmpty = true;
                 
-                // Flag to check if date is marriage date or divorce date
-                boolean isMarried = true;
+        // Flag to check if date is marriage date or divorce date
+        boolean isMarried = true;
                 
-                //Flag so that immediate correct date after MARR gets printed and not the date after an invalid tag
-                boolean immDate=true;
+        //Flag so that immediate correct date after MARR gets printed and not the date after an invalid tag
+        boolean immDate=true;
 
                 
 		boolean firstPerson = true;
@@ -288,11 +288,6 @@ public class GedcomParse {
 
 			//checks all level 2s; valid tag can be DATE
 			
-			String[] long_date;
-					String monthNumber;
-					Date birthDate = new Date();
-					Date deathDate = new Date();
-					double Age = 0;
 			if (Integer.parseInt(level) == 2) {
 				if (lst[1].contains("DATE")) {
 					tag = lst[1];
@@ -302,74 +297,29 @@ public class GedcomParse {
 							arguments = arguments + lst[i] + " ";
 						}
 						
-						 long_date = arguments.split(" ");
-						 
-						monthNumber = dateNumber(long_date[1]);
-												 
-						arguments = long_date[2] + "-" + monthNumber + "-" + long_date[0];
 
 						// Checks if date is birth date or death date and inserts date accordingly
 						if (isIndi==true && isBirth == true ) {
 							indi.birth = arguments;
-							
-							SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
-							try 
-							{
-								birthDate = simpleDateFormat.parse(arguments);
-							} catch (ParseException e) 
-							
-							{
-								e.printStackTrace();
-							}
 							indi.death = "NA";
                                                         //immDate=false;
 						} else if(isIndi==true && isBirth == false){
 							indi.death = arguments;
 							
-							SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
-							try {
-								deathDate = simpleDateFormat.parse(arguments);
-								} catch (ParseException e) {
-									e.printStackTrace();
-								}
-							
 						}else if (isIndi==false && isMarried==true && immDate==true){
-                                                        fam.married= arguments;
-                                                        immDate=false;
-                                                }
-                                                else if(isIndi==false && isMarried==false)
-                                                {
-                                                        fam.divorced=arguments;
-                                                }
+                            fam.married= arguments;
+                            immDate=false;
+                        }
+                        else if(isIndi==false && isMarried==false)
+                        {
+                            fam.divorced=arguments;
+                        }
 				} else {
 					tag = lst[1];
 					arguments = lst[2];
 					isValid = false;
 				}
-					
-					if (deathDate == null)
-					{
-						SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
-						deathDate = new Date();
-						simpleDateFormat.format(deathDate);
-												
-						//in milliseconds
-						double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
-						
-						Age = diff / (24.0 * 60.0* 60.0 * 1000.0) % 365.0;
-													
-						indi.age = (int) Age;
-					}
-											
-					else 
-					{
-						//in milliseconds
-						double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
-						
-						Age = diff / (24.0 * 60.0 * 60.0 * 1000.0) % 365.0;
-													
-						indi.age = (int) Age;
-					}
+									
 			}
 			//            indiHash.putIfAbsent(indi.individualID, hashValueIndi);
 			
@@ -391,39 +341,6 @@ public class GedcomParse {
                 s1.marriageAfter14(indiHash, famHash);
 				String resBirthBeforeDeath=m.birthBeforeDeath(indiHash);
         }
-	
-	public static String dateNumber(String monthName)
-	{
-		switch (monthName)
-		{
-			case "JAN":
-				return "01";
-			case "FEB":
-				return "02";
-			case "MAR":
-				return "03";
-			case "APR":
-				return "04";
-			case "MAY":
-				return "05";
-			case "JUN":
-				return "06";
-			case "JUL":
-				return "07";
-			case "AUG":
-				return "08";
-			case "SEP":
-				return "09";
-			case "OCT":
-				return "10";
-			case "NOV":
-				return "11";
-			case "DEC":
-				return "12";
-			default:
-				return "00";
-		}
-	}
 	
 	public static void main(String[] args) throws IOException {
 		// TODO code application logic here
