@@ -50,7 +50,7 @@ public class GedcomParse
         String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\src\\GedcomParse\\project1_MananSatra.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\project1_MananSatra.ged";
-        FileReader fileReader = new FileReader(mananPath);
+        FileReader fileReader = new FileReader(karanPath);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         // Creating Object to insert later into array list
@@ -312,6 +312,12 @@ public class GedcomParse
                         arguments = lst[2];
                         isValid = false;
                     }
+                    
+                    FindAges fa = new FindAges();
+                    
+                    int Age = fa.FindAge(indi.birth, indi.death);
+                    
+                    indi.age = Age;
                 }
             }
         }
