@@ -9,7 +9,7 @@ public class Manan
 
     ArrayList<String> tempArrayList;
     String res = "";
-    HashMap<String, Integer> monthNumber = new HashMap<String, Integer>();
+    HashMap<String, Float> monthNumber = new HashMap<String, Float>();
 
     public String birthBeforeDeath(HashMap<String, ArrayList<String>> hashIndi)
     {
