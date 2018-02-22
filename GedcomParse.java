@@ -319,6 +319,12 @@ public class GedcomParse {
 					arguments = lst[2];
 					isValid = false;
 				}
+					
+					FindAges fa = new FindAges();
+					
+					int Age = fa.FindAge(indi.birth, indi.death);
+					
+					indi.age = Age;
 									
 			}
 			//            indiHash.putIfAbsent(indi.individualID, hashValueIndi);
