@@ -341,7 +341,7 @@ public class GedcomParse
         
         //--------------------------Manans Space----------------------------
         String resBirthBeforeDeath = m.birthBeforeDeath(indiHash);
-        
+        m.mariageBeforeDivorce(famHash);
         
         //--------------------------Karans Space----------------------------
         
