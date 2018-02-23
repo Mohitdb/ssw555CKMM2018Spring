@@ -22,41 +22,66 @@ public class FindAges {
 		
 		if (date2 == "")
 		{
-			date2 = simpleDateFormat.format(deathDate);
-		}
-		
-		birth = date1.split(" ");
-		death = date2.split(" ");
-		
-		monthNumber = dateNumber(birth[1]);
-		month = dateNumber(death[1]);
-		
-		formattedBirthDate = birth[2] + "-" + monthNumber + "-" + birth[0];
-		formattedDeathDate = death[2] + "-" + month + "-" + death[0];
-
-		try {
-			birthDate = simpleDateFormat.parse(formattedBirthDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			deathDate = simpleDateFormat.parse(formattedDeathDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		
-		SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
-		deathDate = new Date();
-		DateFormat.format(deathDate);
+			birth = date1.split(" ");
 			
-		//in milliseconds
-		double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
-
-		Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+			monthNumber = dateNumber(birth[1]);
 			
-		return (int) Age;
+			formattedBirthDate = birth[2] + "-" + monthNumber + "-" + birth[0];
+
+			try {
+				birthDate = simpleDateFormat.parse(formattedBirthDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			
+			SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+			deathDate = new Date();
+			DateFormat.format(deathDate);
+				
+			//in milliseconds
+			double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
+
+			Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+				
+			return (int) Age;
+		}
 		
+		else
+		{
+			birth = date1.split(" ");
+			death = date2.split(" ");
+			
+			monthNumber = dateNumber(birth[1]);
+			month = dateNumber(death[1]);
+			
+			formattedBirthDate = birth[2] + "-" + monthNumber + "-" + birth[0];
+			formattedDeathDate = death[2] + "-" + month + "-" + death[0];
+
+			try {
+				birthDate = simpleDateFormat.parse(formattedBirthDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				deathDate = simpleDateFormat.parse(formattedDeathDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			
+			SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+			deathDate = new Date();
+			DateFormat.format(deathDate);
+				
+			//in milliseconds
+			double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
+
+			Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+				
+			return (int) Age;
+			
+		}
 	}
 	
 	public static String dateNumber(String monthName)
