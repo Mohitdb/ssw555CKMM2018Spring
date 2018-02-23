@@ -122,4 +122,66 @@ public class Manan
         }
         return monthInt;
     }
+
+    public void mariageBeforeDivorce(HashMap<String, ArrayList<String>> famHash)
+    {
+        famHash.remove("");
+        String res = "";
+        int marriageMonthNumber, divorceMonthNumber;
+        System.out.println("\nManan's User story US04:");
+        for (String key : famHash.keySet())
+        {
+            tempArrayList = famHash.get(key);
+            if (tempArrayList.get(5).equals(""))
+            {
+                res = "INCORRECT";
+                if (!tempArrayList.get(6).equals(""))
+                    System.out.println(tempArrayList.get(5) + "\t\t" + tempArrayList.get(6) + "\tINCORRECT\t\tError US04: Cannot determine without Marriage Date");
+                else
+                    System.out.println(tempArrayList.get(5) + "\t\t" + tempArrayList.get(6) + "\t\tINCORRECT\t\tError US04: Cannot determine without Marriage Date");
+            }
+            else if (!tempArrayList.get(6).equals(""))
+            {
+                String mday[] = tempArrayList.get(5).split(" ");
+                String divDay[] = tempArrayList.get(6).split(" ");
+                marriageMonthNumber = monthNumber(mday[1]);
+                divorceMonthNumber = monthNumber(divDay[1]);
+                if (Integer.parseInt(mday[2]) <= Integer.parseInt(divDay[2]))
+                {
+                    if (Integer.parseInt(mday[2]) == Integer.parseInt(divDay[2]))
+                    {
+                        if (marriageMonthNumber <= divorceMonthNumber)
+                        {
+                            if (Integer.parseInt(mday[0]) <= Integer.parseInt(divDay[0]))
+                            {
+                                res = "CORRECT";
+                                System.out.println(tempArrayList.get(5) + "\t" + tempArrayList.get(6) + "\tCORRECT\t\t\tN/A");
+                            } else
+                            {
+                                res = "INCORRECT";
+                                System.out.println(tempArrayList.get(5) + "\t" + tempArrayList.get(6) + "\tINCORRECT\t\tError US04: Divorce DAY cannot be before Marriage DAY");
+                            }
+                        } else
+                        {
+                            res = "INCORRECT";
+                            System.out.println(tempArrayList.get(5) + "\t" + tempArrayList.get(6) + "INCORRECT\t\tError US04: Divorce MONTH cannot be before Marriage MONTH");
+                        }
+                    } else
+                    {
+                        res = "CORRECT";
+                        System.out.println(tempArrayList.get(5) + "\t" + tempArrayList.get(6) + "\tCORRECT\t\t\tN/A");
+                    }
+                } else
+                {
+                    res = "INCORRECT";
+                    System.out.println(tempArrayList.get(5) + "\t" + tempArrayList.get(6) + "\tINCORRECT\t\tError US04: Divorce YEAR cannot be before Marriage YEAR");
+                }
+
+            } else
+            {
+                res = "CORRECT";
+                System.out.println(tempArrayList.get(5) + "\t" + "N/A" + "\t\tCORRECT\t\t\tN/A");
+            }
+        }
+    }
 }
