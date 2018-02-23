@@ -50,7 +50,12 @@ public class GedcomParse
         String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\src\\GedcomParse\\project1_MananSatra.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\project1_MananSatra.ged";
-        FileReader fileReader = new FileReader(karanPath);
+        
+//        FileReader fileReader = new FileReader(karanPath);
+        FileReader fileReader = new FileReader(mananPath);
+//        FileReader fileReader = new FileReader(mohitPath);
+//        FileReader fileReader = new FileReader(carolinePath);
+        
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         // Creating Object to insert later into array list
@@ -329,9 +334,21 @@ public class GedcomParse
         hashValueFam.add(fam.getMarried());
         hashValueFam.add(fam.isDivorced());
         famHash.putIfAbsent(fam.getFamID(), hashValueFam);
+        
+        //--------------------------Mohits Space----------------------------
         String res[]=s1.birthBeforeMarriage(indiHash,famHash);
         s1.marriageAfter14(indiHash, famHash);
+        
+        //--------------------------Manans Space----------------------------
         String resBirthBeforeDeath = m.birthBeforeDeath(indiHash);
+        
+        
+        //--------------------------Karans Space----------------------------
+        
+        
+        //--------------------------Carolines Space-------------------------
+        
+        
     }
 
     public static void main(String[] args) throws IOException
@@ -352,6 +369,18 @@ public class GedcomParse
 
             System.out.println(famHash.get(key));
         }
+        
+        //--------------------------Mohits Space----------------------------
+
+        
+        //--------------------------Manans Space----------------------------        
+        
+        
+        //--------------------------Karans Space----------------------------
+        
+        
+        //--------------------------Carolines Space-------------------------
+        
     }
 
 }
