@@ -17,27 +17,27 @@ public class MananTest
         Manan instance = new Manan();
         String testID[] =
         {
-            "T1", "T2", "T3","T4","T5"
+            "T1", "T2", "T3","T4","T5","T6","T7"
         };
         String testName[] =
         {
-            "ABC", "DEF", "GHI","JKL","MNO"
+            "ABC", "DEF", "GHI","JKL","MNO","PQR","LMN"
         };
         String testGender[] =
         {
-            "M", "M", "F","F","M"
+            "M", "M", "F","F","M","F","M"
         };
         String testBirth[] =
         {
-            "09 FEB 2000", "25 FEB 2007", "15 SEP 1990","1 JAN 2017","17 MAY 2014"
+            "09 FEB 2000", "25 FEB 2007", "15 SEP 1990","1 JAN 2017","17 MAY 2014","",""
         };
         String testDeath[] =
         {
-            "08 JAN 1999", "12 MAR 2007", "14 SEP 1990","","18 JUN 2015"
+            "08 JAN 1999", "12 MAR 2007", "14 SEP 1990","","18 JUN 2015","","20 MAR 1999"
         };
         String expected[] =
         {
-            "INCORRECT", "INCORRECT", "INCORRECT","CORRECT","CORRECT"
+            "INCORRECT", "INCORRECT", "INCORRECT","CORRECT","CORRECT","INCORRECT","INCORRECT"
         };
         String[] resArray = new String[testID.length];
         HashMap<String, ArrayList<String>> hashIndi = new HashMap<>();
@@ -53,9 +53,9 @@ public class MananTest
             tempArrayList.add(testDeath[i]);
             hashIndi.putIfAbsent(testID[i], tempArrayList);
             res = instance.birthBeforeDeath(hashIndi);
-            System.out.println("Expected Output: "+expected[i]);
-            System.out.println("Actual Output :"+res);
-            System.out.println();
+//            System.out.println("Expected Output: "+expected[i]);
+//            System.out.println("Actual Output :"+res);
+//            System.out.println();
             resArray[i] = res;
         }
         Assert.assertArrayEquals(expected, resArray);

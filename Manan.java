@@ -1,4 +1,3 @@
-
 package GedcomParse;
 
 import java.util.ArrayList;
@@ -14,16 +13,24 @@ public class Manan
     public String birthBeforeDeath(HashMap<String, ArrayList<String>> hashIndi)
     {
         hashIndi.remove("");
-        String res="";
+        String res = "";
         int birthMonthNumber, deathMonthNumber;
         System.out.println("\nManan's User story US03:");
-        System.out.println("BIRTH\t\tDEATH\t\tCORRECT/INCORRECT");
-        System.out.println("-----------\t-----------\t------------------");
+        System.out.println("BIRTH\t\tDEATH\t\tCORRECT/INCORRECT\tERROR MESSAGE(if any)");
+        System.out.println("-----------\t-----------\t------------------\t-----------------------");
+        
         for (String key : hashIndi.keySet())
         {
             tempArrayList = hashIndi.get(key);
-
-            if (!tempArrayList.get(4).equals(""))
+            if (tempArrayList.get(3).equals(""))
+            {
+                res = "INCORRECT";
+                if (!tempArrayList.get(4).equals(""))
+                    System.out.println(tempArrayList.get(3) + "\t\t" + tempArrayList.get(4) + "\tINCORRECT\t\tError US03: Cannot determine without Birth Date");
+                else
+                    System.out.println(tempArrayList.get(3) + "\t\t" + tempArrayList.get(4) + "\t\tINCORRECT\t\tError US03: Cannot determine without Birth Date");
+            }
+            else if (!tempArrayList.get(4).equals(""))
             {
                 String bday[] = tempArrayList.get(3).split(" ");
                 String dday[] = tempArrayList.get(4).split(" ");
@@ -38,32 +45,32 @@ public class Manan
                             if (Integer.parseInt(bday[0]) <= Integer.parseInt(dday[0]))
                             {
                                 res = "CORRECT";
-                                System.out.println(tempArrayList.get(3) + "\t" + tempArrayList.get(4) + "\tCORRECT");
+                                System.out.println(tempArrayList.get(3) + "\t" + tempArrayList.get(4) + "\tCORRECT\t\t\tN/A");
                             } else
                             {
                                 res = "INCORRECT";
-                                System.out.println(tempArrayList.get(3) + "\t" + tempArrayList.get(4) + "\tINCORRECT");
+                                System.out.println(tempArrayList.get(3) + "\t" + tempArrayList.get(4) + "\tINCORRECT\t\tError US03: Death DAY cannot be before birth DAY");
                             }
                         } else
                         {
                             res = "INCORRECT";
-                            System.out.println(tempArrayList.get(3) + "\t" + tempArrayList.get(4) + "\tINCORRECT");
+                            System.out.println(tempArrayList.get(3) + "\t" + tempArrayList.get(4) + "INCORRECT\t\tError US03: Death MONTH cannot be before birth MONTH");
                         }
                     } else
                     {
                         res = "CORRECT";
-                        System.out.println(tempArrayList.get(3) + "\t" + tempArrayList.get(4) + "\tCORRECT");
+                        System.out.println(tempArrayList.get(3) + "\t" + tempArrayList.get(4) + "\tCORRECT\t\t\tN/A");
                     }
                 } else
                 {
                     res = "INCORRECT";
-                    System.out.println(tempArrayList.get(3) + "\t" + tempArrayList.get(4) + "\tINCORRECT");
+                    System.out.println(tempArrayList.get(3) + "\t" + tempArrayList.get(4) + "\tINCORRECT\t\tError US03: Death YEAR cannot be before birth YEAR");
                 }
 
             } else
             {
                 res = "CORRECT";
-                System.out.println(tempArrayList.get(3) + "\t" + "N/A" + "\t\tCORRECT");
+                System.out.println(tempArrayList.get(3) + "\t" + "N/A" + "\t\tCORRECT\t\t\tN/A");
             }
         }
         System.out.println();
@@ -72,47 +79,47 @@ public class Manan
 
     public int monthNumber(String monthString)
     {
-        int monthInt=0;
+        int monthInt = 0;
         switch (monthString)
         {
-            
+
             case "JAN":
-                monthInt= 1;
+                monthInt = 1;
                 break;
             case "FEB":
-                monthInt= 2;
+                monthInt = 2;
                 break;
             case "MAR":
-                monthInt= 3;
+                monthInt = 3;
                 break;
             case "APR":
-                monthInt= 4;
+                monthInt = 4;
                 break;
             case "MAY":
-                monthInt= 5;
+                monthInt = 5;
                 break;
             case "JUN":
-                monthInt= 6;
+                monthInt = 6;
                 break;
             case "JUL":
-                monthInt= 7;
+                monthInt = 7;
                 break;
             case "AUG":
-                monthInt= 8;
+                monthInt = 8;
                 break;
             case "SEP":
-                monthInt= 9;
+                monthInt = 9;
                 break;
             case "OCT":
-                monthInt= 10;
+                monthInt = 10;
                 break;
             case "NOV":
-                monthInt= 11;
+                monthInt = 11;
                 break;
             case "DEC":
-                monthInt= 12;
+                monthInt = 12;
                 break;
         }
         return monthInt;
     }
-    }
+}
