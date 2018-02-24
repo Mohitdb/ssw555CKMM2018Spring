@@ -73,6 +73,9 @@ class aliveMarriedTest {
 		famHash.put("F1", fam2);
 		
 		AliveMarried am = new AliveMarried(indiHash, famHash);
+		
+		System.out.println(am.getAliveMarried());
+		System.out.println(am.getAliveSingle());
 
 		assertEquals("[[I1, Justin Sweeney, M, 11 SEP 1963, ], [I11, Nicole Janson, F, 5 NOV 1970, ], [I2, Pam Janson, F, 7 APR 1965, ]]", am.getAliveMarried().toString());
 		assertFalse(am.getAliveMarried().contains(id2)); 
