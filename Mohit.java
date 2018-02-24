@@ -45,7 +45,7 @@ public class Mohit {
         String HBdate[] = new String[famHashmap.size()];
         String WBdate[] = new String[famHashmap.size()];
         String FId[] = new String[famHashmap.size()];
-        System.out.println("Mohit Sprint 1 User Story 02:");
+        System.out.println("\nMohit Sprint 1 User Story 02:");
         System.out.println("FId\tMDate\t\tHBdate\t\tWBdate\t\tBirth before marriage");
         int i = 0;
         for (String key : famHashmap.keySet()) {
@@ -155,7 +155,7 @@ public class Mohit {
         String HBdate[] = new String[famHashmap.size()];
         String WBdate[] = new String[famHashmap.size()];
         String FId[] = new String[famHashmap.size()];
-        System.out.println("Mohit Sprint 1 User Story 10:");
+        System.out.println("\nMohit Sprint 1 User Story 10:");
         System.out.println("FId\tMDate\t\tHBdate\t\tWBdate\t\tMarriage after 14");
         int i = 0;
         for (String key : famHashmap.keySet()) {

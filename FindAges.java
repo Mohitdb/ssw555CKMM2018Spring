@@ -10,10 +10,8 @@ public class FindAges {
 	{
 		String monthNumber;
 		String month;
-		Date today = new Date();
 		String formattedBirthDate;
 		String formattedDeathDate;
-		String newDate = "";
 		Date birthDate = new Date();
 		Date deathDate = new Date();
 		double Age = 0;
@@ -22,10 +20,8 @@ public class FindAges {
 		
 		SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
 		
-		if (date2 == "NA")
+		if (date2 == "")
 		{
-			today = new Date();
-			
 			birth = date1.split(" ");
 			
 			monthNumber = dateNumber(birth[1]);
@@ -37,13 +33,18 @@ public class FindAges {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
+			
+			
+			SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+			deathDate = new Date();
+			DateFormat.format(deathDate);
 				
-				//in milliseconds
-				double diff = Math.abs(today.getTime() - birthDate.getTime());
+			//in milliseconds
+			double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
 
-				Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+			Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
 				
-				return (int) Age;
+			return (int) Age;
 		}
 		
 		else
@@ -69,31 +70,18 @@ public class FindAges {
 				e.printStackTrace();
 			}
 			
-			if (deathDate == null)
-			{
-				SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
-				deathDate = new Date();
-				DateFormat.format(deathDate);
+			SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+			deathDate = new Date();
+			DateFormat.format(deathDate);
 				
-				//in milliseconds
-				double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
+			//in milliseconds
+			double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
 
-				Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+			Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
 				
-				return (int) Age;
-			}
+			return (int) Age;
 			
-			else 
-			{
-				//in milliseconds
-				double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
-
-				Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
-				
-				return (int) Age;
-			}
 		}
-		
 	}
 	
 	public static String dateNumber(String monthName)
