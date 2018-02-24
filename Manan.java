@@ -1,5 +1,6 @@
 package GedcomParse;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,7 +13,7 @@ public class Manan
     {
         hashIndi.remove("");
         String res = "";
-        System.out.println("\n******************** Manan's User story US03:Birth Before Death ********************");
+        System.out.println("\n====================== Manan's User story US03:Birth Before Death ======================");
         System.out.println("BIRTH\t\tDEATH\t\tCORRECT/INCORRECT\tERROR MESSAGE(if any)");
         System.out.println("-----------\t-----------\t------------------\t-----------------------");
 
@@ -65,7 +66,7 @@ public class Manan
     public void mariageBeforeDivorce(HashMap<String, ArrayList<String>> famHash)
     {
         famHash.remove("");
-        System.out.println("\n******************** Manan's User story US04:Marriage Before Divorce ********************");
+        System.out.println("\n====================== Manan's User story US04:Marriage Before Divorce ======================");
         System.out.println("MARRIAGE\tDIVORCE\t\tCORRECT/INCORRECT\tERROR MESSAGE(if any)");
         System.out.println("-----------\t-------------\t-----------------\t----------------------");
         for (String key : famHash.keySet())
@@ -185,5 +186,51 @@ public class Manan
                 break;
         }
         return monthInt;
+    }
+
+    void lessThan150(HashMap<String, ArrayList<String>> hashIndi)
+    {
+        System.out.println("\n====================== Manan's User story US07:Less Than 150 Years Old ======================");
+        hashIndi.remove("");
+        for (String key : hashIndi.keySet())
+        {
+            int deathYear, birthYear;
+            LocalDate now = LocalDate.now();
+            int currentYear = now.getYear();
+            tempArrayList = hashIndi.get(key);
+            String birthDate = tempArrayList.get(3);
+            String deathDate = tempArrayList.get(4);
+            System.out.println(birthDate + "<-Birth\tDeath->" + deathDate);
+            if (!deathDate.equals(""))
+            {
+                deathYear = Integer.parseInt(deathDate.split(" ")[2]);
+                birthYear = Integer.parseInt(birthDate.split(" ")[2]);
+                if (deathYear - birthYear >= 150)
+                {
+                    System.out.println("ERROR US07: Death year " + deathYear + " should be less than 150 years from birth year " + birthYear);
+                } else
+                {
+                    System.out.println("NO Error!");
+                }
+            } else if (!birthDate.equals(""))
+            {
+                birthYear = Integer.parseInt(birthDate.split(" ")[2]);
+                if (birthYear > currentYear)
+                {
+                    System.out.println("ERROR US07: Birth Year " + birthYear + " is beyound current year " + currentYear);
+                } else if (currentYear - birthYear >= 150)
+                {
+                    System.out.println("ERROR US07: Birth year " + birthYear + " should be less than 150 years from current year " + currentYear);
+                } else
+                {
+                    System.out.println("NO Error!");
+                }
+            } else
+            {
+                System.out.println("ERROR US07: Cannot Determine without Birth Year!");
+            }
+            System.out.println();
+        }
+
     }
 }

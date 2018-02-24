@@ -47,12 +47,12 @@ public class GedcomParse
         //read file
         // TODO: Change path for our testing file
         String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
-        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\src\\GedcomParse\\project1_MananSatra.ged";
+        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\project1_MananSatra.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\project1_MananSatra.ged";
         
-        FileReader fileReader = new FileReader(karanPath);
-//        FileReader fileReader = new FileReader(mananPath);
+//        FileReader fileReader = new FileReader(karanPath);
+        FileReader fileReader = new FileReader(mananPath);
 //        FileReader fileReader = new FileReader(mohitPath);
 //        FileReader fileReader = new FileReader(carolinePath);
         
@@ -342,7 +342,8 @@ public class GedcomParse
         //--------------------------Manans Space----------------------------
         String resBirthBeforeDeath = m.birthBeforeDeath(indiHash);
         m.mariageBeforeDivorce(famHash);
-        
+        m.lessThan150(indiHash);
+
         //--------------------------Karans Space----------------------------
         
         
