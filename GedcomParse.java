@@ -376,11 +376,29 @@ public class GedcomParse
         parse();
         System.out.println("\n******************** Karan's User story US27: Individual Ages in Table ********************");
         System.out.println("\n******************** Individual's Entries:********************");
-        System.out.println("ID" + "\t" + "Name" + "\t" + "Gender" + "\t" + "Birthday" + "\t" + "Deathday" + "\t" + "Age" + "\t" + "Alive");
+        System.out.println("ID" + "\t" + "Name" + "\t" + "\tGender" + "\t" + "Birthday" + "\t" + "Deathday" + "\t" + "Age" + "\t" + "Alive");
         indiHash.remove("");
         for (String key : indiHash.keySet())
         {
-            System.out.println(indiHash.get(key));
+            ArrayList temp=indiHash.get(key);
+            if(indiHash.get(key).get(4).equals(""))
+            {
+                for(int i=0;i<temp.size();i++)
+                {
+                    if(i==4)
+                        System.out.print("NA\t\t");
+                    else System.out.print(temp.get(i)+"\t");
+                }
+                System.out.println();
+            }
+            else
+            {
+                for(int i=0;i<temp.size();i++)
+                {
+                    System.out.print(temp.get(i)+"\t");
+                }
+                System.out.println();
+            }
         }
 
         System.out.println("\n******************** Family Entries: ********************");
