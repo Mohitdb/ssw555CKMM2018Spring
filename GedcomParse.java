@@ -57,6 +57,7 @@ public class GedcomParse
 //        FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
+        System.out.println("\n******************** Karan's User story US21: Correct Gender for Role ********************");
 
         // Creating Object to insert later into array list
         Family fam = new Family();
@@ -229,7 +230,12 @@ public class GedcomParse
 
                                     if (gender == "F")
                                     {
-                                        System.out.println("Error: Individual " + temp.get(0) + " is registered as an Husband but is a female.");
+                                        System.out.println("Error: Individual " + temp.get(0) + " named " + temp.get(1) + " is registered as an Husband but is a female.");
+                                    }
+                                    
+                                    else
+                                    {
+                                    	System.out.println("Individual " + temp.get(0) + " named " + temp.get(1) + " is registered as Husband and is a male. No errors!");
                                     }
                                 }
                             }
@@ -248,7 +254,12 @@ public class GedcomParse
 
                                     if (gender == "M")
                                     {
-                                        System.out.println("Error: Individual " + temp.get(0) + " is registered as an Wife but is a male.");
+                                        System.out.println("Error: Individual " + temp.get(0) + " named " + temp.get(1) + " is registered as an Wife but is a male.");
+                                    }
+                                    
+                                    else
+                                    {
+                                    	System.out.println("Individual " + temp.get(0) + " named " + temp.get(1) + " is registered as Wife and is a female. No errors!");
                                     }
                                 }
                             }
@@ -299,9 +310,22 @@ public class GedcomParse
                         if (isIndi == true && isBirth == true)
                         {
                             indi.birth = arguments;
+                            
+                            FindAges fa = new FindAges();
+                            
+                            int Age = fa.FindAge(indi.birth, indi.death);
+                            
+                            indi.age = Age;
+                            
                         } else if (isIndi == true && isBirth == false)
                         {
                             indi.death = arguments;
+                            
+                            FindAges fa = new FindAges();
+                            
+                            int Age = fa.FindAge(indi.birth, indi.death);
+                            
+                            indi.age = Age;
 
                         } else if (isIndi == false && isMarried == true && immDate == true)
                         {
@@ -318,11 +342,6 @@ public class GedcomParse
                         isValid = false;
                     }
                     
-                    FindAges fa = new FindAges();
-                    
-                    int Age = fa.FindAge(indi.birth, indi.death);
-                    
-                    indi.age = Age;
                 }
             }
         }
@@ -355,14 +374,16 @@ public class GedcomParse
     public static void main(String[] args) throws IOException
     {
         parse();
-        System.out.println("Individual's Entries:");
+        System.out.println("\n******************** Karan's User story US27: Individual Ages in Table ********************");
+        System.out.println("\n******************** Individual's Entries:********************");
+        System.out.println("ID" + "\t" + "Name" + "\t" + "Gender" + "\t" + "Birthday" + "\t" + "Deathday" + "\t" + "Age" + "\t" + "Alive");
         indiHash.remove("");
         for (String key : indiHash.keySet())
         {
             System.out.println(indiHash.get(key));
         }
 
-        System.out.println("Family Entries:");
+        System.out.println("\n******************** Family Entries: ********************");
         System.out.println("ID" + "\t" + "H ID" + "\t" + "H Name" + "\t" + "W ID" + "\t" + "W name" + "\t" + "Marriage date" + "\t" + "Divorce date");
         famHash.remove("");
         for (String key : famHash.keySet())
