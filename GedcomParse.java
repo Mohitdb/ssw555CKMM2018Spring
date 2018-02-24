@@ -373,7 +373,8 @@ public class GedcomParse
     public static void main(String[] args) throws IOException
     {
         parse();
-        System.out.println("\nIndividual's Entries:");
+        System.out.println("\n******************** Karan's User story US27: Individual Ages in Table ********************");
+        System.out.println("\n******************** Individual's Entries:********************");
         System.out.println("ID" + "\t" + "Name" + "\t" + "Gender" + "\t" + "Birthday" + "\t" + "Deathday" + "\t" + "Age" + "\t" + "Alive");
         indiHash.remove("");
         for (String key : indiHash.keySet())
@@ -381,7 +382,7 @@ public class GedcomParse
             System.out.println(indiHash.get(key));
         }
 
-        System.out.println("\nFamily Entries:");
+        System.out.println("\n******************** Family Entries: ********************");
         System.out.println("ID" + "\t" + "H ID" + "\t" + "H Name" + "\t" + "W ID" + "\t" + "W name" + "\t" + "Marriage date" + "\t" + "Divorce date");
         famHash.remove("");
         for (String key : famHash.keySet())
