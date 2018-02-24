@@ -299,9 +299,22 @@ public class GedcomParse
                         if (isIndi == true && isBirth == true)
                         {
                             indi.birth = arguments;
+                            
+                            FindAges fa = new FindAges();
+                            
+                            int Age = fa.FindAge(indi.birth, indi.death);
+                            
+                            indi.age = Age;
+                            
                         } else if (isIndi == true && isBirth == false)
                         {
                             indi.death = arguments;
+                            
+                            FindAges fa = new FindAges();
+                            
+                            int Age = fa.FindAge(indi.birth, indi.death);
+                            
+                            indi.age = Age;
 
                         } else if (isIndi == false && isMarried == true && immDate == true)
                         {
@@ -318,11 +331,6 @@ public class GedcomParse
                         isValid = false;
                     }
                     
-                    FindAges fa = new FindAges();
-                    
-                    int Age = fa.FindAge(indi.birth, indi.death);
-                    
-                    indi.age = Age;
                 }
             }
         }
