@@ -20,7 +20,12 @@ public class FindAges {
 		
 		SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
 		
-		if (date2 == "")
+		if (date1 == "")
+		{
+			return 0;
+		}
+		
+		else if (date2 == "")
 		{
 			birth = date1.split(" ");
 			
