@@ -52,9 +52,9 @@ public class GedcomParse
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\project1_MananSatra.ged";
         
 //        FileReader fileReader = new FileReader(karanPath);
-        FileReader fileReader = new FileReader(mananPath);
+//        FileReader fileReader = new FileReader(mananPath);
 //        FileReader fileReader = new FileReader(mohitPath);
-//        FileReader fileReader = new FileReader(carolinePath);
+        FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         System.out.println("\n******************** Karan's User story US21: Correct Gender for Role ********************");
@@ -345,6 +345,16 @@ public class GedcomParse
                 }
             }
         }
+        
+        hashValueIndi.add(indi.getIndividualID().toString());
+        hashValueIndi.add(indi.getName());
+        hashValueIndi.add(indi.getGender());
+        hashValueIndi.add(indi.getBirth());
+        hashValueIndi.add(indi.getDeath().toString());
+        hashValueIndi.add(indi.getAge());
+        hashValueIndi.add(indi.getisAlive());
+        indiHash.putIfAbsent(indi.getIndividualID(), hashValueIndi);
+        
         hashValueFam.add(fam.getFamID().toString());
         hashValueFam.add(fam.getHusbID());
         hashValueFam.add(fam.getHusbName());
