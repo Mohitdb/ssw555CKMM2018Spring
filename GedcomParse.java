@@ -53,9 +53,9 @@ public class GedcomParse
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\project1_MananSatra.ged";
         
 //        FileReader fileReader = new FileReader(karanPath);
- //       FileReader fileReader = new FileReader(mananPath);
+        FileReader fileReader = new FileReader(mananPath);
  //       FileReader fileReader = new FileReader(mohitPath);
-       FileReader fileReader = new FileReader(carolinePath);
+//       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         System.out.println("\n******************** Karan's User story US21: Correct Gender for Role ********************");
@@ -381,6 +381,7 @@ public class GedcomParse
         //--------------------------Manans Space----------------------------
         String resBirthBeforeDeath = m.birthBeforeDeath(indiHash);
         m.mariageBeforeDivorce(famHash);
+        // m.lessThan150(indiHash);
 
         //--------------------------Karans Space----------------------------
         
