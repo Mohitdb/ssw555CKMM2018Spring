@@ -97,7 +97,7 @@ public class Manan
                     System.out.println(marriageDate + "\t" + divorceDate + "\tError US04: Divorce DAY cannot be before Marriage DAY for same month and year");
                 } else
                 {
-                    System.out.println(marriageDate + "\t" + divorceDate + "\t\tN/A");
+                    //System.out.println(marriageDate + "\t" + divorceDate + "\t\tN/A");
                 }
             } else
             {
