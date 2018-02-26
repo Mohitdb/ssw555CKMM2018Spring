@@ -455,10 +455,7 @@ public class GedcomParse
         
         for (ArrayList<String> key : livMarried)
         {
-        	for (String info : key) {
-        		System.out.print(info);
-        		System.out.print(" ");
-        	}
+        	System.out.print(key.get(1));
         	System.out.println();
             
         }
@@ -469,10 +466,7 @@ public class GedcomParse
         
         for (ArrayList<String> key : livSingle)
         {
-        	for (String info : key) {
-        		System.out.print(info);
-        		System.out.print(" ");
-        	}
+        	System.out.print(key.get(1));
         	System.out.println();
             
         }        
