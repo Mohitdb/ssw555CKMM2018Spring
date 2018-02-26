@@ -43,7 +43,7 @@ public class Mohit {
         String FId[] = new String[famHashmap.size()];
         //System.out.println("\nMohit Sprint 1 User Story 02:");
         //System.out.println("FId\tMDate\t\tHBdate\t\tWBdate\t\tBirth before marriage");
-        System.out.println("\n\n=> Mohit Sprint 1 User Story 02:");
+        System.out.println("\n\n=> Mohit Sprint 1 User Story 02: Birth Before Marriage");
 
         int i = 0;
         for (String key : famHashmap.keySet()) {
@@ -80,42 +80,22 @@ public class Mohit {
 
             i++;
         }
+        try {
+            for (int j = 0; j < i; j++) {
 
-        for (int j = 0; j < i; j++) {
-            if ((MDate[j].equals("N/A")) || (HBdate[j].equals("N/A")) || (WBdate[j].equals("N/A"))) {
-                res[j] = "cannot say";
-            } else {
-                String mdate[] = MDate[j].split(" ");
-                String hdate[] = HBdate[j].split(" ");
-                String wdate[] = WBdate[j].split(" ");
-                if (Integer.parseInt(mdate[2]) < Integer.parseInt(hdate[2])) {
-                    res[j] = "invalid";
-                } else if (Integer.parseInt(mdate[2]) == Integer.parseInt(hdate[2])) {
-                    if (monthmap.get(mdate[1]) < monthmap.get(hdate[1])) {
-                        res[j] = "invalid";
-                    } else if (monthmap.get(mdate[1]) == monthmap.get(hdate[1])) {
-                        if (Integer.parseInt(mdate[0]) <= Integer.parseInt(hdate[0])) {
-                            res[j] = "invalid";
-                        } else {
-                            res[j] = "valid";
-                        }
-                    } else {
-                        res[j] = "valid";
-                    }
+                if ((MDate[j].equals("N/A")) || (HBdate[j].equals("N/A")) || (WBdate[j].equals("N/A"))) {
+                    res[j] = "cannot say";
                 } else {
-                    res[j] = "valid";
-                }
-
-                if (res[j].equals("invalid")) {
-                    res[j] = "invalid";
-                } else {
-                    if (Integer.parseInt(mdate[2]) < Integer.parseInt(wdate[2])) {
+                    String mdate[] = MDate[j].split(" ");
+                    String hdate[] = HBdate[j].split(" ");
+                    String wdate[] = WBdate[j].split(" ");
+                    if (Integer.parseInt(mdate[2]) < Integer.parseInt(hdate[2])) {
                         res[j] = "invalid";
-                    } else if (Integer.parseInt(mdate[2]) == Integer.parseInt(wdate[2])) {
-                        if (monthmap.get(mdate[1]) < monthmap.get(wdate[1])) {
+                    } else if (Integer.parseInt(mdate[2]) == Integer.parseInt(hdate[2])) {
+                        if (monthmap.get(mdate[1]) < monthmap.get(hdate[1])) {
                             res[j] = "invalid";
-                        } else if (monthmap.get(mdate[1]) == monthmap.get(wdate[1])) {
-                            if (Integer.parseInt(mdate[0]) <= Integer.parseInt(wdate[0])) {
+                        } else if (monthmap.get(mdate[1]) == monthmap.get(hdate[1])) {
+                            if (Integer.parseInt(mdate[0]) <= Integer.parseInt(hdate[0])) {
                                 res[j] = "invalid";
                             } else {
                                 res[j] = "valid";
@@ -126,17 +106,43 @@ public class Mohit {
                     } else {
                         res[j] = "valid";
                     }
-                }
-                //System.out.println(MDate[]);
 
+                    if (res[j].equals("invalid")) {
+                        res[j] = "invalid";
+                    } else {
+                        if (Integer.parseInt(mdate[2]) < Integer.parseInt(wdate[2])) {
+                            res[j] = "invalid";
+                        } else if (Integer.parseInt(mdate[2]) == Integer.parseInt(wdate[2])) {
+                            if (monthmap.get(mdate[1]) < monthmap.get(wdate[1])) {
+                                res[j] = "invalid";
+                            } else if (monthmap.get(mdate[1]) == monthmap.get(wdate[1])) {
+                                if (Integer.parseInt(mdate[0]) <= Integer.parseInt(wdate[0])) {
+                                    res[j] = "invalid";
+                                } else {
+                                    res[j] = "valid";
+                                }
+                            } else {
+                                res[j] = "valid";
+                            }
+                        } else {
+                            res[j] = "valid";
+                        }
+                    }
+                    //System.out.println(MDate[]);
+
+                }
+
+                //catch(NullPointerException ne){}
+                //System.out.println(FId[j] + "\t" + MDate[j] + "\t" + HBdate[j] + "\t" + WBdate[j] + "\t" + res[j]);
+                if (res[j].equals("invalid")) {
+                    System.out.println("ERROR: US02: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, birth not before marriage.");
+                }
+                if (res[j].equals("cannot say")) {
+                    System.out.println("ERROR: US02: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, insufficient information to compare.");
+                }
             }
-            //System.out.println(FId[j] + "\t" + MDate[j] + "\t" + HBdate[j] + "\t" + WBdate[j] + "\t" + res[j]);
-             if (res[j].equals("invalid")) {
-                System.out.println("ERROR: US02: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, birth not before marriage.");
-            }
-             if (res[j].equals("cannot say")) {
-                System.out.println("ERROR: US02: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, insufficient information to compare.");
-            }
+        } catch (NullPointerException ne) {
+
         }
         return res;
     }
@@ -160,7 +166,7 @@ public class Mohit {
         String WBdate[] = new String[famHashmap.size()];
         String FId[] = new String[famHashmap.size()];
         //System.out.println("\nMohit Sprint 1 User Story 10:");
-        System.out.println("\n\n=>Mohit Sprint 1 User Story 10:");
+        System.out.println("\n\n=>Mohit Sprint 1 User Story 10: Marriage after 14");
         //int i = 0;
         //System.out.println("FId\tMDate\t\tHBdate\t\tWBdate\t\tMarriage after 14");
         int i = 0;
@@ -197,42 +203,21 @@ public class Mohit {
 
             i++;
         }
-
-        for (int j = 0; j < i; j++) {
-            if ((MDate[j].equals("N/A")) || (HBdate[j].equals("N/A")) || (WBdate[j].equals("N/A"))) {
-                res[j] = "cannot say";
-            } else {
-                String mdate[] = MDate[j].split(" ");
-                String hdate[] = HBdate[j].split(" ");
-                String wdate[] = WBdate[j].split(" ");
-                if (Integer.parseInt(mdate[2]) < (Integer.parseInt(hdate[2]) + 14)) {
-                    res[j] = "invalid";
-                } else if (Integer.parseInt(mdate[2]) == (Integer.parseInt(hdate[2]) + 14)) {
-                    if (monthmap.get(mdate[1]) < monthmap.get(hdate[1])) {
-                        res[j] = "invalid";
-                    } else if (monthmap.get(mdate[1]) == monthmap.get(hdate[1])) {
-                        if (Integer.parseInt(mdate[0]) <= Integer.parseInt(hdate[0])) {
-                            res[j] = "invalid";
-                        } else {
-                            res[j] = "valid";
-                        }
-                    } else {
-                        res[j] = "valid";
-                    }
+        try {
+            for (int j = 0; j < i; j++) {
+                if ((MDate[j].equals("N/A")) || (HBdate[j].equals("N/A")) || (WBdate[j].equals("N/A"))) {
+                    res[j] = "cannot say";
                 } else {
-                    res[j] = "valid";
-                }
-
-                if (res[j].equals("invalid")) {
-                    res[j] = "invalid";
-                } else {
-                    if (Integer.parseInt(mdate[2]) < (Integer.parseInt(wdate[2]) + 14)) {
+                    String mdate[] = MDate[j].split(" ");
+                    String hdate[] = HBdate[j].split(" ");
+                    String wdate[] = WBdate[j].split(" ");
+                    if (Integer.parseInt(mdate[2]) < (Integer.parseInt(hdate[2]) + 14)) {
                         res[j] = "invalid";
-                    } else if (Integer.parseInt(mdate[2]) == (Integer.parseInt(wdate[2]) + 14)) {
-                        if (monthmap.get(mdate[1]) < monthmap.get(wdate[1])) {
+                    } else if (Integer.parseInt(mdate[2]) == (Integer.parseInt(hdate[2]) + 14)) {
+                        if (monthmap.get(mdate[1]) < monthmap.get(hdate[1])) {
                             res[j] = "invalid";
-                        } else if (monthmap.get(mdate[1]) == monthmap.get(wdate[1])) {
-                            if (Integer.parseInt(mdate[0]) <= Integer.parseInt(wdate[0])) {
+                        } else if (monthmap.get(mdate[1]) == monthmap.get(hdate[1])) {
+                            if (Integer.parseInt(mdate[0]) <= Integer.parseInt(hdate[0])) {
                                 res[j] = "invalid";
                             } else {
                                 res[j] = "valid";
@@ -243,16 +228,75 @@ public class Mohit {
                     } else {
                         res[j] = "valid";
                     }
+
+                    if (res[j].equals("invalid")) {
+                        res[j] = "invalid";
+                    } else {
+                        if (Integer.parseInt(mdate[2]) < (Integer.parseInt(wdate[2]) + 14)) {
+                            res[j] = "invalid";
+                        } else if (Integer.parseInt(mdate[2]) == (Integer.parseInt(wdate[2]) + 14)) {
+                            if (monthmap.get(mdate[1]) < monthmap.get(wdate[1])) {
+                                res[j] = "invalid";
+                            } else if (monthmap.get(mdate[1]) == monthmap.get(wdate[1])) {
+                                if (Integer.parseInt(mdate[0]) <= Integer.parseInt(wdate[0])) {
+                                    res[j] = "invalid";
+                                } else {
+                                    res[j] = "valid";
+                                }
+                            } else {
+                                res[j] = "valid";
+                            }
+                        } else {
+                            res[j] = "valid";
+                        }
+                    }
                 }
-            }
-            if (res[j].equals("invalid")) {
-                System.out.println("ERROR: US10: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, marriage not after 14.");
+                if (res[j].equals("invalid")) {
+                    System.out.println("ERROR: US10: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, marriage not after 14.");
                 }
-            if (res[j].equals("cannot say")) {
-                System.out.println("ERROR: US10: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, insufficient information to compare.");
+                if (res[j].equals("cannot say")) {
+                    System.out.println("ERROR: US10: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, insufficient information to compare.");
+                }
+                //System.out.println(FId[j] + "\t" + MDate[j] + "\t" + HBdate[j] + "\t" + WBdate[j] + "\t" + res[j]);
+
             }
-            //System.out.println(FId[j] + "\t" + MDate[j] + "\t" + HBdate[j] + "\t" + WBdate[j] + "\t" + res[j]);
+        } catch (NullPointerException ne) {
 
         }
+
     }
+
+   /* public void uniqueIDs(String indid[], String famid[]) {
+        System.out.println("\n\n=>Mohit Sprint 2 User Story 22: UniqueIDs");
+        try {
+            for (int i = 0; i < indid.length; i++) {
+                for (int j = i + 1; j < indid.length; j++) {
+
+                    if (indid[i].equals(indid[j])) {
+                        System.out.println("ERROR: US22: Individual ID: " + indid[i] + " is not unique");
+                        break;
+                    }
+
+                }
+            }
+        } catch (NullPointerException ne) {
+            //System.out.println("NO ERROR: All individuals have unique id.");
+        }
+        try {
+            for (int k = 0; k < famid.length; k++) {
+                for (int l = k + 1; l < famid.length; l++) {
+
+                    if (famid[k].equals(famid[l])) {
+                        System.out.println("ERROR: US22: Family ID: " + famid[k] + " is not unique");
+                        break;
+                    }
+
+                }
+
+            }
+
+        } catch (NullPointerException ne) {
+            //System.out.println("NO ERROR: All individuals have unique id.");
+        }
+    }*/
 }

@@ -30,6 +30,7 @@ public class GedcomParse
 
     static String reader = null;
     static Mohit s1 = new Mohit();
+    static AliveMarried am;
 
     static HashMap<String, ArrayList<String>> indiHash = new HashMap<>();
     static HashMap<String, ArrayList<String>> famHash = new HashMap<>();
@@ -48,11 +49,11 @@ public class GedcomParse
         // TODO: Change path for our testing file
         String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
         String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\mananSprint1.ged";
-        String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\src\\Gedcomparse\\US02&US10.ged";
+        String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\US22.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\project1_MananSatra.ged";
         
 //        FileReader fileReader = new FileReader(karanPath);
-//        FileReader fileReader = new FileReader(mananPath);
+ //       FileReader fileReader = new FileReader(mananPath);
         FileReader fileReader = new FileReader(mohitPath);
 //        FileReader fileReader = new FileReader(carolinePath);
         
@@ -75,7 +76,9 @@ public class GedcomParse
         //Flag so that immediate correct date after MARR gets printed and not the date after an invalid tag
         boolean immDate = true;
         boolean firstPerson = true;
-
+        String indid[]=new String[256];
+        String famid[]=new String[256];
+        int ui=0,uf=0;
         ArrayList<String> hashValueIndi = new ArrayList<>();
         ArrayList<String> hashValueFam = new ArrayList<>();
         //while loop to check to see if each line is valid and formats the information accordingly
@@ -168,12 +171,17 @@ public class GedcomParse
                     if (lst[2].contains("INDI"))
                     {
                         indi.setIndividualID(lst[1].substring(1, lst[1].length() - 1));
+                        indid[ui]=lst[1].substring(1, lst[1].length() - 1);
+                        ui++;
                         isIndi = true;
                     } else
                     {
                         fam.setFamID(lst[1].substring(1, lst[1].length() - 1));
+                        famid[uf]=(lst[1].substring(1, lst[1].length() - 1));
+                        uf++;
                         isIndi = false;
                     }
+
 
                     tag = lst[2];
                     arguments = lst[1];
@@ -346,14 +354,16 @@ public class GedcomParse
             }
         }
         
-        hashValueIndi.add(indi.getIndividualID().toString());
-        hashValueIndi.add(indi.getName());
-        hashValueIndi.add(indi.getGender());
-        hashValueIndi.add(indi.getBirth());
-        hashValueIndi.add(indi.getDeath().toString());
-        hashValueIndi.add(indi.getAge());
-        hashValueIndi.add(indi.getisAlive());
-        indiHash.putIfAbsent(indi.getIndividualID(), hashValueIndi);
+        if(famHash.isEmpty()) {
+	        hashValueIndi.add(indi.getIndividualID().toString());
+	        hashValueIndi.add(indi.getName());
+	        hashValueIndi.add(indi.getGender());
+	        hashValueIndi.add(indi.getBirth());
+	        hashValueIndi.add(indi.getDeath().toString());
+	        hashValueIndi.add(indi.getAge());
+	        hashValueIndi.add(indi.getisAlive());
+	        indiHash.putIfAbsent(indi.getIndividualID(), hashValueIndi);
+        }
         
         hashValueFam.add(fam.getFamID().toString());
         hashValueFam.add(fam.getHusbID());
@@ -367,7 +377,7 @@ public class GedcomParse
         //--------------------------Mohits Space----------------------------
         String res[]=s1.birthBeforeMarriage(indiHash,famHash);
         s1.marriageAfter14(indiHash, famHash);
-        
+        //s1.uniqueIDs(indid,famid);
         //--------------------------Manans Space----------------------------
         String resBirthBeforeDeath = m.birthBeforeDeath(indiHash);
         m.mariageBeforeDivorce(famHash);
@@ -376,6 +386,8 @@ public class GedcomParse
         
         
         //--------------------------Carolines Space-------------------------
+        
+        
         
         
     }
@@ -404,9 +416,18 @@ public class GedcomParse
             }
             if(indiHash.get(key).get(4).equals("") || indiHash.get(key).get(3).equals(""))
             {
+				int temp1;
+                if(indiHash.get(key).get(4).equals(""))
+                {
+                    temp1=4;
+                }
+                else
+                {
+                    temp1=3;
+                }
                 for(int i=0;i<temp.size();i++)
                 {
-                    if(i==3 || i==4)
+                    if(i==temp1)
                         System.out.print("NA\t\t\t");
                     else System.out.print(temp.get(i)+"\t\t");
                 }
@@ -442,6 +463,29 @@ public class GedcomParse
         
         //--------------------------Carolines Space-------------------------
         
+        am = new AliveMarried(indiHash, famHash);
+        
+        System.out.println("===============Caroline's US30 - List Living Married===============");
+
+        ArrayList<ArrayList<String>> livMarried = am.getAliveMarried();
+        
+        for (ArrayList<String> key : livMarried)
+        {
+        	System.out.print(key.get(1));
+        	System.out.println();
+            
+        }
+        
+        
+        System.out.println("===============Caroline's US10 - List Living Single===============");
+        ArrayList<ArrayList<String>> livSingle = am.getAliveSingle();
+        
+        for (ArrayList<String> key : livSingle)
+        {
+        	System.out.print(key.get(1));
+        	System.out.println();
+            
+        }        
     }
 
 }
