@@ -21,15 +21,15 @@ public class AliveMarried {
 			indiInfo = this.indiHash.get(indiKey);
 			for (String famKey : this.famHash.keySet()) {
 				famInfo = this.famHash.get(famKey);
-				System.out.println("id" + indiInfo);
-				System.out.println("fam" + famInfo);
+				//System.out.println("id" + indiInfo);
+				//System.out.println("fam" + famInfo);
 				if((indiKey.equals(famInfo.get(1)) || indiKey.equals(famInfo.get(3))) && indiInfo.get(4) == "") {
 					if(livSingle.contains(indiInfo)) {
 						livSingle.remove(indiInfo);
 					}
 					livMarried.add(indiInfo);
 					break;
-				}else if (indiInfo.get(4) == ""){
+				}else if (indiInfo.get(4) == "" && Integer.parseInt(indiInfo.get(5)) > 30){
 					if(!livSingle.contains(indiInfo)) {
 						livSingle.add(indiInfo);
 					}
