@@ -354,17 +354,6 @@ public class GedcomParse
             }
         }
         
-        if(famHash.isEmpty()) {
-	        hashValueIndi.add(indi.getIndividualID().toString());
-	        hashValueIndi.add(indi.getName());
-	        hashValueIndi.add(indi.getGender());
-	        hashValueIndi.add(indi.getBirth());
-	        hashValueIndi.add(indi.getDeath().toString());
-	        hashValueIndi.add(indi.getAge());
-	        hashValueIndi.add(indi.getisAlive());
-	        indiHash.putIfAbsent(indi.getIndividualID(), hashValueIndi);
-        }
-        
         hashValueFam.add(fam.getFamID().toString());
         hashValueFam.add(fam.getHusbID());
         hashValueFam.add(fam.getHusbName());
@@ -415,7 +404,7 @@ public class GedcomParse
                 }
                 System.out.println();
             }
-            if(indiHash.get(key).get(4).equals("") || indiHash.get(key).get(3).equals(""))
+            else if(indiHash.get(key).get(4).equals("") || indiHash.get(key).get(3).equals(""))
             {
 				int temp1;
                 if(indiHash.get(key).get(4).equals(""))
