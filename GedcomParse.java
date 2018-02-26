@@ -30,6 +30,7 @@ public class GedcomParse
 
     static String reader = null;
     static Mohit s1 = new Mohit();
+    static AliveMarried am;
 
     static HashMap<String, ArrayList<String>> indiHash = new HashMap<>();
     static HashMap<String, ArrayList<String>> famHash = new HashMap<>();
@@ -52,9 +53,9 @@ public class GedcomParse
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\project1_MananSatra.ged";
         
 //        FileReader fileReader = new FileReader(karanPath);
-        FileReader fileReader = new FileReader(mananPath);
+ //       FileReader fileReader = new FileReader(mananPath);
 //        FileReader fileReader = new FileReader(mohitPath);
-//        FileReader fileReader = new FileReader(carolinePath);
+        FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         System.out.println("\n******************** Karan's User story US21: Correct Gender for Role ********************");
@@ -346,14 +347,16 @@ public class GedcomParse
             }
         }
         
-        hashValueIndi.add(indi.getIndividualID().toString());
-        hashValueIndi.add(indi.getName());
-        hashValueIndi.add(indi.getGender());
-        hashValueIndi.add(indi.getBirth());
-        hashValueIndi.add(indi.getDeath().toString());
-        hashValueIndi.add(indi.getAge());
-        hashValueIndi.add(indi.getisAlive());
-        indiHash.putIfAbsent(indi.getIndividualID(), hashValueIndi);
+        if(famHash.isEmpty()) {
+	        hashValueIndi.add(indi.getIndividualID().toString());
+	        hashValueIndi.add(indi.getName());
+	        hashValueIndi.add(indi.getGender());
+	        hashValueIndi.add(indi.getBirth());
+	        hashValueIndi.add(indi.getDeath().toString());
+	        hashValueIndi.add(indi.getAge());
+	        hashValueIndi.add(indi.getisAlive());
+	        indiHash.putIfAbsent(indi.getIndividualID(), hashValueIndi);
+        }
         
         hashValueFam.add(fam.getFamID().toString());
         hashValueFam.add(fam.getHusbID());
@@ -376,6 +379,8 @@ public class GedcomParse
         
         
         //--------------------------Carolines Space-------------------------
+        
+        
         
         
     }
@@ -442,6 +447,35 @@ public class GedcomParse
         
         //--------------------------Carolines Space-------------------------
         
+        am = new AliveMarried(indiHash, famHash);
+        
+        System.out.println("===============Caroline's US30 - List Living Married===============");
+
+        ArrayList<ArrayList<String>> livMarried = am.getAliveMarried();
+        
+        for (ArrayList<String> key : livMarried)
+        {
+        	for (String info : key) {
+        		System.out.print(info);
+        		System.out.print(" ");
+        	}
+        	System.out.println();
+            
+        }
+        
+        
+        System.out.println("===============Caroline's US10 - List Living Single===============");
+        ArrayList<ArrayList<String>> livSingle = am.getAliveSingle();
+        
+        for (ArrayList<String> key : livSingle)
+        {
+        	for (String info : key) {
+        		System.out.print(info);
+        		System.out.print(" ");
+        	}
+        	System.out.println();
+            
+        }        
     }
 
 }
