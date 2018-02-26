@@ -54,8 +54,8 @@ public class GedcomParse
         
 //        FileReader fileReader = new FileReader(karanPath);
  //       FileReader fileReader = new FileReader(mananPath);
-        FileReader fileReader = new FileReader(mohitPath);
-//        FileReader fileReader = new FileReader(carolinePath);
+ //       FileReader fileReader = new FileReader(mohitPath);
+       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         System.out.println("\n******************** Karan's User story US21: Correct Gender for Role ********************");
