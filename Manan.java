@@ -6,17 +6,17 @@ import java.util.HashMap;
 
 public class Manan
 {
-
+    
     ArrayList<String> tempArrayList;
-
+    
     public String birthBeforeDeath(HashMap<String, ArrayList<String>> hashIndi)
     {
         hashIndi.remove("");
         String res = "";
         System.out.println("\n====================== Manan's User story US03:Birth Before Death ======================");
-        System.out.println("BIRTH\t\tDEATH\t\tCORRECT/INCORRECT\tERROR MESSAGE(if any)");
-        System.out.println("-----------\t-----------\t------------------\t-----------------------");
-
+        System.out.println("BIRTH\t\tDEATH\t\tERROR MESSAGE");
+        System.out.println("-----------\t-----------\t-----------------------");
+        
         for (String key : hashIndi.keySet())
         {
             tempArrayList = hashIndi.get(key);
@@ -27,10 +27,10 @@ public class Manan
                 res = "INCORRECT";
                 if (!deathDate.equals(""))
                 {
-                    System.out.println(birthDate + "\t\t" + deathDate + "\tINCORRECT\t\tError US03: Cannot determine without Birth Date");
+                    System.out.println("N/A\t\t" + deathDate + "\tError US03: Cannot determine without Birth Date");
                 } else
                 {
-                    System.out.println(birthDate + "\t\t" + deathDate + "\t\tINCORRECT\t\tError US03: Cannot determine without Birth Date");
+                    System.out.println( "N/A\t\tN/A\t" + deathDate + "\tError US03: Cannot determine without Birth Date");
                 }
             } else if (!deathDate.equals(""))
             {
@@ -38,37 +38,37 @@ public class Manan
                 if (result.equals("year"))
                 {
                     res = "INCORRECT";
-                    System.out.println(birthDate + "\t" + deathDate + "\tINCORRECT\t\tError US04: Divorce YEAR cannot be before Marriage YEAR");
+                    System.out.println(birthDate + "\t" + deathDate + "\tError US03: Death YEAR cannot be before Birth YEAR");
                 } else if (result.equals("month"))
                 {
                     res = "INCORRECT";
-                    System.out.println(birthDate + "\t" + deathDate + "INCORRECT\t\tError US04: Divorce MONTH cannot be before Marriage MONTH");
+                    System.out.println(birthDate + "\t" + deathDate + "\tError US03: Death MONTH cannot be before Birth MONTH for same year");
                 } else if (result.equals("day"))
                 {
                     res = "INCORRECT";
-                    System.out.println(birthDate + "\t" + deathDate + "\tINCORRECT\t\tError US04: Divorce DAY cannot be before Marriage DAY");
+                    System.out.println(birthDate + "\t" + deathDate + "\tError US03: Death DAY cannot be before Birth DAY for same month and year");
                 } else
                 {
                     res = "CORRECT";
-                    System.out.println(birthDate + "\t" + deathDate + "\tCORRECT\t\t\tN/A");
+                    //System.out.println(birthDate + "\t" + deathDate + "\tN/A");
                 }
-
+                
             } else
             {
                 res = "CORRECT";
-                System.out.println(tempArrayList.get(3) + "\t" + "N/A" + "\t\tCORRECT\t\t\tN/A");
+                //System.out.println(tempArrayList.get(3) + "\t" + "\t\tN/A");
             }
         }
         System.out.println();
         return res;
     }
-
+    
     public void mariageBeforeDivorce(HashMap<String, ArrayList<String>> famHash)
     {
         famHash.remove("");
         System.out.println("\n====================== Manan's User story US04:Marriage Before Divorce ======================");
-        System.out.println("MARRIAGE\tDIVORCE\t\tCORRECT/INCORRECT\tERROR MESSAGE(if any)");
-        System.out.println("-----------\t-------------\t-----------------\t----------------------");
+        System.out.println("MARRIAGE\tDIVORCE\t\tERROR MESSAGE");
+        System.out.println("-----------\t-------------\t----------------------");
         for (String key : famHash.keySet())
         {
             tempArrayList = famHash.get(key);
@@ -78,34 +78,34 @@ public class Manan
             {
                 if (!divorceDate.equals(""))
                 {
-                    System.out.println(marriageDate + "\t\t" + divorceDate + "\tINCORRECT\t\tError US04: Cannot determine without Marriage Date");
+                    System.out.println("N/A\t\t" + divorceDate + "\tError US04: Cannot determine without Marriage Date");
                 } else
                 {
-                    System.out.println(marriageDate + "\t\t" + divorceDate + "\t\tINCORRECT\t\tError US04: Cannot determine without Marriage Date");
+                    System.out.println("N/A\t\tN/A\t" + "\tError US04: Cannot determine without Marriage Date");
                 }
             } else if (!divorceDate.equals(""))
             {
                 String result = dateCal(marriageDate, divorceDate);
                 if (result.equals("year"))
                 {
-                    System.out.println(marriageDate + "\t" + divorceDate + "\tINCORRECT\t\tError US04: Divorce YEAR cannot be before Marriage YEAR");
+                    System.out.println(marriageDate + "\t" + divorceDate + "\tError US04: Divorce YEAR cannot be before Marriage YEAR");
                 } else if (result.equals("month"))
                 {
-                    System.out.println(marriageDate + "\t" + divorceDate + "INCORRECT\t\tError US04: Divorce MONTH cannot be before Marriage MONTH");
+                    System.out.println(marriageDate + "\t" + divorceDate + "\tError US04: Divorce MONTH cannot be before Marriage MONTH for same year");
                 } else if (result.equals("day"))
                 {
-                    System.out.println(marriageDate + "\t" + divorceDate + "\tINCORRECT\t\tError US04: Divorce DAY cannot be before Marriage DAY");
+                    System.out.println(marriageDate + "\t" + divorceDate + "\tError US04: Divorce DAY cannot be before Marriage DAY for same month and year");
                 } else
                 {
-                    System.out.println(marriageDate + "\t" + divorceDate + "\tCORRECT\t\t\tN/A");
+                    System.out.println(marriageDate + "\t" + divorceDate + "\t\tN/A");
                 }
             } else
             {
-                System.out.println(tempArrayList.get(5) + "\t" + "N/A" + "\t\tCORRECT\t\t\tN/A");
+                //System.out.println(tempArrayList.get(5) + "\t" + "N/A" + "\t\tCORRECT\t\t\tN/A");
             }
         }
     }
-
+    
     public String dateCal(String firstFromList, String secondFromList)
     {
         String result = "";
@@ -113,7 +113,7 @@ public class Manan
         String secondDate[] = secondFromList.split(" ");
         int firstMonthNumber = monthNumber(firstDate[1]);
         int secondMonthNumber = monthNumber(secondDate[1]);
-
+        
         if (Integer.parseInt(firstDate[2]) <= Integer.parseInt(secondDate[2]))
         {
             if (Integer.parseInt(firstDate[2]) == Integer.parseInt(secondDate[2]))
@@ -141,13 +141,13 @@ public class Manan
         }
         return result;
     }
-
+    
     public int monthNumber(String monthString)
     {
         int monthInt = 0;
         switch (monthString)
         {
-
+            
             case "JAN":
                 monthInt = 1;
                 break;
@@ -187,50 +187,5 @@ public class Manan
         }
         return monthInt;
     }
-
-    void lessThan150(HashMap<String, ArrayList<String>> hashIndi)
-    {
-        System.out.println("\n====================== Manan's User story US07:Less Than 150 Years Old ======================");
-        hashIndi.remove("");
-        for (String key : hashIndi.keySet())
-        {
-            int deathYear, birthYear;
-            LocalDate now = LocalDate.now();
-            int currentYear = now.getYear();
-            tempArrayList = hashIndi.get(key);
-            String birthDate = tempArrayList.get(3);
-            String deathDate = tempArrayList.get(4);
-            System.out.println(birthDate + "<-Birth\tDeath->" + deathDate);
-            if (!deathDate.equals(""))
-            {
-                deathYear = Integer.parseInt(deathDate.split(" ")[2]);
-                birthYear = Integer.parseInt(birthDate.split(" ")[2]);
-                if (deathYear - birthYear >= 150)
-                {
-                    System.out.println("ERROR US07: Death year " + deathYear + " should be less than 150 years from birth year " + birthYear);
-                } else
-                {
-                    System.out.println("NO Error!");
-                }
-            } else if (!birthDate.equals(""))
-            {
-                birthYear = Integer.parseInt(birthDate.split(" ")[2]);
-                if (birthYear > currentYear)
-                {
-                    System.out.println("ERROR US07: Birth Year " + birthYear + " is beyound current year " + currentYear);
-                } else if (currentYear - birthYear >= 150)
-                {
-                    System.out.println("ERROR US07: Birth year " + birthYear + " should be less than 150 years from current year " + currentYear);
-                } else
-                {
-                    System.out.println("NO Error!");
-                }
-            } else
-            {
-                System.out.println("ERROR US07: Cannot Determine without Birth Year!");
-            }
-            System.out.println();
-        }
-
-    }
+    
 }
