@@ -47,11 +47,12 @@ public class GedcomParse
         //read file
         // TODO: Change path for our testing file
         String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
-        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\project1_MananSatra.ged";
+        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\mananSprint1.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\project1_MananSatra.ged";
-        String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\project1_MananSatra.ged"
-          FileReader fileReader = new FileReader(karanPath);
-//        FileReader fileReader = new FileReader(mananPath);
+        String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\project1_MananSatra.ged";
+        
+//        FileReader fileReader = new FileReader(karanPath);
+        FileReader fileReader = new FileReader(mananPath);
 //        FileReader fileReader = new FileReader(mohitPath);
 //        FileReader fileReader = new FileReader(carolinePath);
         
@@ -370,7 +371,6 @@ public class GedcomParse
         //--------------------------Manans Space----------------------------
         String resBirthBeforeDeath = m.birthBeforeDeath(indiHash);
         m.mariageBeforeDivorce(famHash);
-        m.lessThan150(indiHash);
 
         //--------------------------Karans Space----------------------------
         
@@ -385,18 +385,30 @@ public class GedcomParse
         parse();
         System.out.println("\n******************** Karan's User story US27: Individual Ages in Table ********************");
         System.out.println("\n******************** Individual's Entries:********************");
-        System.out.println("ID" + "\t" + "Name" + "\t" + "\tGender" + "\t" + "Birthday" + "\t" + "Deathday" + "\t" + "Age" + "\t" + "Alive");
+        System.out.println("ID" + "\t\t" + "Name" + "\t\t" + "\tGender" + "\t\t" + "Birthday" + "\t\t" + "Deathday" + "\t\t" + "Age" + "\t\t" + "Alive");
         indiHash.remove("");
         for (String key : indiHash.keySet())
         {
             ArrayList temp=indiHash.get(key);
-            if(indiHash.get(key).get(4).equals(""))
+            if(indiHash.get(key).get(4).equals("") && indiHash.get(key).get(3).equals(""))
             {
                 for(int i=0;i<temp.size();i++)
                 {
-                    if(i==4)
-                        System.out.print("NA\t\t");
-                    else System.out.print(temp.get(i)+"\t");
+                    if(i==3)
+                        System.out.print("NA\t\t\t");
+                    else if(i==4)
+                        System.out.print("NA\t\t\t");
+                    else System.out.print(temp.get(i)+"\t\t");
+                }
+                System.out.println();
+            }
+            if(indiHash.get(key).get(4).equals("") || indiHash.get(key).get(3).equals(""))
+            {
+                for(int i=0;i<temp.size();i++)
+                {
+                    if(i==3 || i==4)
+                        System.out.print("NA\t\t\t");
+                    else System.out.print(temp.get(i)+"\t\t");
                 }
                 System.out.println();
             }
@@ -404,7 +416,7 @@ public class GedcomParse
             {
                 for(int i=0;i<temp.size();i++)
                 {
-                    System.out.print(temp.get(i)+"\t");
+                    System.out.print(temp.get(i)+"\t\t");
                 }
                 System.out.println();
             }
