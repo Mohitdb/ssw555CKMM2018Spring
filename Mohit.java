@@ -41,12 +41,16 @@ public class Mohit {
         String HBdate[] = new String[famHashmap.size()];
         String WBdate[] = new String[famHashmap.size()];
         String FId[] = new String[famHashmap.size()];
+        //System.out.println("\nMohit Sprint 1 User Story 02:");
+        //System.out.println("FId\tMDate\t\tHBdate\t\tWBdate\t\tBirth before marriage");
         System.out.println("\n\n=> Mohit Sprint 1 User Story 02:");
+
         int i = 0;
         for (String key : famHashmap.keySet()) {
             famvalues = famHashmap.get(key);
             FId[i] = key;
             if (famvalues.get(5) == "") {
+                //MDate[i] = "\t" + famvalues.get(5);
                 MDate[i] = "N/A";
             } else {
                 MDate[i] = famvalues.get(5);
@@ -56,6 +60,7 @@ public class Mohit {
                 if (famvalues.get(1).equals(key2) || famvalues.get(3).equals(key2)) {
                     if (famvalues.get(1).equals(key2)) {
                         if (indivalues.get(3) == "") {
+                            //HBdate[i] = "\t" + indivalues.get(3);
                             HBdate[i] = "N/A";
                         } else {
                             HBdate[i] = indivalues.get(3);
@@ -63,6 +68,7 @@ public class Mohit {
                     }
                     if (famvalues.get(3).equals(key2)) {
                         if (indivalues.get(3) == "") {
+                            //WBdate[i] = "\t" + indivalues.get(3);
                             WBdate[i] = "N/A";
                         } else {
                             WBdate[i] = indivalues.get(3);
@@ -71,6 +77,7 @@ public class Mohit {
                 }
 
             }
+
             i++;
         }
 
@@ -98,6 +105,7 @@ public class Mohit {
                 } else {
                     res[j] = "valid";
                 }
+
                 if (res[j].equals("invalid")) {
                     res[j] = "invalid";
                 } else {
@@ -119,11 +127,14 @@ public class Mohit {
                         res[j] = "valid";
                     }
                 }
+                //System.out.println(MDate[]);
+
             }
-            if (res[j].equals("invalid")) {
+            //System.out.println(FId[j] + "\t" + MDate[j] + "\t" + HBdate[j] + "\t" + WBdate[j] + "\t" + res[j]);
+             if (res[j].equals("invalid")) {
                 System.out.println("ERROR: US02: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, birth not before marriage.");
             }
-            if (res[j].equals("cannot say")) {
+             if (res[j].equals("cannot say")) {
                 System.out.println("ERROR: US02: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, insufficient information to compare.");
             }
         }
@@ -148,16 +159,21 @@ public class Mohit {
         String HBdate[] = new String[famHashmap.size()];
         String WBdate[] = new String[famHashmap.size()];
         String FId[] = new String[famHashmap.size()];
+        //System.out.println("\nMohit Sprint 1 User Story 10:");
         System.out.println("\n\n=>Mohit Sprint 1 User Story 10:");
+        //int i = 0;
+        //System.out.println("FId\tMDate\t\tHBdate\t\tWBdate\t\tMarriage after 14");
         int i = 0;
         for (String key : famHashmap.keySet()) {
             famvalues = famHashmap.get(key);
             FId[i] = key;
             if (famvalues.get(5) == "") {
-                MDate[i] = "N/A" + famvalues.get(5);
+                MDate[i] = "N/A";
             } else {
                 MDate[i] = famvalues.get(5);
             }
+            //MDate[i]=famvalues.get(5);
+            //System.out.println(MDate[i]);
             for (String key2 : indiHashmap.keySet()) {
                 indivalues = indiHashmap.get(key2);
                 if (famvalues.get(1).equals(key2) || famvalues.get(3).equals(key2)) {
@@ -178,6 +194,7 @@ public class Mohit {
                 }
 
             }
+
             i++;
         }
 
@@ -234,6 +251,8 @@ public class Mohit {
             if (res[j].equals("cannot say")) {
                 System.out.println("ERROR: US10: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, insufficient information to compare.");
             }
+            //System.out.println(FId[j] + "\t" + MDate[j] + "\t" + HBdate[j] + "\t" + WBdate[j] + "\t" + res[j]);
+
         }
     }
 }
