@@ -53,9 +53,9 @@ public class GedcomParse
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\project1_MananSatra.ged";
         
 //        FileReader fileReader = new FileReader(karanPath);
-        FileReader fileReader = new FileReader(mananPath);
+ //       FileReader fileReader = new FileReader(mananPath);
  //       FileReader fileReader = new FileReader(mohitPath);
-//       FileReader fileReader = new FileReader(carolinePath);
+       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         System.out.println("\n******************** Karan's User story US21: Correct Gender for Role ********************");
@@ -387,7 +387,7 @@ public class GedcomParse
         parse();
         System.out.println("\n******************** Karan's User story US27: Individual Ages in Table ********************");
         System.out.println("\n******************** Individual's Entries:********************");
-        System.out.println("ID" + "\t\t" + "Name" + "\t\t" + "\tGender" + "\t\t" + "Birthday" + "\t\t" + "Deathday" + "\t\t" + "Age" + "\t\t" + "Alive");
+        System.out.println("ID" + "\t\t\t" + "Name" + "\t\t" + "\tGender" + "\t\t" + "Birthday" + "\t\t" + "Deathday" + "\t\t" + "Age" + "\t\t" + "Alive");
         indiHash.remove("");
         for (String key : indiHash.keySet())
         {
@@ -434,12 +434,15 @@ public class GedcomParse
         }
 
         System.out.println("\n******************** Family Entries: ********************");
-        System.out.println("ID" + "\t" + "H ID" + "\t" + "H Name" + "\t" + "W ID" + "\t" + "W name" + "\t" + "Marriage date" + "\t" + "Divorce date");
+        System.out.println("ID" + "\t\t\t" + "H ID" + "\t\t\t" + "H Name" + "\t\t\t" + "W ID" + "\t\t\t" + "W name" + "\t\t\t" + "Marriage date" + "\t\t" + "Divorce date");
         famHash.remove("");
         for (String key : famHash.keySet())
         {
 
-            System.out.println(famHash.get(key));
+            for(String i: famHash.get(key)) {
+            	System.out.print(i + "\t\t");
+            }
+            System.out.println();
         }
         
         //--------------------------Mohits Space----------------------------
