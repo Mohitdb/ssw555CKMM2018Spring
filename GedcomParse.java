@@ -409,9 +409,18 @@ public class GedcomParse
             }
             if(indiHash.get(key).get(4).equals("") || indiHash.get(key).get(3).equals(""))
             {
+				int temp1;
+                if(indiHash.get(key).get(4).equals(""))
+                {
+                    temp1=4;
+                }
+                else
+                {
+                    temp1=3;
+                }
                 for(int i=0;i<temp.size();i++)
                 {
-                    if(i==3 || i==4)
+                    if(i==temp1)
                         System.out.print("NA\t\t\t");
                     else System.out.print(temp.get(i)+"\t\t");
                 }
