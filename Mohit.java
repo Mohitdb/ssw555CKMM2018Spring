@@ -137,9 +137,9 @@ public class Mohit {
                 if (res[j].equals("invalid")) {
                     System.out.println("ERROR: US02: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, birth not before marriage.");
                 }
-                if (res[j].equals("cannot say")) {
+                /*if (res[j].equals("cannot say")) {
                     System.out.println("ERROR: US02: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, insufficient information to compare.");
-                }
+                }*/
             }
         } catch (NullPointerException ne) {
 
@@ -254,9 +254,9 @@ public class Mohit {
                 if (res[j].equals("invalid")) {
                     System.out.println("ERROR: US10: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, marriage not after 14.");
                 }
-                if (res[j].equals("cannot say")) {
+                /*if (res[j].equals("cannot say")) {
                     System.out.println("ERROR: US10: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, insufficient information to compare.");
-                }
+                }*/
                 //System.out.println(FId[j] + "\t" + MDate[j] + "\t" + HBdate[j] + "\t" + WBdate[j] + "\t" + res[j]);
 
             }
