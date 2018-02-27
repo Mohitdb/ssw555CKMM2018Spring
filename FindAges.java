@@ -25,7 +25,7 @@ public class FindAges {
 			return 0;
 		}
 		
-		else if (date2 == "")
+		else if (date2.equals(""))
 		{
 			birth = date1.split(" ");
 			
@@ -35,21 +35,22 @@ public class FindAges {
 
 			try {
 				birthDate = simpleDateFormat.parse(formattedBirthDate);
+				
+				SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+				deathDate = new Date();
+				DateFormat.format(deathDate);
+					
+				//in milliseconds
+				double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
+
+				Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+					
+				return (int) Age;
+				
 			} catch (ParseException e) {
 				e.printStackTrace();
+				return 0;
 			}
-			
-			
-			SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
-			deathDate = new Date();
-			DateFormat.format(deathDate);
-				
-			//in milliseconds
-			double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
-
-			Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
-				
-			return (int) Age;
 		}
 		
 		else
@@ -65,27 +66,20 @@ public class FindAges {
 
 			try {
 				birthDate = simpleDateFormat.parse(formattedBirthDate);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			
-			try {
 				deathDate = simpleDateFormat.parse(formattedDeathDate);
+				
+				double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
+
+				Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+					
+				return (int) Age;
+				
+				
 			} catch (ParseException e) {
 				e.printStackTrace();
+				
+				return 0;
 			}
-			
-			SimpleDateFormat DateFormat =  new SimpleDateFormat("yyyy-MM-dd");
-			deathDate = new Date();
-			DateFormat.format(deathDate);
-				
-			//in milliseconds
-			double diff = Math.abs(deathDate.getTime() - birthDate.getTime());
-
-			Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
-				
-			return (int) Age;
-			
 		}
 	}
 	
