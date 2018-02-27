@@ -27,10 +27,10 @@ public class Manan
                 res = "INCORRECT";
                 if (!deathDate.equals(""))
                 {
-                    System.out.println("N/A\t\t" + deathDate + "\tError US03: Cannot determine without Birth Date");
+                    //System.out.println("N/A\t\t" + deathDate + "\tError US03: Cannot determine without Birth Date");
                 } else
                 {
-                    System.out.println( "N/A\t\tN/A\t" + deathDate + "\tError US03: Cannot determine without Birth Date");
+                    //System.out.println( "N/A\t\tN/A\t" + deathDate + "\tError US03: Cannot determine without Birth Date");
                 }
             } else if (!deathDate.equals(""))
             {
@@ -78,10 +78,10 @@ public class Manan
             {
                 if (!divorceDate.equals(""))
                 {
-                    System.out.println("N/A\t\t" + divorceDate + "\tError US04: Cannot determine without Marriage Date");
+                    //System.out.println("N/A\t\t" + divorceDate + "\tError US04: Cannot determine without Marriage Date");
                 } else
                 {
-                    System.out.println("N/A\t\tN/A\t" + "\tError US04: Cannot determine without Marriage Date");
+                    //System.out.println("N/A\t\tN/A\t" + "\tError US04: Cannot determine without Marriage Date");
                 }
             } else if (!divorceDate.equals(""))
             {
@@ -213,7 +213,7 @@ public class Manan
                     System.out.println("ERROR US07: Birth year " + birthYear + " should be less than 150 years from current year " + currentYear);
                 } else
                 {
-                    System.out.println("NO Error!");
+                    //System.out.println("NO Error!");
                 }
             } else if (!deathDate.equals("") && !birthDate.equals(""))
             {
@@ -228,7 +228,7 @@ public class Manan
                 }
             } else
             {
-                System.out.println("ERROR US07: Cannot Determine without Birth Year!");
+                //System.out.println("ERROR US07: Cannot Determine without Birth Year!");
             }
             System.out.println();
         }
