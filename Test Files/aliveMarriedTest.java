@@ -21,6 +21,7 @@ class aliveMarriedTest {
 		id1.add("M");
 		id1.add("11 SEP 1963");
 		id1.add("");
+		id1.add("48");
 		indiHash.put("I1", id1);
 		
 		ArrayList<String> id2 = new ArrayList<String>();
@@ -29,6 +30,7 @@ class aliveMarriedTest {
 		id2.add("M");
 		id2.add("7 JUL 1965");
 		id2.add("11 SEP 2001");
+		id2.add("45");
 		indiHash.put("I12", id2);
 		
 		ArrayList<String> id3 = new ArrayList<String>();
@@ -37,6 +39,7 @@ class aliveMarriedTest {
 		id3.add("F");
 		id3.add("7 APR 1965");
 		id3.add("");
+		id3.add("45");
 		indiHash.put("I2", id3);
 		
 		ArrayList<String> id4 = new ArrayList<String>();
@@ -45,6 +48,7 @@ class aliveMarriedTest {
 		id4.add("F");
 		id4.add("5 NOV 1970");
 		id4.add("");
+		id4.add("25");
 		indiHash.put("I11", id4);
 		
 		ArrayList<String> id5 = new ArrayList<String>();
@@ -53,6 +57,7 @@ class aliveMarriedTest {
 		id5.add("M");
 		id5.add("12 NOV 1935");
 		id5.add("");
+		id5.add("35");
 		indiHash.put("I5", id5);
 		
 		ArrayList<String> fam1 = new ArrayList<String>();
@@ -74,14 +79,16 @@ class aliveMarriedTest {
 		
 		AliveMarried am = new AliveMarried(indiHash, famHash);
 		
-		System.out.println(am.getAliveMarried());
-		System.out.println(am.getAliveSingle());
+		//System.out.println(am.getAliveMarried());
+		//System.out.println(am.getAliveSingle());
 
-		assertEquals("[[I1, Justin Sweeney, M, 11 SEP 1963, ], [I11, Nicole Janson, F, 5 NOV 1970, ], [I2, Pam Janson, F, 7 APR 1965, ]]", am.getAliveMarried().toString());
+		assertEquals("[[I1, Justin Sweeney, M, 11 SEP 1963, , 48], [I11, Nicole Janson, F, 5 NOV 1970, , 25], [I2, Pam Janson, F, 7 APR 1965, , 45]]", am.getAliveMarried().toString());
 		assertFalse(am.getAliveMarried().contains(id2)); 
 		assertFalse(am.getAliveMarried().contains(id5)); 
 		assertTrue(am.getAliveMarried().contains(id1)); 
 		assertTrue(am.getAliveMarried().contains(id4)); 
+		assertEquals("[[I5, Sean Sweeney, M, 12 NOV 1935, , 35]]", am.getAliveSingle().toString());
+		assertTrue(am.getAliveSingle().contains(id5)); 
 	}
 
 }
