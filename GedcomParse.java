@@ -47,15 +47,15 @@ public class GedcomParse
 
         //read file
         // TODO: Change path for our testing file
-        String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
+        String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\sprint1.ged";
         String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\mananSprint1.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\MananMohitSprint1.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\project1_MananSatra.ged";
         
 //        FileReader fileReader = new FileReader(karanPath);
  //       FileReader fileReader = new FileReader(mananPath);
-        FileReader fileReader = new FileReader(mohitPath);
- //      FileReader fileReader = new FileReader(carolinePath);
+//        FileReader fileReader = new FileReader(mohitPath);
+       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         System.out.println("\n******************** Karan's User story US21: Correct Gender for Role ********************");
@@ -424,13 +424,13 @@ public class GedcomParse
         }
 
         System.out.println("\n******************** Family Entries: ********************");
-        System.out.println("ID" + "\t\t\t" + "H ID" + "\t\t\t" + "H Name" + "\t\t\t" + "W ID" + "\t\t\t" + "W name" + "\t\t\t" + "Marriage date" + "\t\t" + "Divorce date");
+        System.out.println("ID" + "\t\t\t" + "H ID" + "\t\t\t" + "H Name" + "\t\t\t\t" + "W ID" + "\t\t\t" + "W name" + "\t\t\t" + "Marriage date" + "\t\t\t" + "Divorce date");
         famHash.remove("");
         for (String key : famHash.keySet())
         {
 
             for(String i: famHash.get(key)) {
-            	System.out.print(i + "\t\t");
+            	System.out.print(i + "\t\t\t");
             }
             System.out.println();
         }
