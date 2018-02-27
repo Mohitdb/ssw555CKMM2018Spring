@@ -13,7 +13,10 @@ public class AliveMarried {
 	AliveMarried(HashMap<String, ArrayList<String>> indiHash, HashMap<String, ArrayList<String>> famHash) {
 		this.indiHash = indiHash;
 		this.famHash = famHash;
-		
+		find();
+	}
+	
+	private void find() {
 		ArrayList<String> indiInfo = new ArrayList<String>();
 		ArrayList<String> famInfo = new ArrayList<String>();
 
