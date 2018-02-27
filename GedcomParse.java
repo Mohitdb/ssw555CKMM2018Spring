@@ -234,12 +234,14 @@ public class GedcomParse
 
                                     ArrayList<String> temp = indiHash.get(key);
                                     fam.setHusbName(temp.get(1));
+                                    String name = temp.get(1);
                                     String gender = temp.get(2);
 
-                                    if (gender == "F")
+                                    if (gender.equals("F"))
                                     {
-                                        System.out.println("Error: Individual " + temp.get(0) + " named " + temp.get(1) + " is registered as an Husband but is a female.");
+                                    	System.out.println("Error: Individual " + temp.get(0) + " named " + temp.get(1) + " is registered as a Husband but is a Female.");
                                     }
+                                    
                                 }
                             }
                         } else if (lst[1].contains("WIFE"))
@@ -253,11 +255,12 @@ public class GedcomParse
                                 {
                                     ArrayList<String> temp = indiHash.get(key);
                                     fam.setWifeName(temp.get(1));
+                                    String name = temp.get(1);
                                     String gender = temp.get(2);
 
-                                    if (gender == "M")
+                                    if (gender.equals("M"))
                                     {
-                                        System.out.println("Error: Individual " + temp.get(0) + " named " + temp.get(1) + " is registered as an Wife but is a male.");
+                                        System.out.println("Error: Individual " + temp.get(0) + " named " + temp.get(1) + " is registered as a Wife but is a Male.");
                                     }
                                 }
                             }
