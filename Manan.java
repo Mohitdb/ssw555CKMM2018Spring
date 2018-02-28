@@ -106,27 +106,35 @@ public class Manan
         }
     }
     
-    public String dateCal(String firstFromList, String secondFromList)
+     public String dateCal(String firstFromList, String secondFromList)
     {
         String result = "";
         String firstDate[] = firstFromList.split(" ");
         String secondDate[] = secondFromList.split(" ");
         int firstMonthNumber = monthNumber(firstDate[1]);
         int secondMonthNumber = monthNumber(secondDate[1]);
-        
+
         if (Integer.parseInt(firstDate[2]) <= Integer.parseInt(secondDate[2]))
         {
             if (Integer.parseInt(firstDate[2]) == Integer.parseInt(secondDate[2]))
             {
                 if (firstMonthNumber <= secondMonthNumber)
                 {
-                    if (Integer.parseInt(firstDate[0]) <= Integer.parseInt(secondDate[0]))
+                    if (firstMonthNumber == secondMonthNumber)
                     {
-                        result = "CORRECT";
-                    } else
-                    {
-                        result = "day";
+                        if (Integer.parseInt(firstDate[0]) <= Integer.parseInt(secondDate[0]))
+                        {
+                            result = "CORRECT";
+                        } else
+                        {
+                            result = "day";
+                        }
                     }
+                    else
+                    {
+                        result="CORRECT";
+                    }
+
                 } else
                 {
                     result = "month";
