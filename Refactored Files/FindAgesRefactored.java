@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FindAgesRefactored {
+	
+	double yearsCalc = 24.0 * 60.0 * 60.0 * 1000.0 * 365.0; // Smelly code Fix: Makes code more efficient since now it doesn't have to keep multiplying the numbers everytime.
 
 	public int ageFinder(String date1, String date2) 
 	{
@@ -114,13 +116,13 @@ public class FindAgesRefactored {
 		}
 	}
 	
-	public int Age(Date birth, Date death)
+	public int Age(Date birth, Date death) // Smelly fix number 2 because it cleans up the code.
 	{
 		double Age;
 		
 		double diff = Math.abs(death.getTime() - birth.getTime());
 
-		Age = diff / (24.0 * 60.0 * 60.0 * 1000.0 * 365.0);
+		Age = diff / yearsCalc;
 			
 		return (int) Age;
 	}

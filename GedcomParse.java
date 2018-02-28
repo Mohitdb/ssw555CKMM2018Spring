@@ -52,13 +52,13 @@ public class GedcomParse
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\MananMohitSprint1.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\GitHub Here\\ssw555CKMM2018Spring\\Gedcom Files\\sprint1.ged";
         
-  //      FileReader fileReader = new FileReader(karanPath);
+       FileReader fileReader = new FileReader(karanPath);
  //       FileReader fileReader = new FileReader(mananPath);
 //        FileReader fileReader = new FileReader(mohitPath);
-       FileReader fileReader = new FileReader(carolinePath);
+//       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        System.out.println("\n******************** Karan's User story US21: Correct Gender for Role ********************");
+        System.out.println("******************** Karan's User story US21: Correct Gender for Role ********************");
 
         // Creating Object to insert later into array list
         Family fam = new Family();
@@ -366,7 +366,13 @@ public class GedcomParse
         // m.lessThan150(indiHash);
 
         //--------------------------Karans Space----------------------------
+        MarriedAfterDeath md = new MarriedAfterDeath();
         
+        md.marriageAfterDeath(indiHash, famHash);
+        
+        DivorcedAfterDeath dd = new DivorcedAfterDeath();
+        
+        dd.divorcedAfterDeath(indiHash, famHash);
         
         //--------------------------Carolines Space-------------------------
         
