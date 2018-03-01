@@ -6,9 +6,9 @@ import java.util.HashMap;
 
 public class Manan
 {
-    
+
     ArrayList<String> tempArrayList;
-    
+
     public String birthBeforeDeath(HashMap<String, ArrayList<String>> hashIndi)
     {
         hashIndi.remove("");
@@ -16,7 +16,7 @@ public class Manan
         System.out.println("\n====================== Manan's User story US03:Birth Before Death ======================");
         System.out.println("BIRTH\t\tDEATH\t\tERROR MESSAGE");
         System.out.println("-----------\t-----------\t-----------------------");
-        
+
         for (String key : hashIndi.keySet())
         {
             tempArrayList = hashIndi.get(key);
@@ -52,7 +52,7 @@ public class Manan
                     res = "CORRECT";
                     //System.out.println(birthDate + "\t" + deathDate + "\tN/A");
                 }
-                
+
             } else
             {
                 res = "CORRECT";
@@ -62,7 +62,7 @@ public class Manan
         System.out.println();
         return res;
     }
-    
+
     public void mariageBeforeDivorce(HashMap<String, ArrayList<String>> famHash)
     {
         famHash.remove("");
@@ -105,8 +105,8 @@ public class Manan
             }
         }
     }
-    
-     public String dateCal(String firstFromList, String secondFromList)
+
+    public String dateCal(String firstFromList, String secondFromList)
     {
         String result = "";
         String firstDate[] = firstFromList.split(" ");
@@ -129,10 +129,9 @@ public class Manan
                         {
                             result = "day";
                         }
-                    }
-                    else
+                    } else
                     {
-                        result="CORRECT";
+                        result = "CORRECT";
                     }
 
                 } else
@@ -149,13 +148,13 @@ public class Manan
         }
         return result;
     }
-    
+
     public int monthNumber(String monthString)
     {
         int monthInt = 0;
         switch (monthString)
         {
-            
+
             case "JAN":
                 monthInt = 1;
                 break;
@@ -195,52 +194,90 @@ public class Manan
         }
         return monthInt;
     }
-    
-    void lessThan150(HashMap<String, ArrayList<String>> hashIndi)
+
+    public String lessThan150(HashMap<String, ArrayList<String>> hashIndi)
     {
-        System.out.println("\n====================== Manan's User story US07:Less Than 150 Years Old ======================");
         hashIndi.remove("");
+        String resLessThan150 = "";
+        LocalDate now = LocalDate.now();
+        int currentYear = now.getYear();
         for (String key : hashIndi.keySet())
         {
-            int deathYear, birthYear;
-            LocalDate now = LocalDate.now();
-            int currentYear = now.getYear();
             tempArrayList = hashIndi.get(key);
+            int age = Integer.parseInt(tempArrayList.get(5));
             String birthDate = tempArrayList.get(3);
             String deathDate = tempArrayList.get(4);
-            System.out.println(birthDate + "<-Birth\tDeath->" + deathDate);
-            
-            if (!birthDate.equals(""))
+            if (age >= 150)
             {
-                birthYear = Integer.parseInt(birthDate.split(" ")[2]);
-                if (birthYear > currentYear)
+                int birthYear = Integer.parseInt(birthDate.split(" ")[2]);
+                if (tempArrayList.get(4).equals(""))
                 {
-                    System.out.println("ERROR US07: Birth Year " + birthYear + " is beyound current year " + currentYear);
-                } else if (currentYear - birthYear >= 150)
-                {
+                    System.out.println(birthDate + "<-Birth\tDeath->" + deathDate);
                     System.out.println("ERROR US07: Birth year " + birthYear + " should be less than 150 years from current year " + currentYear);
+                    resLessThan150 = "INCORRECT";
                 } else
                 {
-                    //System.out.println("NO Error!");
-                }
-            } else if (!deathDate.equals("") && !birthDate.equals(""))
-            {
-                deathYear = Integer.parseInt(deathDate.split(" ")[2]);
-                birthYear = Integer.parseInt(birthDate.split(" ")[2]);
-                if (deathYear - birthYear >= 150)
-                {
+                    int deathYear = Integer.parseInt(deathDate.split(" ")[2]);
+                    System.out.println(birthDate + "<-Birth\tDeath->" + deathDate);
                     System.out.println("ERROR US07: Death year " + deathYear + " should be less than 150 years from birth year " + birthYear);
-                } else
-                {
-                    System.out.println("NO Error!");
+                    resLessThan150 = "INCORRECT";
                 }
             } else
             {
-                //System.out.println("ERROR US07: Cannot Determine without Birth Year!");
+                resLessThan150 = "CORRECT";
             }
             System.out.println();
         }
-        
+        return resLessThan150;
     }
-    
+
+    void siblingsByAge(HashMap<String, ArrayList<String>> famHash, HashMap<String, ArrayList<String>> indiHash)
+    {
+        indiHash.remove("");
+        famHash.remove("");
+
+        System.out.println("\n====================== Manan's User story US28:Order Siblings of Families by age ======================");
+        for (String s : famHash.keySet())
+        {
+
+            int i = 0;
+            if (!famHash.get(s).get(7).equals(""))
+            {
+                System.out.println("\nFor Family " + s);
+                String[] splitted = famHash.get(s).get(7).split(" ");
+                int[] age = new int[splitted.length - 1];
+                String[] name = new String[splitted.length - 1];
+                for (String s1 : splitted)
+                {
+                    if (!s1.equals(""))
+                    {
+                        age[i] = Integer.parseInt(indiHash.get(s1).get(5));
+                        name[i] = indiHash.get(s1).get(1);
+                        i++;
+                    }
+                }
+                for (int k = 0; k < age.length; k++)
+                {
+                    for (int j = 0; j < age.length - i; j++)
+                    {
+                        if (age[j] < age[j + 1])
+                        {
+                            int temp = age[j];
+                            age[j] = age[j + 1];
+                            age[j + 1] = temp;
+
+                            String tempString = name[j];
+                            name[j] = name[j + 1];
+                            name[j + 1] = tempString;
+                        }
+                    }
+                }
+                for (int j = 0; j < age.length; j++)
+                {
+                    System.out.println(name[j] + "\t" + age[j]);
+                }
+            }
+        }
+    }
+
 }

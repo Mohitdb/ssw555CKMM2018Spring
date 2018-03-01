@@ -13,6 +13,7 @@ public class Family
 	String wifeID;
 	String wifeName;
 	ArrayList<String> children;
+        String childIDs;
 	
 	public Family()
 	{
@@ -24,6 +25,7 @@ public class Family
 		wifeID = "";
 		wifeName = "";
 		children = new ArrayList<String>();
+                childIDs="";
 	}
 
 	public String getFamID() {
@@ -89,4 +91,11 @@ public class Family
 	public void setChildren(ArrayList<String> children) {
 		this.children = children;
 	}
+        public void setChildIDs(String childIDs)
+        {
+            this.childIDs=childIDs;
+        }
+        public String getChildIDs(){
+            return childIDs;
+        }
 }

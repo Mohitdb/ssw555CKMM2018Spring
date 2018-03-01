@@ -12,6 +12,7 @@ package GedcomParse;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -39,21 +40,21 @@ public class GedcomParse
             {
                 "NAME", "SEX", "BIRT", "DEAT", "FAMC", "FAMS", "MARR", "HUSB", "WIFE", "CHIL", "DIV"
             };
-
+    
     @SuppressWarnings("resource")
     public static void parse() throws IOException
     {
-
+        
         //read file
         // TODO: Change path for our testing file
         String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
-        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\mananSprint1.ged";
+        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\mananSprint2.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\Sprint1.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\GitHub Here\\ssw555CKMM2018Spring\\Gedcom Files\\sprint1.ged";
         
  //      FileReader fileReader = new FileReader(karanPath);
- //       FileReader fileReader = new FileReader(mananPath);
-        FileReader fileReader = new FileReader(mohitPath);
+        FileReader fileReader = new FileReader(mananPath);
+//        FileReader fileReader = new FileReader(mohitPath);
 //       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -80,12 +81,13 @@ public class GedcomParse
         int ui=0,uf=0;
         ArrayList<String> hashValueIndi = new ArrayList<>();
         ArrayList<String> hashValueFam = new ArrayList<>();
+        String childIDs="";
         //while loop to check to see if each line is valid and formats the information accordingly
         while ((reader = bufferedReader.readLine()) != null)
         {
             hashValueIndi = new ArrayList<>();
             hashValueFam = new ArrayList<>();
-
+            
             String[] lst = reader.split(" ", 0);
             String level = lst[0];
             String tag = "";
@@ -131,6 +133,7 @@ public class GedcomParse
                     hashValueFam.add(fam.getWifeName());
                     hashValueFam.add(fam.getMarried());
                     hashValueFam.add(fam.isDivorced());
+                    hashValueFam.add(fam.getChildIDs());
 
                     famHash.putIfAbsent(fam.getFamID(), hashValueFam);
 
@@ -164,6 +167,7 @@ public class GedcomParse
                             fam.wifeID = "";
                             fam.wifeName = "";
                             fam.children = new ArrayList<String>();
+                            fam.childIDs="";
                         }
                     }
 
@@ -179,13 +183,14 @@ public class GedcomParse
                         famid[uf]=(lst[1].substring(1, lst[1].length() - 1));
                         uf++;
                         isIndi = false;
+                        childIDs="";
                     }
 
 
                     tag = lst[2];
                     arguments = lst[1];
                     isValid = true;
-
+                    
                 } else
                 {
                     tag = lst[1];
@@ -272,6 +277,11 @@ public class GedcomParse
                         {
                             isMarried = false;
                         }
+                        else if(lst[1].contains("CHIL"))
+                        {
+                            childIDs=childIDs+" "+lst[2].replace("@", "");
+                            fam.setChildIDs(childIDs);
+                        }
                     }
                 }
 
@@ -353,6 +363,7 @@ public class GedcomParse
         hashValueFam.add(fam.getWifeName());
         hashValueFam.add(fam.getMarried());
         hashValueFam.add(fam.isDivorced());
+        hashValueFam.add(fam.getChildIDs());
         famHash.putIfAbsent(fam.getFamID(), hashValueFam);
         
         //--------------------------Mohits Space----------------------------
@@ -364,7 +375,8 @@ public class GedcomParse
         //--------------------------Manans Space----------------------------
         String resBirthBeforeDeath = m.birthBeforeDeath(indiHash);
         m.mariageBeforeDivorce(famHash);
-        // m.lessThan150(indiHash);
+        String resLessThan150 =m.lessThan150(indiHash);
+        m.siblingsByAge(famHash, indiHash);
 
         //--------------------------Karans Space----------------------------
         MarriedAfterDeath md = new MarriedAfterDeath();
@@ -434,7 +446,7 @@ public class GedcomParse
         }
 
         System.out.println("\n******************** Family Entries: ********************");
-        System.out.println("ID" + "\t\t\t" + "H ID" + "\t\t\t" + "H Name" + "\t\t\t\t" + "W ID" + "\t\t\t" + "W name" + "\t\t\t" + "Marriage date" + "\t\t\t" + "Divorce date");
+        System.out.println("ID" + "\t\t\t" + "H ID" + "\t\t\t" + "H Name" + "\t\t\t\t" + "W ID" + "\t\t\t" + "W name" + "\t\t\t" + "Marriage date" + "\t\t\t" + "Divorce date"+"\t\t\t"+"Child IDs");
         famHash.remove("");
         for (String key : famHash.keySet())
         {
@@ -455,7 +467,7 @@ public class GedcomParse
         
         
         //--------------------------Carolines Space-------------------------
-        
+
         am = new AliveMarried(indiHash, famHash);
         
         System.out.println("===============Caroline's US30 - List Living Married===============");
@@ -478,7 +490,8 @@ public class GedcomParse
         	System.out.print(key.get(1));
         	System.out.println();
             
-        }        
+        }    
+        
     }
 
 }
