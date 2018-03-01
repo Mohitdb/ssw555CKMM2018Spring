@@ -8,6 +8,8 @@ package GedcomParse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -17,9 +19,10 @@ public class Mohit {
 
     ArrayList<String> famvalues;
     ArrayList<String> indivalues;
-    HashMap<String, Integer> monthmap = new HashMap<>();
-
-    public String[] birthBeforeMarriage(HashMap<String, ArrayList<String>> indiHashmap, HashMap<String, ArrayList<String>> famHashmap) {
+    
+    
+    static HashMap<String, Integer> monthmap = new HashMap<>();
+    static{
         monthmap.put("JAN", 1);
         monthmap.put("FEB", 2);
         monthmap.put("MAR", 3);
@@ -32,8 +35,30 @@ public class Mohit {
         monthmap.put("OCT", 10);
         monthmap.put("NOV", 11);
         monthmap.put("DEC", 12);
-        boolean valid = false;
-        String missing = "";
+    }
+    public String comparedate(String mdate[],String hwdate[])
+    {
+        String res;
+        if (Integer.parseInt(mdate[2]) < Integer.parseInt(hwdate[2])) {
+                        res = "invalid";
+                    } else if (Integer.parseInt(mdate[2]) == Integer.parseInt(hwdate[2])) {
+                        if (monthmap.get(mdate[1]) < monthmap.get(hwdate[1])) {
+                            res = "invalid";
+                        } else if (monthmap.get(mdate[1]) == monthmap.get(hwdate[1])) {
+                            if (Integer.parseInt(mdate[0]) <= Integer.parseInt(hwdate[0])) {
+                                res = "invalid";
+                            } else {
+                                res = "valid";
+                            }
+                        } else {
+                            res = "valid";
+                        }
+                    } else {
+                        res = "valid";
+                    }
+        return res;
+    }
+    public String[] birthBeforeMarriage(HashMap<String, ArrayList<String>> indiHashmap, HashMap<String, ArrayList<String>> famHashmap) {
         indiHashmap.remove("");
         famHashmap.remove("");
         String res[] = new String[famHashmap.size()];
@@ -41,16 +66,12 @@ public class Mohit {
         String HBdate[] = new String[famHashmap.size()];
         String WBdate[] = new String[famHashmap.size()];
         String FId[] = new String[famHashmap.size()];
-        //System.out.println("\nMohit Sprint 1 User Story 02:");
-        //System.out.println("FId\tMDate\t\tHBdate\t\tWBdate\t\tBirth before marriage");
-        System.out.println("\n\n=> Mohit Sprint 1 User Story 02: Birth Before Marriage");
-
-        int i = 0;
+        System.out.println("\n\n=> Mohit Sprint 1 User Story 02: Birth Before Marriage");int i = 0;
+        try{
         for (String key : famHashmap.keySet()) {
             famvalues = famHashmap.get(key);
             FId[i] = key;
-            if (famvalues.get(5) == "") {
-                //MDate[i] = "\t" + famvalues.get(5);
+            if (famvalues.get(5).equals("")) {
                 MDate[i] = "N/A";
             } else {
                 MDate[i] = famvalues.get(5);
@@ -59,26 +80,25 @@ public class Mohit {
                 indivalues = indiHashmap.get(key2);
                 if (famvalues.get(1).equals(key2) || famvalues.get(3).equals(key2)) {
                     if (famvalues.get(1).equals(key2)) {
-                        if (indivalues.get(3) == "") {
-                            //HBdate[i] = "\t" + indivalues.get(3);
+                        if (indivalues.get(3).equals("")) {
                             HBdate[i] = "N/A";
                         } else {
                             HBdate[i] = indivalues.get(3);
                         }
                     }
                     if (famvalues.get(3).equals(key2)) {
-                        if (indivalues.get(3) == "") {
-                            //WBdate[i] = "\t" + indivalues.get(3);
+                        if (indivalues.get(3).equals("")) {
                             WBdate[i] = "N/A";
                         } else {
                             WBdate[i] = indivalues.get(3);
                         }
                     }
                 }
-
             }
-
             i++;
+        }
+        }
+        catch(NullPointerException ne){
         }
         try {
             for (int j = 0; j < i; j++) {
@@ -89,57 +109,16 @@ public class Mohit {
                     String mdate[] = MDate[j].split(" ");
                     String hdate[] = HBdate[j].split(" ");
                     String wdate[] = WBdate[j].split(" ");
-                    if (Integer.parseInt(mdate[2]) < Integer.parseInt(hdate[2])) {
-                        res[j] = "invalid";
-                    } else if (Integer.parseInt(mdate[2]) == Integer.parseInt(hdate[2])) {
-                        if (monthmap.get(mdate[1]) < monthmap.get(hdate[1])) {
-                            res[j] = "invalid";
-                        } else if (monthmap.get(mdate[1]) == monthmap.get(hdate[1])) {
-                            if (Integer.parseInt(mdate[0]) <= Integer.parseInt(hdate[0])) {
-                                res[j] = "invalid";
-                            } else {
-                                res[j] = "valid";
-                            }
-                        } else {
-                            res[j] = "valid";
-                        }
-                    } else {
-                        res[j] = "valid";
-                    }
-
+                    res[j]=comparedate(mdate,hdate);
                     if (res[j].equals("invalid")) {
                         res[j] = "invalid";
                     } else {
-                        if (Integer.parseInt(mdate[2]) < Integer.parseInt(wdate[2])) {
-                            res[j] = "invalid";
-                        } else if (Integer.parseInt(mdate[2]) == Integer.parseInt(wdate[2])) {
-                            if (monthmap.get(mdate[1]) < monthmap.get(wdate[1])) {
-                                res[j] = "invalid";
-                            } else if (monthmap.get(mdate[1]) == monthmap.get(wdate[1])) {
-                                if (Integer.parseInt(mdate[0]) <= Integer.parseInt(wdate[0])) {
-                                    res[j] = "invalid";
-                                } else {
-                                    res[j] = "valid";
-                                }
-                            } else {
-                                res[j] = "valid";
-                            }
-                        } else {
-                            res[j] = "valid";
-                        }
+                        res[j]=comparedate(mdate,wdate);
                     }
-                    //System.out.println(MDate[]);
-
                 }
-
-                //catch(NullPointerException ne){}
-                //System.out.println(FId[j] + "\t" + MDate[j] + "\t" + HBdate[j] + "\t" + WBdate[j] + "\t" + res[j]);
                 if (res[j].equals("invalid")) {
                     System.out.println("ERROR: US02: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, birth not before marriage.");
                 }
-                /*if (res[j].equals("cannot say")) {
-                    System.out.println("ERROR: US02: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, insufficient information to compare.");
-                }*/
             }
         } catch (NullPointerException ne) {
 
@@ -147,60 +126,42 @@ public class Mohit {
         return res;
     }
 
-    public void marriageAfter14(HashMap<String, ArrayList<String>> indiHashmap, HashMap<String, ArrayList<String>> famHashmap) {
-        monthmap.put("JAN", 1);
-        monthmap.put("FEB", 2);
-        monthmap.put("MAR", 3);
-        monthmap.put("APR", 4);
-        monthmap.put("MAY", 5);
-        monthmap.put("JUN", 6);
-        monthmap.put("JUL", 7);
-        monthmap.put("AUG", 8);
-        monthmap.put("SEP", 9);
-        monthmap.put("OCT", 10);
-        monthmap.put("NOV", 11);
-        monthmap.put("DEC", 12);
+    public String[] marriageAfter14(HashMap<String, ArrayList<String>> indiHashmap, HashMap<String, ArrayList<String>> famHashmap) {
+
         String res[] = new String[famHashmap.size()];
         String MDate[] = new String[famHashmap.size()];
         String HBdate[] = new String[famHashmap.size()];
         String WBdate[] = new String[famHashmap.size()];
         String FId[] = new String[famHashmap.size()];
-        //System.out.println("\nMohit Sprint 1 User Story 10:");
         System.out.println("\n\n=>Mohit Sprint 1 User Story 10: Marriage after 14");
-        //int i = 0;
-        //System.out.println("FId\tMDate\t\tHBdate\t\tWBdate\t\tMarriage after 14");
         int i = 0;
         for (String key : famHashmap.keySet()) {
             famvalues = famHashmap.get(key);
             FId[i] = key;
-            if (famvalues.get(5) == "") {
+            if (famvalues.get(5).equals("")) {
                 MDate[i] = "N/A";
             } else {
                 MDate[i] = famvalues.get(5);
             }
-            //MDate[i]=famvalues.get(5);
-            //System.out.println(MDate[i]);
             for (String key2 : indiHashmap.keySet()) {
                 indivalues = indiHashmap.get(key2);
                 if (famvalues.get(1).equals(key2) || famvalues.get(3).equals(key2)) {
                     if (famvalues.get(1).equals(key2)) {
-                        if (indivalues.get(3) == "") {
+                        if (indivalues.get(3).equals("")) {
                             HBdate[i] = "N/A";
                         } else {
                             HBdate[i] = indivalues.get(3);
                         }
                     }
                     if (famvalues.get(3).equals(key2)) {
-                        if (indivalues.get(3) == "") {
+                        if (indivalues.get(3).equals("")) {
                             WBdate[i] = "N/A";
                         } else {
                             WBdate[i] = indivalues.get(3);
                         }
                     }
                 }
-
             }
-
             i++;
         }
         try {
@@ -211,92 +172,101 @@ public class Mohit {
                     String mdate[] = MDate[j].split(" ");
                     String hdate[] = HBdate[j].split(" ");
                     String wdate[] = WBdate[j].split(" ");
-                    if (Integer.parseInt(mdate[2]) < (Integer.parseInt(hdate[2]) + 14)) {
-                        res[j] = "invalid";
-                    } else if (Integer.parseInt(mdate[2]) == (Integer.parseInt(hdate[2]) + 14)) {
-                        if (monthmap.get(mdate[1]) < monthmap.get(hdate[1])) {
-                            res[j] = "invalid";
-                        } else if (monthmap.get(mdate[1]) == monthmap.get(hdate[1])) {
-                            if (Integer.parseInt(mdate[0]) <= Integer.parseInt(hdate[0])) {
-                                res[j] = "invalid";
-                            } else {
-                                res[j] = "valid";
-                            }
-                        } else {
-                            res[j] = "valid";
-                        }
-                    } else {
-                        res[j] = "valid";
-                    }
-
+                    int h=Integer.parseInt(hdate[2])+14;
+                    String thdate=hdate[0]+" "+hdate[1]+" "+h;
+                    String newhdate[]=thdate.split(" ");
+                    int w=Integer.parseInt(wdate[2])+14;
+                    String twdate=wdate[0]+" "+wdate[1]+" "+w;
+                    String newwdate[]=twdate.split(" ");
+                    res[j]=comparedate(mdate,newhdate);
                     if (res[j].equals("invalid")) {
                         res[j] = "invalid";
                     } else {
-                        if (Integer.parseInt(mdate[2]) < (Integer.parseInt(wdate[2]) + 14)) {
-                            res[j] = "invalid";
-                        } else if (Integer.parseInt(mdate[2]) == (Integer.parseInt(wdate[2]) + 14)) {
-                            if (monthmap.get(mdate[1]) < monthmap.get(wdate[1])) {
-                                res[j] = "invalid";
-                            } else if (monthmap.get(mdate[1]) == monthmap.get(wdate[1])) {
-                                if (Integer.parseInt(mdate[0]) <= Integer.parseInt(wdate[0])) {
-                                    res[j] = "invalid";
-                                } else {
-                                    res[j] = "valid";
-                                }
-                            } else {
-                                res[j] = "valid";
-                            }
-                        } else {
-                            res[j] = "valid";
-                        }
+                        res[j]=comparedate(mdate,newwdate);
                     }
                 }
                 if (res[j].equals("invalid")) {
                     System.out.println("ERROR: US10: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, marriage not after 14.");
                 }
-                /*if (res[j].equals("cannot say")) {
-                    System.out.println("ERROR: US10: Family ID: " + FId[j] + " has marriage date: " + MDate[j] + " with Husband birthdate: " + HBdate[j] + " and Wife birthdate: " + WBdate[j] + ". Thus, insufficient information to compare.");
-                }*/
-                //System.out.println(FId[j] + "\t" + MDate[j] + "\t" + HBdate[j] + "\t" + WBdate[j] + "\t" + res[j]);
-
             }
         } catch (NullPointerException ne) {
 
         }
-
+        return res;
     }
 
-   /* public void uniqueIDs(String indid[], String famid[]) {
+    public void uniqueIDs(String indid[], String famid[]) {
+        String dup[]=new String [256];
+        int m=0;
         System.out.println("\n\n=>Mohit Sprint 2 User Story 22: UniqueIDs");
         try {
             for (int i = 0; i < indid.length; i++) {
                 for (int j = i + 1; j < indid.length; j++) {
-
                     if (indid[i].equals(indid[j])) {
-                        System.out.println("ERROR: US22: Individual ID: " + indid[i] + " is not unique");
+                        dup[m++]=indid[i];
                         break;
-                    }
-
+                        }
                 }
             }
-        } catch (NullPointerException ne) {
-            //System.out.println("NO ERROR: All individuals have unique id.");
         }
+        catch (NullPointerException ne) {
+        }
+        Set<String> mySet = new HashSet<String>(Arrays.asList(dup));
+        mySet.remove(null);
+        for (String temp : mySet) {
+            System.out.println("ERROR: US22: Individual ID: " + temp + " is not unique");
+        }
+        m=0;
         try {
             for (int k = 0; k < famid.length; k++) {
                 for (int l = k + 1; l < famid.length; l++) {
 
                     if (famid[k].equals(famid[l])) {
-                        System.out.println("ERROR: US22: Family ID: " + famid[k] + " is not unique");
+                        dup[m++]=famid[k];
                         break;
                     }
-
                 }
-
             }
-
         } catch (NullPointerException ne) {
-            //System.out.println("NO ERROR: All individuals have unique id.");
         }
-    }*/
+        Set<String> mySet2 = new HashSet<String>(Arrays.asList(dup));
+        mySet2.remove(null);
+        for (String temp : mySet2) {
+           System.out.println("ERROR: US22: Family ID: " + temp + " is not unique");
+        }
+    }
+    
+    public void uniquenamebirthdate(HashMap<String, ArrayList<String>> indiHashmap){
+        String dup[]=new String [256];
+        int m=0;
+        System.out.println("\n\n=>Mohit Sprint 2 User Story 23: Unique name and birth date");
+        indiHashmap.remove("");
+        String name[] = new String[indiHashmap.size()];
+        String BDate[] = new String[indiHashmap.size()];
+        int i=0;
+        for (String key : indiHashmap.keySet()) {
+            indivalues = indiHashmap.get(key);
+            name[i]=indivalues.get(1);
+            BDate[i]=indivalues.get(3);
+            i++;
+        }
+        try{
+        for (int k = 0; k < name.length; k++) {
+                for (int j = k + 1; j < name.length; j++) {
+                   if(name[k].equals(name[j]) && BDate[k].equals(BDate[j])) {
+                       dup[m++]=name[k]+"\t"+BDate[k];
+                       break;
+                   }
+                }
+        }
+        }
+        catch(NullPointerException ne){
+            
+        }
+        Set<String> mySet = new HashSet<String>(Arrays.asList(dup));
+        mySet.remove(null);
+        for (String temp : mySet) {
+           System.out.println("ANOMALY: US23: Name - " + temp.substring(0,temp.indexOf("\t")) + " and Birth Date - "+temp.substring(temp.indexOf("\t")+1)+" together occur more than once. Hence, not unique.");
+        }
+    }
 }
