@@ -52,15 +52,23 @@ public class AliveMarried {
 			//System.out.println(indiHash.get(famInfo.get(1)).get(4) + "    " + indiHash.get(famInfo.get(3)).get(4));
 			if(indiHash.get(famInfo.get(1)).get(4) != "" && indiHash.get(famInfo.get(3)).get(4)  != "") {
 				String children = famInfo.get(7);
+				//System.out.println(children);
 				String[] childrenIDs;
-				children = famInfo.get(7);
+				//children = famInfo.get(7);
 				childrenIDs = children.split(" ");
-				for(int i = 1; i < childrenIDs.length; i++) {
-					//System.out.println("id" + i + childrenIDs[i]);
-					if(indiHash.get(childrenIDs[i]).get(4) == "" && Integer.parseInt(indiHash.get(childrenIDs[i]).get(5)) < 18) {
-						orphans.add(indiHash.get(childrenIDs[i]));
+				for(String chil: childrenIDs) {
+					if(!chil.toString().equals("")) {
+						if(indiHash.get(chil).get(4) == "" && Integer.parseInt(indiHash.get(chil).get(5)) < 18) {
+							orphans.add(indiHash.get(chil));
+						}
 					}
 				}
+//				for(int i = 0; i < childrenIDs.length; i++) {
+//					System.out.println("id" + i + childrenIDs[i]);
+//					if(indiHash.get(childrenIDs[i]).get(4) == "" && Integer.parseInt(indiHash.get(childrenIDs[i]).get(5)) < 18) {
+//						orphans.add(indiHash.get(childrenIDs[i]));
+//					}
+//				}
 			}
 		}
 	}
