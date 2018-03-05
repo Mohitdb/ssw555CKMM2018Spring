@@ -500,7 +500,17 @@ public class GedcomParse
         	System.out.print(key.get(1));
         	System.out.println();
             
-        }    
+        }  
+        
+        System.out.println("===============Caroline's US33 - List Orphans===============");
+        ArrayList<ArrayList<String>> orphans = am.getOrphans();
+        
+        for (ArrayList<String> key : orphans)
+        {
+        	System.out.print(key.get(1));
+        	System.out.println();
+            
+        }  
     }
 
 }
