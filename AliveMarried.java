@@ -9,6 +9,7 @@ public class AliveMarried {
 	private HashMap<String, ArrayList<String>> famHash = new HashMap<>();
 	private ArrayList<ArrayList<String>> livMarried = new ArrayList<ArrayList<String>>();
 	private ArrayList<ArrayList<String>> livSingle = new ArrayList<ArrayList<String>>();
+	private ArrayList<ArrayList<String>> deceased = new ArrayList<ArrayList<String>>();
 
 	AliveMarried(HashMap<String, ArrayList<String>> indiHash, HashMap<String, ArrayList<String>> famHash) {
 		this.indiHash = indiHash;
@@ -36,6 +37,10 @@ public class AliveMarried {
 					if(!livSingle.contains(indiInfo)) {
 						livSingle.add(indiInfo);
 					}
+				}else if(indiInfo.get(4) != ""){
+					if(!deceased.contains(indiInfo)) {
+						deceased.add(indiInfo);
+					}
 				}
 			}
 		}
@@ -47,6 +52,10 @@ public class AliveMarried {
 	
 	public ArrayList<ArrayList<String>> getAliveSingle() {
 		return livSingle;
+	}
+	
+	public ArrayList<ArrayList<String>> getDeceased() {
+		return deceased;
 	}
 
 }

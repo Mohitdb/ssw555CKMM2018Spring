@@ -52,10 +52,10 @@ public class GedcomParse
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\Sprint1.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\GitHub Here\\ssw555CKMM2018Spring\\Gedcom Files\\KaranSprint2.ged";
         
-       FileReader fileReader = new FileReader(karanPath);
+//       FileReader fileReader = new FileReader(karanPath);
 //        FileReader fileReader = new FileReader(mananPath);
 //        FileReader fileReader = new FileReader(mohitPath);
-//       FileReader fileReader = new FileReader(carolinePath);
+       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         System.out.println("******************** Karan's User story US21: Correct Gender for Role ********************");
@@ -492,6 +492,15 @@ public class GedcomParse
             
         }    
         
+        System.out.println("===============Caroline's US29 - List Deceased===============");
+        ArrayList<ArrayList<String>> deceased = am.getDeceased();
+        
+        for (ArrayList<String> key : deceased)
+        {
+        	System.out.print(key.get(1));
+        	System.out.println();
+            
+        }    
     }
 
 }
