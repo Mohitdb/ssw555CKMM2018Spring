@@ -11,55 +11,88 @@ public class MarriedAfterDeath {
 	SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
 	Date deathDate = new Date();
 	Date marriageDate = new Date();
-	String[] newDate;
+	String[] weddingDate;
+	String[] death;
 	String monthNumber;
-	String formattedDate;
+	String month;
+	String formattedWeddingDate;
+	String formattedDeathDate;
 	ArrayList<String> tempIndi;
 	ArrayList<String> tempFam;
 	String marriedDate;
 	String dDate;
 	
-	public void marriageAfterDeath(HashMap<String, ArrayList<String>> indiHashmap, HashMap<String, ArrayList<String>> famHashmap)
+	private HashMap<String, ArrayList<String>> indiHash = new HashMap<>();
+	private HashMap<String, ArrayList<String>> famHash = new HashMap<>();
+	
+	public void marriageAfterDeath(HashMap<String, ArrayList<String>> indiHash, HashMap<String, ArrayList<String>> famHash)
 	{	
 		System.out.println("\n******************** Karan's User story US05: Marriage before Death **********************");
 		
-		 int i = 0;
-	        for (String key : famHashmap.keySet())
-	        {
-	        	tempFam = famHashmap.get(key);
-	        	
-	        	for (String ID : indiHashmap.keySet())
-	        	{
-	        		tempIndi = indiHashmap.get(ID);
-	        		
-	        		marriedDate = tempFam.get(5);
-	        		
-	        		if (!marriedDate.equals(""))
-	        		{
-	        			marriageDate = stringToDate(marriedDate);
-	        			
-	        			String husID = tempFam.get(1);
-	        			String wID = tempFam.get(3);
-	        			
-	        			if (husID.equals(key) || wID.equals(key))
-	        			{
-	        				dDate = tempIndi.get(4);
-	        				
-	        				if (!dDate.equals(""))
-	        				{
-	        					deathDate = stringToDate(dDate);
-	        					
-	        					marriageDeathComparison(marriageDate, deathDate, tempIndi.get(1), tempIndi.get(0));
-	        				}
-	        				
-	        			}
-	        			
-	        		}
-	        	}
-	        	
-	        	
-	        	
-	        }
+		this.indiHash = indiHash;
+		this.famHash = famHash;
+		
+		marriageComparedtoDeath();
+	}
+	
+	public void marriageComparedtoDeath()
+	{
+		
+		ArrayList<String> indiInfo = new ArrayList<String>();
+		ArrayList<String> famInfo = new ArrayList<String>();
+		
+		for (String famKey : this.famHash.keySet())
+		{
+			famInfo = this.famHash.get(famKey);
+			
+			marriedDate = famInfo.get(5);
+			
+			if (!marriedDate.equals(""))
+			{	
+				for (String indiKey : this.indiHash.keySet())
+				{
+					indiInfo = this.indiHash.get(indiKey);
+					
+					String hID = famInfo.get(1);
+					String wID = famInfo.get(3);
+					
+					if (indiKey.contains(hID) || indiKey.contains(wID))
+					{
+						dDate = indiInfo.get(4);
+						
+						if (!dDate.equals(""))
+						{
+							{
+								weddingDate = marriedDate.split(" ");
+								death = dDate.split(" ");
+								
+								monthNumber = dateNumber(weddingDate[1]);
+								month = dateNumber(death[1]);
+								
+								formattedWeddingDate = weddingDate[2] + "-" + monthNumber + "-" + weddingDate[0];
+								formattedDeathDate = death[2] + "-" + month + "-" + death[0];
+								
+								
+								try {
+									marriageDate = simpleDateFormat.parse(formattedWeddingDate);
+									
+									deathDate = simpleDateFormat.parse(formattedDeathDate);
+									
+									marriageDeathComparison(marriageDate, deathDate, indiInfo.get(1), indiInfo.get(0));
+								}
+								
+								catch (ParseException e) 
+								{
+									e.printStackTrace();
+								}
+							}
+						}
+						
+					}
+					
+				}
+			}
+		}
 		
 	}
 	
@@ -95,30 +128,7 @@ public class MarriedAfterDeath {
 				return "00";
 		}
 	}
-	
-	public Date stringToDate(String date)
-	{
-		newDate = date.split(" ");
-		
-		monthNumber = dateNumber(newDate[1]);
-		
-		formattedDate = newDate[2] + "-" + monthNumber + "-" + newDate[0];
-		
-		try {
-			marriageDate = simpleDateFormat.parse(formattedDate);
-			
-			return marriageDate;
-		}
-		
-		catch (ParseException e) 
-		{
-			e.printStackTrace();
-			
-			return marriageDate;
-		}
 
-	}
-	
 	public void marriageDeathComparison(Date date1, Date date2, String name, String ID)
 	{
 		double deathDateTime;
@@ -126,6 +136,7 @@ public class MarriedAfterDeath {
 		
 		deathDateTime = date2.getTime();
 		marriageDateTime = date1.getTime();
+		
 		
 		if (deathDateTime < marriageDateTime)
 		{

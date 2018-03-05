@@ -10,58 +10,88 @@ public class DivorcedAfterDeath {
 	
 	SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
 	Date deathDate = new Date();
-	Date divorced = new Date();
-	String[] newDate;
+	Date divorcedDate = new Date();
+	String[] diDate;
+	String[] death;
 	String monthNumber;
-	String formattedDate;
+	String month;
+	String formattedDivorceDate;
+	String formattedDeathDate;
 	ArrayList<String> tempIndi;
 	ArrayList<String> tempFam;
-	String divorcedDate;
+	String divorceDate;
 	String dDate;
+
+	private HashMap<String, ArrayList<String>> indiHash = new HashMap<>();
+	private HashMap<String, ArrayList<String>> famHash = new HashMap<>();
 	
-	public void divorcedAfterDeath(HashMap<String, ArrayList<String>> indiHashmap, HashMap<String, ArrayList<String>> famHashmap)
+	public void divorcedComparedtoDeath(HashMap<String, ArrayList<String>> indiHash, HashMap<String, ArrayList<String>> famHash)
 	{	
 		System.out.println("\n******************** Karan's User story US06: Divorced before Death **********************");
 		
-		 int i = 0;
-	        for (String key : famHashmap.keySet())
-	        {
-	        	tempFam = famHashmap.get(key);
-	        	
-	        	for (String ID : indiHashmap.keySet())
-	        	{
-	        		tempIndi = indiHashmap.get(ID);
-	        		
-	        		divorcedDate = tempFam.get(5);
-	        		
-	        		if (!divorcedDate.equals(""))
-	        		{
-	        			divorced = stringToDate(divorcedDate);
-	        			
-	        			String husID = tempFam.get(1);
-	        			String wID = tempFam.get(3);
-	        			
-	        			if (husID.equals(key) || wID.equals(key))
-	        			{
-	        				dDate = tempIndi.get(4);
-	        				
-	        				if (!dDate.equals(""))
-	        				{
-	        					deathDate = stringToDate(dDate);
-	        					
-	        					divorcedDeathComparison(divorced, deathDate, tempIndi.get(1), tempIndi.get(0));
-	        				}
-	        				
-	        			}
-	        			
-	        		}
-	        	}
-	        	
-	        	
-	        	
-	        }
+		this.indiHash = indiHash;
+		this.famHash = famHash;
 		
+		divorcedAfterDeath();
 	}
+	
+	public void divorcedAfterDeath()
+	{	
+		ArrayList<String> indiInfo = new ArrayList<String>();
+		ArrayList<String> famInfo = new ArrayList<String>();
+		
+		for (String famKey : this.famHash.keySet())
+		{
+			famInfo = this.famHash.get(famKey);
+			
+			divorceDate = famInfo.get(6);
+			
+			if (!divorceDate.equals(""))
+			{	
+				for (String indiKey : this.indiHash.keySet())
+				{
+					indiInfo = this.indiHash.get(indiKey);
+					
+					String hID = famInfo.get(1);
+					String wID = famInfo.get(3);
+					
+					if (indiKey.contains(hID) || indiKey.contains(wID))
+					{
+						dDate = indiInfo.get(4);
+						
+						if (!dDate.equals(""))
+						{
+								diDate = divorceDate.split(" ");
+								death = dDate.split(" ");
+								
+								monthNumber = dateNumber(diDate[1]);
+								month = dateNumber(death[1]);
+								
+								formattedDivorceDate = diDate[2] + "-" + monthNumber + "-" + diDate[0];
+								formattedDeathDate = death[2] + "-" + month + "-" + death[0];
+								
+								
+								try {
+									divorcedDate = simpleDateFormat.parse(formattedDivorceDate);
+									
+									deathDate = simpleDateFormat.parse(formattedDeathDate);
+									
+									divorcedDeathComparison(divorcedDate, deathDate, indiInfo.get(1), indiInfo.get(0));
+								}
+								
+								catch (ParseException e) 
+								{
+									e.printStackTrace();
+								}
+							}
+						}
+						
+					}
+					
+				}
+			}
+		}
+		
 	
 	public static String dateNumber(String monthName)
 	{
@@ -94,29 +124,6 @@ public class DivorcedAfterDeath {
 			default:
 				return "00";
 		}
-	}
-	
-	public Date stringToDate(String date)
-	{
-		newDate = date.split(" ");
-		
-		monthNumber = dateNumber(newDate[1]);
-		
-		formattedDate = newDate[2] + "-" + monthNumber + "-" + newDate[0];
-		
-		try {
-			divorced = simpleDateFormat.parse(formattedDate);
-			
-			return divorced;
-		}
-		
-		catch (ParseException e) 
-		{
-			e.printStackTrace();
-			
-			return divorced;
-		}
-
 	}
 	
 	public void divorcedDeathComparison(Date date1, Date date2, String name, String ID)
