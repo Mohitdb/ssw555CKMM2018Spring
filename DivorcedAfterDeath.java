@@ -27,7 +27,7 @@ public class DivorcedAfterDeath {
 	
 	public void divorcedComparedtoDeath(HashMap<String, ArrayList<String>> indiHash, HashMap<String, ArrayList<String>> famHash)
 	{	
-		System.out.println("\n******************** Karan's User story US06: Divorced before Death **********************");
+		System.out.println("\n******************** Karan's User story US06: Divorced After Death **********************");
 		
 		this.indiHash = indiHash;
 		this.famHash = famHash;
@@ -55,7 +55,7 @@ public class DivorcedAfterDeath {
 					String hID = famInfo.get(1);
 					String wID = famInfo.get(3);
 					
-					if (indiKey.contains(hID) || indiKey.contains(wID))
+					if (indiKey.equals(hID) || indiKey.equals(wID))
 					{
 						dDate = indiInfo.get(4);
 						
