@@ -73,7 +73,8 @@ public class MarriedAfterDeath {
 								formattedDeathDate = death[2] + "-" + month + "-" + death[0];
 								
 								
-								try {
+								try 
+								{
 									marriageDate = simpleDateFormat.parse(formattedWeddingDate);
 									
 									deathDate = simpleDateFormat.parse(formattedDeathDate);
@@ -93,6 +94,7 @@ public class MarriedAfterDeath {
 				}
 			}
 		}
+	
 		
 	}
 	
@@ -133,6 +135,7 @@ public class MarriedAfterDeath {
 	{
 		double deathDateTime;
 		double marriageDateTime;
+		String result = "";
 		
 		deathDateTime = date2.getTime();
 		marriageDateTime = date1.getTime();
@@ -142,5 +145,6 @@ public class MarriedAfterDeath {
 		{
 			System.out.println("Error: Individual " + ID + " named " + name + " is married after the person has died!");
 		}
+		
 	}
 }
