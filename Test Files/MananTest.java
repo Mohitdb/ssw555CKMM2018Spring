@@ -1,4 +1,3 @@
-
 package GedcomParse;
 
 import java.util.ArrayList;
@@ -9,9 +8,10 @@ import static org.junit.Assert.*;
 
 public class MananTest
 {
-//    mananRefractored instance=new mananRefractored();
-    Manan instance=new Manan();
-   @Test
+    
+    Manan instance = new Manan();
+    
+    @Test
     public void testBirthBeforeDeath()
     {
         String res = "";
@@ -87,7 +87,7 @@ public class MananTest
         {
             "8 JAN 2000", "1 JAN 2001", "",
         };
-        
+
         // had to add this section of code in test file after refractoring
         String testAge[] = new String[testID.length];
         for (int i = 0; i < testBirth.length; i++)
@@ -96,7 +96,7 @@ public class MananTest
             testAge[i] = age.toString();
         }
         //end of section that needed to be added
-        
+
         String expectedLT150[] =
         {
             "INCORRECT", "INCORRECT", "INCORRECT"
@@ -121,4 +121,133 @@ public class MananTest
         Assert.assertArrayEquals(expectedLT150, resArrayLT150);
 
     }
+
+    @Test
+    public void testMariageBeforeDivorce()
+    {
+        ArrayList<String> res = new ArrayList<>();
+        System.out.println("==================Test for US04: Marriage Before Divorce==================");
+        HashMap<String, ArrayList<String>> hashFam = new HashMap<>();
+        ArrayList<String> tempArrayList1 = new ArrayList<>();
+        ArrayList<String> tempArrayList2 = new ArrayList<>();
+        ArrayList<String> tempArrayList3 = new ArrayList<>();
+        
+        tempArrayList1.add("F1");
+        tempArrayList1.add("5");
+        tempArrayList1.add("E");
+        tempArrayList1.add("6");
+        tempArrayList1.add("F");
+        tempArrayList1.add("09 FEB 2000");
+        tempArrayList1.add("08 JAN 1999");
+        hashFam.put("F1", tempArrayList1);
+        
+        tempArrayList2.add("F2");
+        tempArrayList2.add("9");
+        tempArrayList2.add("W");
+        tempArrayList2.add("1");
+        tempArrayList2.add("M");
+        tempArrayList2.add("12 MAR 2007");
+        tempArrayList2.add("25 FEB 2007");
+        hashFam.put("F2", tempArrayList2);
+        
+        tempArrayList3.add("F3");
+        tempArrayList3.add("7");
+        tempArrayList3.add("T");
+        tempArrayList3.add("13");
+        tempArrayList3.add("K");
+        tempArrayList3.add("15 SEP 1990");
+        tempArrayList3.add("14 SEP 1990");
+        hashFam.put("F3", tempArrayList3);
+
+        ArrayList<String> expected=new ArrayList<>();
+        expected.add("INCORRECT");
+        expected.add("INCORRECT");
+        expected.add("INCORRECT");
+        res=instance.mariageBeforeDivorce(hashFam);
+        Assert.assertEquals(expected, res);
+        
+    }
+
+    @Test
+    public void testSiblingsByAge()
+    {
+        HashMap<String, ArrayList<String>> hashIndi = new HashMap<>();
+        ArrayList<String> tempArrayList1 = new ArrayList<>();
+        ArrayList<String> tempArrayList2 = new ArrayList<>();
+        ArrayList<String> tempArrayList3 = new ArrayList<>();
+        ArrayList<String> tempArrayList4 = new ArrayList<>();
+        ArrayList<String> tempArrayList5 = new ArrayList<>();
+        ArrayList<String> tempArrayList6 = new ArrayList<>();
+        ArrayList<String> tempArrayList7 = new ArrayList<>();
+
+        tempArrayList1.add("1");
+        tempArrayList1.add("A");
+        tempArrayList1.add("M");
+        tempArrayList1.add("");
+        tempArrayList1.add("");
+        tempArrayList1.add("6");
+        hashIndi.put("1", tempArrayList1);
+
+        tempArrayList2.add("2");
+        tempArrayList2.add("B");
+        tempArrayList2.add("M");
+        tempArrayList2.add("");
+        tempArrayList2.add("");
+        tempArrayList2.add("20");
+        hashIndi.put("2", tempArrayList2);
+
+        tempArrayList3.add("3");
+        tempArrayList3.add("C");
+        tempArrayList3.add("M");
+        tempArrayList3.add("");
+        tempArrayList3.add("");
+        tempArrayList3.add("6");
+        hashIndi.put("3", tempArrayList3);
+
+        tempArrayList4.add("4");
+        tempArrayList4.add("D");
+        tempArrayList4.add("M");
+        tempArrayList4.add("");
+        tempArrayList4.add("");
+        tempArrayList4.add("11");
+        hashIndi.put("4", tempArrayList4);
+
+        tempArrayList5.add("5");
+        tempArrayList5.add("E");
+        tempArrayList5.add("M");
+        tempArrayList5.add("");
+        tempArrayList5.add("");
+        tempArrayList5.add("50");
+        hashIndi.put("5", tempArrayList5);
+
+        tempArrayList6.add("6");
+        tempArrayList6.add("F");
+        tempArrayList6.add("F");
+        tempArrayList6.add("");
+        tempArrayList6.add("");
+        tempArrayList6.add("45");
+        hashIndi.put("6", tempArrayList6);
+
+        tempArrayList7.add("F1");
+        tempArrayList7.add("5");
+        tempArrayList7.add("E");
+        tempArrayList7.add("6");
+        tempArrayList7.add("F");
+        tempArrayList7.add("20 DEC 1996");
+        tempArrayList7.add("");
+        tempArrayList7.add("1 2 3 4");
+        HashMap<String, ArrayList<String>> hashFam = new HashMap<>();
+        hashFam.put("F1", tempArrayList7);
+
+        int[] expected =
+        {
+            20, 11, 6, 6
+        };
+        int[] ageFromFunction =
+        {
+        };
+        ageFromFunction = instance.siblingsByAge(hashFam, hashIndi);
+        Assert.assertArrayEquals(ageFromFunction, expected);
+    }
+
 }

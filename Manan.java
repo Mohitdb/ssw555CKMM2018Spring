@@ -2,6 +2,9 @@ package GedcomParse;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Manan
@@ -63,9 +66,11 @@ public class Manan
         return res;
     }
 
-    public void mariageBeforeDivorce(HashMap<String, ArrayList<String>> famHash)
+    public ArrayList<String> mariageBeforeDivorce(HashMap<String, ArrayList<String>> famHash)
     {
         famHash.remove("");
+        ArrayList<String> res = new ArrayList<>();
+        ArrayList<String> tempArrayList = new ArrayList<>();
         System.out.println("\n====================== Manan's User story US04:Marriage Before Divorce ======================");
         System.out.println("MARRIAGE\tDIVORCE\t\tERROR MESSAGE");
         System.out.println("-----------\t-------------\t----------------------");
@@ -89,12 +94,15 @@ public class Manan
                 if (result.equals("year"))
                 {
                     System.out.println(marriageDate + "\t" + divorceDate + "\tError US04: Divorce YEAR cannot be before Marriage YEAR");
+                    res.add("INCORRECT");
                 } else if (result.equals("month"))
                 {
                     System.out.println(marriageDate + "\t" + divorceDate + "\tError US04: Divorce MONTH cannot be before Marriage MONTH for same year");
+                    res.add("INCORRECT");
                 } else if (result.equals("day"))
                 {
                     System.out.println(marriageDate + "\t" + divorceDate + "\tError US04: Divorce DAY cannot be before Marriage DAY for same month and year");
+                    res.add("INCORRECT");
                 } else
                 {
                     //System.out.println(marriageDate + "\t" + divorceDate + "\t\tN/A");
@@ -104,6 +112,7 @@ public class Manan
                 //System.out.println(tempArrayList.get(5) + "\t" + "N/A" + "\t\tCORRECT\t\t\tN/A");
             }
         }
+        return res;
     }
 
      public String lessThan150(HashMap<String, ArrayList<String>> hashIndi)
@@ -144,11 +153,11 @@ public class Manan
         return resLessThan150;
     }
 
-    void siblingsByAge(HashMap<String, ArrayList<String>> famHash, HashMap<String, ArrayList<String>> indiHash)
+    public int[] siblingsByAge(HashMap<String, ArrayList<String>> famHash, HashMap<String, ArrayList<String>> indiHash)
     {
         indiHash.remove("");
         famHash.remove("");
-
+        int[] ageCopy={};
         System.out.println("\n====================== Manan's User story US28:Order Siblings of Families by Age ======================");
         for (String s : famHash.keySet())
         {
@@ -160,8 +169,8 @@ public class Manan
                 System.out.println("Name\t\tAge");
                 System.out.println("-------------  --------");
                 String[] splitted = famHash.get(s).get(7).split(" ");
-                int[] age = new int[splitted.length - 1];
-                String[] name = new String[splitted.length - 1];
+                int[] age = new int[splitted.length];
+                String[] name = new String[splitted.length];
                 for (String s1 : splitted)
                 {
                     if (!s1.equals(""))
@@ -171,9 +180,9 @@ public class Manan
                         i++;
                     }
                 }
-                for (int k = 0; k < age.length; k++)
+                for (int k = 0; k < age.length-1; k++)
                 {
-                    for (int j = 0; j < age.length - i; j++)
+                    for (int j = 0; j < age.length-1 - k; j++)
                     {
                         if (age[j] < age[j + 1])
                         {
@@ -191,8 +200,11 @@ public class Manan
                 {
                     System.out.println(name[j] + "\t" + age[j]);
                 }
+                ageCopy=age;
             }
         }
+
+        return ageCopy;
     }
     
     public String dateCal(String firstFromList, String secondFromList)
@@ -284,5 +296,27 @@ public class Manan
         return monthInt;
     }
 
+//    void recentBirth(HashMap<String, ArrayList<String>> indiHash)
+//    {
+//        Calendar c=Calendar.getInstance();
+//        c.add(Calendar.DATE, -30);
+//        Date dateBefore30Days = c.getTime();
+//        Date
+//        boolean b=dateBefore30Days.
+////        System.out.println(dateBefore30Days.getDate());
+////        System.out.println(dateBefore30Days.getMonth());
+//        String[] dateString =dateBefore30Days.toString().split(" ");
+//        System.out.println(Arrays.toString(dateString));
+//        String month=dateString[1].toUpperCase();
+//        String date=dateString[2];
+//        String year=dateString[5];
+//        System.out.println("Date:"+date+" Month:"+month+" Year:"+year);
+//        String beforeDate=date+"/"+month+"/"+year;
+//        
+//        
+//
+//    }
+
+    
 
 }
