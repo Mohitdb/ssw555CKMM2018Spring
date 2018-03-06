@@ -52,9 +52,9 @@ public class GedcomParse
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\Sprint1.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\GitHub Here\\ssw555CKMM2018Spring\\Gedcom Files\\KaranSprint2.ged";
         
-       FileReader fileReader = new FileReader(karanPath);
+//       FileReader fileReader = new FileReader(karanPath);
 //        FileReader fileReader = new FileReader(mananPath);
-//        FileReader fileReader = new FileReader(mohitPath);
+        FileReader fileReader = new FileReader(mohitPath);
 //       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -368,10 +368,10 @@ public class GedcomParse
         
         //--------------------------Mohits Space----------------------------
         Mohit s1 = new Mohit();
-        String res[]=s1.birthBeforeMarriage(indiHash,famHash);
+        String res1[]=s1.birthBeforeMarriage(indiHash,famHash);
         String res2[]=s1.marriageAfter14(indiHash, famHash);
-        s1.uniqueIDs(indid,famid);
-        s1.uniquenamebirthdate(indiHash);
+        String res3[]=s1.uniqueIDs(indid,famid);
+        String res4[]=s1.uniquenamebirthdate(indiHash);
         //--------------------------Manans Space----------------------------
         String resBirthBeforeDeath = m.birthBeforeDeath(indiHash);
         m.mariageBeforeDivorce(famHash);

@@ -195,9 +195,11 @@ public class Mohit {
         return res;
     }
 
-    public void uniqueIDs(String indid[], String famid[]) {
+    public String[] uniqueIDs(String indid[], String famid[]) {
         String dup[]=new String [256];
+        String res[]=new String[256];
         int m=0;
+        int r=0;
         System.out.println("\n\n=>Mohit Sprint 2 User Story 22: UniqueIDs");
         try {
             for (int i = 0; i < indid.length; i++) {
@@ -215,6 +217,8 @@ public class Mohit {
         mySet.remove(null);
         for (String temp : mySet) {
             System.out.println("ERROR: US22: Individual ID: " + temp + " is not unique");
+            res[r]=temp;
+            r++;
         }
         m=0;
         try {
@@ -233,12 +237,22 @@ public class Mohit {
         mySet2.remove(null);
         for (String temp : mySet2) {
            System.out.println("ERROR: US22: Family ID: " + temp + " is not unique");
+           res[r]=temp;
+           r++;
         }
+        String temp[]=new String[r];
+        for(int l=0;l<r;l++)
+        {
+            temp[l]=res[l];
+        }
+        return temp;
     }
     
-    public void uniquenamebirthdate(HashMap<String, ArrayList<String>> indiHashmap){
+    public String[] uniquenamebirthdate(HashMap<String, ArrayList<String>> indiHashmap){
         String dup[]=new String [256];
+        String res[]=new String[256];
         int m=0;
+        int r=0;
         System.out.println("\n\n=>Mohit Sprint 2 User Story 23: Unique name and birth date");
         indiHashmap.remove("");
         String name[] = new String[indiHashmap.size()];
@@ -267,6 +281,14 @@ public class Mohit {
         mySet.remove(null);
         for (String temp : mySet) {
            System.out.println("ANOMALY: US23: Name - " + temp.substring(0,temp.indexOf("\t")) + " and Birth Date - "+temp.substring(temp.indexOf("\t")+1)+" together occur more than once. Hence, not unique.");
+           res[r]=temp;
+           r++;
         }
+        String temp[]=new String[r];
+        for(int l=0;l<r;l++)
+        {
+            temp[l]=res[l];
+        }
+        return temp;
     }
 }
