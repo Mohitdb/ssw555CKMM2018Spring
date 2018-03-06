@@ -47,15 +47,15 @@ public class GedcomParse
         
         //read file
         // TODO: Change path for our testing file
-        String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\ssw555project01.ged";
+        String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\sprint2.ged";
         String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\Manan\\mananSprint1and2.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\Sprint1.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\GitHub Here\\ssw555CKMM2018Spring\\Gedcom Files\\KaranSprint2.ged";
         
-       FileReader fileReader = new FileReader(karanPath);
+//       FileReader fileReader = new FileReader(karanPath);
 //        FileReader fileReader = new FileReader(mananPath);
 //        FileReader fileReader = new FileReader(mohitPath);
-//       FileReader fileReader = new FileReader(carolinePath);
+       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         System.out.println("******************** Karan's User story US21: Correct Gender for Role ********************");
@@ -476,7 +476,7 @@ public class GedcomParse
         
         for (ArrayList<String> key : livMarried)
         {
-        	System.out.print(key.get(1));
+        	System.out.print(key.get(0) + " "  +key.get(1));
         	System.out.println();
             
         }
@@ -487,7 +487,7 @@ public class GedcomParse
         
         for (ArrayList<String> key : livSingle)
         {
-        	System.out.print(key.get(1));
+        	System.out.print(key.get(0) + " "  +key.get(1));
         	System.out.println();
             
         }    
@@ -497,7 +497,7 @@ public class GedcomParse
         
         for (ArrayList<String> key : deceased)
         {
-        	System.out.print(key.get(1));
+        	System.out.print(key.get(0) + " "  +key.get(1));
         	System.out.println();
             
         }  
@@ -507,7 +507,7 @@ public class GedcomParse
         
         for (ArrayList<String> key : orphans)
         {
-        	System.out.print(key.get(1));
+        	System.out.print(key.get(0) + " "  +key.get(1));
         	System.out.println();
             
         }  
