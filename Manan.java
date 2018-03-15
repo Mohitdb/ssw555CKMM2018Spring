@@ -115,7 +115,7 @@ public class Manan
         return res;
     }
 
-     public String lessThan150(HashMap<String, ArrayList<String>> hashIndi)
+    public String lessThan150(HashMap<String, ArrayList<String>> hashIndi)
     {
         System.out.println("\n====================== Manan's User story US07:Less Than 15 Years Old ======================");
         hashIndi.remove("");
@@ -157,7 +157,9 @@ public class Manan
     {
         indiHash.remove("");
         famHash.remove("");
-        int[] ageCopy={};
+        int[] ageCopy =
+        {
+        };
         System.out.println("\n====================== Manan's User story US28:Order Siblings of Families by Age ======================");
         for (String s : famHash.keySet())
         {
@@ -180,9 +182,9 @@ public class Manan
                         i++;
                     }
                 }
-                for (int k = 0; k < age.length-1; k++)
+                for (int k = 0; k < age.length - 1; k++)
                 {
-                    for (int j = 0; j < age.length-1 - k; j++)
+                    for (int j = 0; j < age.length - 1 - k; j++)
                     {
                         if (age[j] < age[j + 1])
                         {
@@ -200,13 +202,123 @@ public class Manan
                 {
                     System.out.println(name[j] + "\t" + age[j]);
                 }
-                ageCopy=age;
+                ageCopy = age;
             }
         }
 
         return ageCopy;
     }
-    
+
+    ArrayList<String> maleLastNames(HashMap<String, ArrayList<String>> famHash, HashMap<String, ArrayList<String>> indiHash)
+    {
+        System.out.println("\n====================== Manan's User story US16:Male Last Names ======================");
+        famHash.remove("");
+        String surname = "";
+        ArrayList<String> res = new ArrayList<>();
+        for (String key : famHash.keySet())
+        {
+            if (!famHash.get(key).get(2).equals(""))
+            {
+                surname = famHash.get(key).get(2).split(" ")[1];
+            } else
+            {
+                String tempSiblingID = famHash.get(key).get(7).split(" ")[0];
+                for (String id : indiHash.keySet())
+                {
+                    if (id.equals(tempSiblingID))
+                    {
+                        surname = indiHash.get(id).get(1).split(" ")[1];
+                    }
+                }
+
+            }
+            if (!famHash.get(key).get(7).equals(""))
+            {
+                String[] siblingIDs = famHash.get(key).get(7).split(" ");
+                for (String s : siblingIDs)
+                {
+                    for (String key1 : indiHash.keySet())
+                    {
+                        if (key1.equals(s))
+                        {
+                            if (indiHash.get(key1).get(2).equals("M"))
+                            {
+                                if (!indiHash.get(key1).get(1).split(" ")[1].equals(surname))
+                                {
+                                    System.out.println("ERROR US16: FAMILY " + key + " : Males in the family should have same last name!");
+                                    System.out.println("CONFLICTING LAST NAMES: " + surname + " & " + indiHash.get(key1).get(1).split(" ")[1]);
+                                    System.out.println();
+                                    res.add("INCORRECT");
+                                } else
+                                {
+                                    res.add("CORRECT");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return res;
+    }
+
+    ArrayList<String> uniqueFirstNames(HashMap<String, ArrayList<String>> famHash, HashMap<String, ArrayList<String>> indiHash)
+    {
+        System.out.println("\n====================== Manan's User story US25:Unique First Names in Families ======================");
+        indiHash.remove("");
+        famHash.remove("");
+        ArrayList<String> res = new ArrayList<>();
+        HashMap<String, String> tempHash = new HashMap<>();
+        for (String key : famHash.keySet())
+        {
+            if (!famHash.get(key).get(7).equals(""))
+            {
+                String[] childIDs = famHash.get(key).get(7).split(" ");
+
+                String childname = "";
+                String childDOB = "";
+                int i = 0;
+                if (childIDs.length > 1)
+                {
+
+                    for (String s : childIDs)
+                    {
+                        for (String key1 : indiHash.keySet())
+                        {
+                            if (key1.equals(s))
+                            {
+
+                                if (tempHash.containsKey(indiHash.get(key1).get(1)))
+                                {
+
+                                    if (indiHash.get(key1).get(3).equals(tempHash.get(indiHash.get(key1).get(1))))
+                                    {
+                                        System.out.println("ERROR US25: FAMILY: " + key + ": No more than one child with the same name and birth date should appear in a family!");
+                                        System.out.println("SAME CHILD NAME: " + indiHash.get(key1).get(1) + " \tSAME BIRTH DATE: " + indiHash.get(key1).get(3));
+                                        System.out.println();
+                                        res.add("INCORRECT");
+                                    } else
+                                    {
+                                        res.add("CORRECT");
+                                    }
+
+                                } else
+                                {
+                                    tempHash.put(indiHash.get(key1).get(1), indiHash.get(key1).get(3));
+                                }
+                            }
+                        }
+                    }
+                } else
+                {
+                    System.out.println("CORRECT hai");
+                    res.add("CORRECT");
+                }
+            }
+        }
+        return res;
+    }
+
     public String dateCal(String firstFromList, String secondFromList)
     {
         String result = "";
@@ -316,7 +428,4 @@ public class Manan
 //        
 //
 //    }
-
-    
-
 }

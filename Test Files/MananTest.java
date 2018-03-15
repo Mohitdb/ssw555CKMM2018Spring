@@ -179,7 +179,7 @@ public class MananTest
         ArrayList<String> tempArrayList5 = new ArrayList<>();
         ArrayList<String> tempArrayList6 = new ArrayList<>();
         ArrayList<String> tempArrayList7 = new ArrayList<>();
-
+        
         tempArrayList1.add("1");
         tempArrayList1.add("A");
         tempArrayList1.add("M");
@@ -248,6 +248,196 @@ public class MananTest
         };
         ageFromFunction = instance.siblingsByAge(hashFam, hashIndi);
         Assert.assertArrayEquals(ageFromFunction, expected);
+    }
+    
+    @Test
+    public void testMalesLastNames()
+    {
+        HashMap<String, ArrayList<String>> hashIndi = new HashMap<>();
+        ArrayList<String> tempArrayList1 = new ArrayList<>();
+        ArrayList<String> tempArrayList2 = new ArrayList<>();
+        ArrayList<String> tempArrayList3 = new ArrayList<>();
+        ArrayList<String> tempArrayList4 = new ArrayList<>();
+        ArrayList<String> tempArrayList5 = new ArrayList<>();
+        ArrayList<String> tempArrayList6 = new ArrayList<>();
+        ArrayList<String> tempArrayList7 = new ArrayList<>();
+        ArrayList<String> tempArrayList8 = new ArrayList<>();
+        
+        tempArrayList1.add("1");
+        tempArrayList1.add("Mahesh Shah");
+        tempArrayList1.add("M");
+        tempArrayList1.add("");
+        tempArrayList1.add("");
+        tempArrayList1.add("");
+        hashIndi.put("1", tempArrayList1);
+
+        tempArrayList2.add("2");
+        tempArrayList2.add("Madhav Shah");
+        tempArrayList2.add("M");
+        tempArrayList2.add("");
+        tempArrayList2.add("");
+        tempArrayList2.add("");
+        hashIndi.put("2", tempArrayList2);
+
+        tempArrayList3.add("3");
+        tempArrayList3.add("Mohak Mehta");
+        tempArrayList3.add("M");
+        tempArrayList3.add("");
+        tempArrayList3.add("");
+        tempArrayList3.add("");
+        hashIndi.put("3", tempArrayList3);
+
+        tempArrayList4.add("4");
+        tempArrayList4.add("Adam Doshi");
+        tempArrayList4.add("M");
+        tempArrayList4.add("");
+        tempArrayList4.add("");
+        tempArrayList4.add("11");
+        hashIndi.put("4", tempArrayList4);
+
+        tempArrayList5.add("5");
+        tempArrayList5.add("Jake Doshi");
+        tempArrayList5.add("M");
+        tempArrayList5.add("");
+        tempArrayList5.add("");
+        tempArrayList5.add("50");
+        hashIndi.put("5", tempArrayList5);
+
+        tempArrayList6.add("6");
+        tempArrayList6.add("Smith Williams");
+        tempArrayList6.add("M");
+        tempArrayList6.add("");
+        tempArrayList6.add("");
+        tempArrayList6.add("");
+        hashIndi.put("6", tempArrayList6);
+        
+        tempArrayList7.add("F1");
+        tempArrayList7.add("1");
+        tempArrayList7.add("Mahesh Shah");
+        tempArrayList7.add("");
+        tempArrayList7.add("");
+        tempArrayList7.add("");
+        tempArrayList7.add("");
+        tempArrayList7.add("2 3");
+        HashMap<String, ArrayList<String>> hashFam = new HashMap<>();
+        hashFam.put("F1", tempArrayList7);
+        
+        tempArrayList8.add("F2");
+        tempArrayList8.add("4");
+        tempArrayList8.add("Adam Doshi");
+        tempArrayList8.add("");
+        tempArrayList8.add("");
+        tempArrayList8.add("");
+        tempArrayList8.add("");
+        tempArrayList8.add("5 6");
+        hashFam.put("F2", tempArrayList7);
+        
+        ArrayList<String> actual=instance.maleLastNames(hashFam, hashIndi);
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("CORRECT");
+        expected.add("INCORRECT");
+        expected.add("CORRECT");
+        expected.add("INCORRECT");
+
+        Assert.assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void testUniqueFirstNames()
+    {
+        HashMap<String, ArrayList<String>> hashIndi = new HashMap<>();
+        ArrayList<String> tempArrayList1 = new ArrayList<>();
+        ArrayList<String> tempArrayList2 = new ArrayList<>();
+        ArrayList<String> tempArrayList3 = new ArrayList<>();
+        ArrayList<String> tempArrayList4 = new ArrayList<>();
+        ArrayList<String> tempArrayList5 = new ArrayList<>();
+        ArrayList<String> tempArrayList6 = new ArrayList<>();
+        ArrayList<String> tempArrayList7 = new ArrayList<>();
+        ArrayList<String> tempArrayList8 = new ArrayList<>();
+        ArrayList<String> tempArrayList9 = new ArrayList<>();
+        
+        tempArrayList1.add("1");
+        tempArrayList1.add("Mahesh Shah");
+        tempArrayList1.add("M");
+        tempArrayList1.add("");
+        tempArrayList1.add("");
+        tempArrayList1.add("");
+        hashIndi.put("1", tempArrayList1);
+
+        tempArrayList2.add("2");
+        tempArrayList2.add("Madhav Shah");
+        tempArrayList2.add("M");
+        tempArrayList2.add("1 FEB 1996");
+        tempArrayList2.add("");
+        tempArrayList2.add("");
+        hashIndi.put("2", tempArrayList2);
+
+        tempArrayList3.add("3");
+        tempArrayList3.add("Madhav Shah");
+        tempArrayList3.add("M");
+        tempArrayList3.add("2 FEB 1996");
+        tempArrayList3.add("");
+        tempArrayList3.add("");
+        hashIndi.put("3", tempArrayList3);
+
+        tempArrayList4.add("4");
+        tempArrayList4.add("Adam Doshi");
+        tempArrayList4.add("M");
+        tempArrayList4.add("");
+        tempArrayList4.add("");
+        tempArrayList4.add("");
+        hashIndi.put("4", tempArrayList4);
+
+        tempArrayList5.add("5");
+        tempArrayList5.add("Jake Blanc");
+        tempArrayList5.add("M");
+        tempArrayList5.add("25 AUG 2001");
+        tempArrayList5.add("");
+        tempArrayList5.add("");
+        hashIndi.put("5", tempArrayList5);
+
+        tempArrayList6.add("6");
+        tempArrayList6.add("Smith Williams");
+        tempArrayList6.add("M");
+        tempArrayList6.add("");
+        tempArrayList6.add("");
+        tempArrayList6.add("45");
+        hashIndi.put("6", tempArrayList6);
+        
+        tempArrayList7.add("7");
+        tempArrayList7.add("Jake Blanc");
+        tempArrayList7.add("M");
+        tempArrayList7.add("25 AUG 2001");
+        tempArrayList7.add("");
+        tempArrayList7.add("");
+        hashIndi.put("7", tempArrayList7);
+        
+        tempArrayList8.add("F1");
+        tempArrayList8.add("1");
+        tempArrayList8.add("Mahesh Shah");
+        tempArrayList8.add("");
+        tempArrayList8.add("");
+        tempArrayList8.add("");
+        tempArrayList8.add("");
+        tempArrayList8.add("2 3");
+        HashMap<String, ArrayList<String>> hashFam = new HashMap<>();
+        hashFam.put("F1", tempArrayList8);
+        
+        tempArrayList9.add("F2");
+        tempArrayList9.add("4");
+        tempArrayList9.add("Adam Doshi");
+        tempArrayList9.add("");
+        tempArrayList9.add("");
+        tempArrayList9.add("");
+        tempArrayList9.add("");
+        tempArrayList9.add("5 6 7");
+        hashFam.put("F2", tempArrayList9);
+        
+        ArrayList<String> actual=instance.uniqueFirstNames(hashFam, hashIndi);
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("CORRECT");
+        expected.add("INCORRECT");
+        Assert.assertEquals(expected, actual);
     }
 
 }

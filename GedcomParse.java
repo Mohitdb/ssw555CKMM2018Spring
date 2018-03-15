@@ -48,14 +48,14 @@ public class GedcomParse
         //read file
         // TODO: Change path for our testing file
         String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\sprint2.ged";
-        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\Manan\\mananSprint1and2.ged";
+        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\Manan\\mananSprint3.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\Sprint1.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\GitHub Here\\ssw555CKMM2018Spring\\Gedcom Files\\KaranSprint2.ged";
         
 //       FileReader fileReader = new FileReader(karanPath);
-//        FileReader fileReader = new FileReader(mananPath);
+        FileReader fileReader = new FileReader(mananPath);
 //        FileReader fileReader = new FileReader(mohitPath);
-       FileReader fileReader = new FileReader(carolinePath);
+//       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         System.out.println("******************** Karan's User story US21: Correct Gender for Role ********************");
@@ -377,6 +377,8 @@ public class GedcomParse
         ArrayList<String> resMarriageBeforeDeath=m.mariageBeforeDivorce(famHash);
         String resLessThan150 =m.lessThan150(indiHash);
         int [] resSiblingsByAge=m.siblingsByAge(famHash, indiHash);
+        ArrayList<String> resMaleLastNames=m.maleLastNames(famHash,indiHash);
+        ArrayList<String> resUniqueFirstNames=m.uniqueFirstNames(famHash,indiHash);
 
         //--------------------------Karans Space----------------------------
         MarriedAfterDeath md = new MarriedAfterDeath();
