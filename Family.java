@@ -25,7 +25,7 @@ public class Family
 		wifeID = "";
 		wifeName = "";
 		children = new ArrayList<String>();
-                childIDs="";
+        childIDs="";
 	}
 
 	public String getFamID() {

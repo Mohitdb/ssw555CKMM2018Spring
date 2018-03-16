@@ -80,11 +80,13 @@ public class MarriedAfterDeath {
 									deathDate = simpleDateFormat.parse(formattedDeathDate);
 									
 									marriageDeathComparison(marriageDate, deathDate, indiInfo.get(1), indiInfo.get(0));
+									
 								}
 								
 								catch (ParseException e) 
 								{
 									e.printStackTrace();
+									
 								}
 							}
 						}
@@ -95,7 +97,6 @@ public class MarriedAfterDeath {
 			}
 		}
 	
-		
 	}
 	
 	public static String dateNumber(String monthName)

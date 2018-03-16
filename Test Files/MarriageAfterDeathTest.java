@@ -175,6 +175,12 @@ class MarriageAfterDeathTest {
 
 		//System.out.println(id2);
 		
+		int expected = 0;
+		
+		int res = md.marriageAfterDeath(indiHash, famHash);
+		
+		assertEquals(res, expected);
+		
 	}
 
 }

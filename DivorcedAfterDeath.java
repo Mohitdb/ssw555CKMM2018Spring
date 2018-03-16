@@ -77,6 +77,7 @@ public class DivorcedAfterDeath {
 									deathDate = simpleDateFormat.parse(formattedDeathDate);
 									
 									divorcedDeathComparison(divorcedDate, deathDate, indiInfo.get(1), indiInfo.get(0));
+									
 								}
 								
 								catch (ParseException e) 
@@ -90,6 +91,7 @@ public class DivorcedAfterDeath {
 					
 				}
 			}
+		
 		}
 		
 	
