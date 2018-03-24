@@ -311,7 +311,7 @@ public class Manan
                     }
                 } else
                 {
-                    System.out.println("CORRECT hai");
+                    //System.out.println("CORRECT hai");
                     res.add("CORRECT");
                 }
             }
