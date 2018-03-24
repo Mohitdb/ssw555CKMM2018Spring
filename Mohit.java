@@ -202,7 +202,7 @@ public class Mohit {
         int r=0;
         System.out.println("\n\n=>Mohit Sprint 2 User Story 22: UniqueIDs");
         try {
-            for (int i = 0; i < indid.length; i++) {
+            for (int i = 0; i < indid.length-1; i++) {
                 for (int j = i + 1; j < indid.length; j++) {
                     if (indid[i].equals(indid[j])) {
                         dup[m++]=indid[i];
@@ -221,8 +221,12 @@ public class Mohit {
             r++;
         }
         m=0;
+        for(int q=0;q<dup.length;q++)
+        {
+            dup[q]=null;
+        }
         try {
-            for (int k = 0; k < famid.length; k++) {
+            for (int k = 0; k < famid.length-1; k++) {
                 for (int l = k + 1; l < famid.length; l++) {
 
                     if (famid[k].equals(famid[l])) {
@@ -235,9 +239,9 @@ public class Mohit {
         }
         Set<String> mySet2 = new HashSet<String>(Arrays.asList(dup));
         mySet2.remove(null);
-        for (String temp : mySet2) {
-           System.out.println("ERROR: US22: Family ID: " + temp + " is not unique");
-           res[r]=temp;
+        for (String temp2 : mySet2) {
+           System.out.println("ERROR: US22: Family ID: " + temp2 + " is not unique");
+           res[r]=temp2;
            r++;
         }
         String temp[]=new String[r];
@@ -283,6 +287,39 @@ public class Mohit {
            System.out.println("ANOMALY: US23: Name - " + temp.substring(0,temp.indexOf("\t")) + " and Birth Date - "+temp.substring(temp.indexOf("\t")+1)+" together occur more than once. Hence, not unique.");
            res[r]=temp;
            r++;
+        }
+        String temp[]=new String[r];
+        for(int l=0;l<r;l++)
+        {
+            temp[l]=res[l];
+        }
+        return temp;
+    }
+    public String[] siblingsShouldNotMarry(HashMap<String, ArrayList<String>> famHashmap)
+    {
+        System.out.println("\n\n=>Mohit Sprint 3 User Story 18: Siblings should not marry");
+        int r=0;
+        String res[]=new String[256];
+        for (String key : famHashmap.keySet()) {
+            famvalues = famHashmap.get(key);
+            String[] child = famvalues.get(7).split(" ");
+            if(child.length>1)
+            {
+                for(int i=0;i<child.length-1;i++)
+                {
+                    for(int j=i+1;j<child.length;j++)
+                    {
+                        for(String key2: famHashmap.keySet()){
+                            famvalues=famHashmap.get(key2);
+                            if((child[i].matches(famvalues.get(1))&& child[j].matches(famvalues.get(3))) || ((child[j].matches(famvalues.get(1))&& child[i].matches(famvalues.get(3)))))
+                            {
+                                System.out.println("ERROR: US18: Siblings with IDs "+child[i]+" "+child[j]+" are married");
+                                res[r++]=child[i]+"\t"+child[j];
+                            }
+                        }
+                    }
+                }
+            }
         }
         String temp[]=new String[r];
         for(int l=0;l<r;l++)
