@@ -50,7 +50,7 @@ public class GedcomParse
         String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\sprint2.ged";
         String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\Manan\\mananSprint3.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\Sprint1.ged";
-        String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\GitHub Here\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\sprint2.ged";
+        String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\GitHub Here\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\KaranSprint3.ged";
         
        FileReader fileReader = new FileReader(karanPath);
 //        FileReader fileReader = new FileReader(mananPath);
