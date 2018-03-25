@@ -119,9 +119,6 @@ public class MohitTest {
         String familyid[]=new String[]{"F1","F2","F3","F4","F1","F3","F7"};
         String expected1[]=new String[]{"I1","I2","F1","F3"};
         String res[]=m.uniqueIDs(indid, familyid);
-        for (String re : res) {
-            System.out.println(re);
-        }
         Assert.assertArrayEquals(expected1,res);
     }
     //test for unique name and birthdate
@@ -156,6 +153,87 @@ public class MohitTest {
         String expected1[]=new String[]{"DAVID"+"\t"+"1 JUN 1980"};
         String res[]=m.uniquenamebirthdate(individual);
         //res2=m.marriageAfter14(individual, family);
+        Assert.assertArrayEquals( expected1, res);
+    }
+    
+    @Test
+    public void testsiblingsShouldNotMarry()
+    {
+        Mohit m=new Mohit();
+        String familyid[]=new String[]{"F1","F2","F3"};
+        String husbid[]=new String[]{"I1","I3","I5"};
+        String husbname[]=new String[]{"DAVID","JON","STEVE"};
+        String wifeid[]=new String[]{"I2","I4","I6"};
+        String wifename[]=new String[]{"JANICE","PREETI","SASHA"};
+        String marrdate[]=new String[]{"1 JUN 1990","","20 JUL 2005"};
+        String divdate[]=new String[]{"","15 JUL 2010",""};
+        String childID[]=new String[]{"I3 I4 I5 I6","",""};
+        String expected1[]=new String[]{"I3"+"\t"+"I4","I5\tI6"};
+        HashMap<String, ArrayList<String>> family = new HashMap<>();
+        ArrayList<String> famvalues=new ArrayList<>();
+        for(int i=0;i<3;i++)
+        {
+            famvalues.clear();
+            famvalues.add(familyid[i]);
+            famvalues.add(husbid[i]);
+            famvalues.add(husbname[i]);
+            famvalues.add(wifeid[i]);
+            famvalues.add(wifename[i]);
+            famvalues.add(marrdate[i]);
+            famvalues.add(divdate[i]);
+            famvalues.add(childID[i]);
+            family.put(familyid[i], new ArrayList(famvalues));
+        }
+        String res[]=m.siblingsShouldNotMarry(family);
+        Assert.assertArrayEquals( expected1, res);
+    }
+    
+    @Test
+    public void testrejectIllegitimateDates()
+    {
+        HashMap<String, ArrayList<String>> individual = new HashMap<>();
+        HashMap<String, ArrayList<String>> family = new HashMap<>();
+        ArrayList<String> famvalues=new ArrayList<>();
+        ArrayList<String> indivalues=new ArrayList<>();
+        Mohit m=new Mohit();
+        String indid[]=new String[]{"I1","I2","I3","I4","I5","I6"};
+        String indname[]=new String[]{"DAVID","JANICE","JON","PREETI","STEVE","SASHA"};
+        String indgender[]=new String[]{"M","F","M","F","M","F"};
+        String indbdate[]=new String[]{"29 FEB 1981","29 FEB 1980","3 JUL 2000","4 NOV 2000","21 JUL 2006","20 JUN 2007"};
+        String indisalive[]=new String[]{"true","true","true","true","true","true"};
+        String indddate[]=new String[]{"","","","","",""};
+        String familyid[]=new String[]{"F1","F2","F3"};
+        String husbid[]=new String[]{"I1","I3","I5"};
+        String husbname[]=new String[]{"DAVID","JON","STEVE"};
+        String wifeid[]=new String[]{"I2","I4","I6"};
+        String wifename[]=new String[]{"JANICE","PREETI","SASHA"};
+        String marrdate[]=new String[]{"31 JUN 1990","","20 JUL 2005"};
+        String divdate[]=new String[]{"","32 JUL 2010",""};
+        String expected1[]=new String[]{"I1\t29 FEB 1981","F1\t31 JUN 1990","F2\t32 JUL 2010"};
+        for(int i=0;i<6;i++)
+        {
+            indivalues.clear();
+            indivalues.add(indid[i]);
+            indivalues.add(indname[i]);
+            indivalues.add(indgender[i]);
+            indivalues.add(indbdate[i]);
+            indivalues.add(indisalive[i]);
+            indivalues.add(indddate[i]);
+            individual.put(indid[i], new ArrayList(indivalues));
+        }
+        for(int i=0;i<3;i++)
+        {
+            famvalues.clear();
+            famvalues.add(familyid[i]);
+            famvalues.add(husbid[i]);
+            famvalues.add(husbname[i]);
+            famvalues.add(wifeid[i]);
+            famvalues.add(wifename[i]);
+            famvalues.add(marrdate[i]);
+            famvalues.add(divdate[i]);
+            family.put(familyid[i], new ArrayList(famvalues));
+        }
+        String res[]=m.rejectIllegitimateDates(individual,family);
         Assert.assertArrayEquals( expected1, res);
     }
     
