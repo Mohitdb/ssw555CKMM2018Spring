@@ -328,4 +328,100 @@ public class Mohit {
         }
         return temp;
     }
+    
+    public boolean checkDate(String s){
+        try{
+            s=s.trim();
+        if(!s.matches("")){
+            
+            if(s.contains("NA"))
+            {
+                return true;
+            }
+            
+        String temp[]=s.split(" ");
+        if((temp[1].matches("JAN"))||(temp[1].matches("MAR"))||(temp[1].matches("MAY"))||(temp[1].matches("JUL"))||(temp[1].matches("AUG"))||(temp[1].matches("OCT"))||(temp[1].matches("DEC")))
+            {
+                if(Integer.parseInt(temp[0])>31)
+                {
+                    return false;
+                }
+            }
+        else if((temp[1].matches("APR"))||(temp[1].matches("JUN")||(temp[1].matches("SEP"))||(temp[1].matches("NOV"))))
+            {
+                if(Integer.parseInt(temp[0])>30)
+                {
+                    return false;
+                }
+            }
+        else if(temp[1].matches("FEB")){
+            {
+                if(Integer.parseInt(temp[2])%4==0)
+                {
+                    if(Integer.parseInt(temp[0])>29)
+                    {
+                        return false;
+                    }
+                }
+                else{
+                    if(Integer.parseInt(temp[0])>28)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+        }
+        }
+        catch(ArrayIndexOutOfBoundsException ae)
+        {
+            
+        }
+        return true;
+    }
+    
+    public String[] rejectIllegitimateDates(HashMap<String, ArrayList<String>> indiHashmap,HashMap<String, ArrayList<String>> famHashmap)
+    {
+        int r=0;
+        String res[]=new String[256];
+        System.out.println("\n\n=>Mohit Sprint 3 User Story 42: Reject Illegitimate Dates");
+        for (String key : indiHashmap.keySet()) {
+            indivalues=indiHashmap.get(key);
+            boolean bdate=checkDate(indivalues.get(3));
+            if(bdate==false)
+            {
+                System.out.println("ERROR: US42: Individual ID "+indivalues.get(0)+" has birth date "+indivalues.get(3)+" which is illegitimate");
+                res[r++]=indivalues.get(0)+"\t"+indivalues.get(3);
+            }
+            boolean ddate=checkDate(indivalues.get(4));
+            if(ddate==false)
+            {
+                System.out.println("ERROR: US42: Individual ID "+indivalues.get(0)+" has death date "+indivalues.get(4)+" which is illegitimate");
+                res[r++]=indivalues.get(0)+"\t"+indivalues.get(4);
+            }
+        }
+        for (String key : famHashmap.keySet()) {
+            famvalues=famHashmap.get(key);
+            boolean mdate=checkDate(famvalues.get(5));
+            if(mdate==false)
+            {
+                System.out.println("ERROR: US42: Family ID "+famvalues.get(0)+" has marriage date "+famvalues.get(5)+" which is illegitimate");
+                res[r++]=famvalues.get(0)+"\t"+famvalues.get(5);
+            }
+            boolean divdate=checkDate(famvalues.get(6));
+            if(divdate==false)
+            {
+                System.out.println("ERROR: US42: Family ID "+famvalues.get(0)+" has divorce date "+famvalues.get(6)+" which is illegitimate");
+                res[r++]=famvalues.get(0)+"\t"+famvalues.get(6);
+            }
+            
+        }
+        String temp[]=new String[r];
+        for(int l=0;l<r;l++)
+        {
+            temp[l]=res[l];
+        }
+        return temp;
+    }
+    
 }
