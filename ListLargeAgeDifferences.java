@@ -34,6 +34,10 @@ public class ListLargeAgeDifferences {
 	public void ageDifferencesCompare() 
 	{
 		ArrayList<String> famInfo = new ArrayList<String>();
+		String [] mDate;
+		String monthNumber;
+		String formattedMarriageDate;
+		Date wedding = new Date();
 		
 		for (String famKey : this.famHash.keySet())
 		{
@@ -42,31 +46,52 @@ public class ListLargeAgeDifferences {
 			String hID = famInfo.get(1);
 			String wID = famInfo.get(3);
 			
-			husAge = findAgeWhenMarried(hID, famInfo.get(5));
-				
-			wifeAge = findAgeWhenMarried(wID, famInfo.get(5));
-				
 			String husName = famInfo.get(2);
-				
 			String wifeName = famInfo.get(4);
-						
-			comparison = birthDateComparison(wifeAge, husAge);
-						
-			difference = returnAgeDifference(wifeAge, husAge);
-						
-			if (comparison.equals("Wife Too Old!"))
+			
+			String marriedDate = famInfo.get(5);
+			
+			mDate = marriedDate.split(" ");
+			
+			monthNumber = dateNumber(mDate[1]);
+			
+			formattedMarriageDate = mDate[2] + "-" + monthNumber + "-" + mDate[0];
+			
+			try 
 			{
-				System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + wifeName + " is more than double the age of " + husName + "!");
+				wedding = simpleDateFormat.parse(formattedMarriageDate);
+				
+
+				husAge = findAgeWhenMarried(hID, wedding);
+					
+				wifeAge = findAgeWhenMarried(wID, wedding);
+				
+				
+				comparison = birthDateComparison(wifeAge, husAge);
+							
+				difference = returnAgeDifference(wifeAge, husAge);
+							
+				if (comparison.equals("Wife Too Old!"))
+				{
+					System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + wifeName + " is more than double the age of " + husName + "!");
+				}
+							
+				if (comparison.equals("Hus Too Old!"))
+				{
+					System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + husName + " is more than double the age of " + wifeName + "!");
+				}
+				
 			}
-						
-			if (comparison.equals("Hus Too Old!"))
+			
+			catch (ParseException e)
 			{
-				System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + husName + " is more than double the age of " + wifeName + "!");
+				e.printStackTrace();
 			}
+			
 		}
 	}
 	
-	public int findAgeWhenMarried(String Id, String marriedDate)
+	public int findAgeWhenMarried(String Id, Date marriedDate)
 	{
 		ArrayList<String> indiInfo = new ArrayList<String>();
 		int Age = 0;
@@ -75,11 +100,6 @@ public class ListLargeAgeDifferences {
 		String month;
 		String formattedBirthDate;
 		Date birthday;
-		
-		String [] mDate;
-		String monthNumber;
-		String formattedMarriageDate;
-		Date wedding;
 		
 		for (String indiKey : this.indiHash.keySet())
 		{
@@ -90,20 +110,16 @@ public class ListLargeAgeDifferences {
 				bDate = indiInfo.get(3);
 				
 				birthDate = bDate.split(" ");
-				mDate = marriedDate.split(" ");
 				
 				month = dateNumber(birthDate[1]);
-				monthNumber = dateNumber(mDate[1]);
 				
 				formattedBirthDate = birthDate[2] + "-" + month + "-" + birthDate[0];
-				formattedMarriageDate = mDate[2] + "-" + monthNumber + "-" + mDate[0];
 				
 				try 
 				{
 					birthday = simpleDateFormat.parse(formattedBirthDate);
-					wedding = simpleDateFormat.parse(formattedMarriageDate);
 					
-					double diff = Math.abs(wedding.getTime() - birthday.getTime());
+					double diff = Math.abs(marriedDate.getTime() - birthday.getTime());
 					
 					double age = diff / MillToYear;
 					
