@@ -399,6 +399,9 @@ public class GedcomParse
         
         //--------------------------Carolines Space-------------------------
         
+        Siblings sb = new Siblings(famHash, indiHash);
+        sb.checkSiblings();
+        sb.listMultBirths();
         
         
         
