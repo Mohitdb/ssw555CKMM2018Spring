@@ -39,10 +39,6 @@ public class ParentsNotTooOld {
 		{
 			famInfo = this.famHash.get(famKey);
 			
-			for (String indiKey : this.indiHash.keySet())
-			{
-				
-				indiInfo = this.indiHash.get(indiKey);
 				
 				children = famInfo.get(7);
 				String hID = famInfo.get(1);
@@ -52,51 +48,66 @@ public class ParentsNotTooOld {
 				
 				youngestChild = findYoungest(childIds, indiHash);
 				
-				if (indiKey.equals(youngestChild))
+				String fatherName = famInfo.get(2);
+				
+				String motherName = famInfo.get(4);
+				
+				childAge = findAgeFromIndi(youngestChild);
+				
+				motherAge = findAgeFromIndi(wID);
+				
+				fatherAge = findAgeFromIndi(hID);
+				
+				String comparison = parentChildAgeCompare(childAge, motherAge, fatherAge);
+				
+				
+				
+				int motherChild = motherChildDiff(childAge, motherAge);
+				int fatherChild = fatherChildDiff(childAge, fatherAge);
+				
+				if (comparison.equals("Child is older than Mother!"))
 				{
-					childAge = Integer.valueOf(indiInfo.get(5));
-					
-					if (indiKey.equals(hID))
-					{
-						fatherAge = Integer.valueOf(indiInfo.get(5));
-						String fatherName = famInfo.get(2);
-						
-						if (indiKey.equals(wID))
-						{
-							motherAge = Integer.valueOf(indiInfo.get(5));
-							String motherName = famInfo.get(4);
-							
-							comparison = parentChildAgeCompare(childAge, motherAge, fatherAge);
-							
-							int motherChild = motherChildDiff(childAge, motherAge);
-							int fatherChild = fatherChildDiff(childAge, fatherAge);
-							
-							if (comparison.equals("Child is older than Mother!"))
-							{
-								System.out.println("Error: Individual " + wID + " named " + motherName + " is younger than her children!");
-							}
-							
-							if (comparison.equals("Child is older than Father!"))
-							{
-								System.out.println("Error: Individual " + hID + " named " + fatherName + " is younger than his children!");
-							}
-							
-							if (comparison.equals("Mother is 60 years older than child!"))
-							{
-								System.out.println("Error: Individual " + wID + " named " + motherName + " is " + motherChild + " years older than her youngest child!");
-							}
-							
-							if (comparison.equals("Father is 80 years older than child!"))
-							{
-								System.out.println("Error: Individual " + hID + " named " + fatherName + " is " + fatherChild + " years older than his youngest child!");
-							}
-						}
-					}
+					System.out.println("Error: Individual " + wID + " named " + motherName + " is younger than her children!");
 				}
-			}
-	}
-
+				
+				if (comparison.equals("Child is older than Father!"))
+				{
+					System.out.println("Error: Individual " + hID + " named " + fatherName + " is younger than his children!");
+				}
+				
+				if (comparison.equals("Mother is 60 years older than child!"))
+				{
+					System.out.println("Error: Individual " + wID + " named " + motherName + " is " + motherChild + " years older than her youngest child!");
+				}
+				
+				if (comparison.equals("Father is 80 years older than child!"))
+				{
+					System.out.println("Error: Individual " + hID + " named " + fatherName + " is " + fatherChild + " years older than his youngest child!");
+				}
+		}
 }
+	
+	public int findAgeFromIndi(String Id)
+	{
+		ArrayList<String> indiInfo = new ArrayList<String>();
+		int Age = 0;
+		
+		for (String indiKey : this.indiHash.keySet())
+		{
+			
+			indiInfo = this.indiHash.get(indiKey);
+
+			if (indiKey.equals(Id))
+			{
+				Age = Integer.valueOf(indiInfo.get(5));
+				
+				return Age;
+			}
+		}
+		
+		return Age;
+		
+	}
 	
 	public String findYoungest(String[] childIds, HashMap<String, ArrayList<String>> indiHash)
 	{
