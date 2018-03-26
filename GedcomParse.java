@@ -380,7 +380,7 @@ public class GedcomParse
         String resBirthBeforeDeath = m.birthBeforeDeath(indiHash);
         ArrayList<String> resMarriageBeforeDeath=m.mariageBeforeDivorce(famHash);
         String resLessThan150 =m.lessThan150(indiHash);
-        int [] resSiblingsByAge=m.siblingsByAge(famHash, indiHash);
+//        int [] resSiblingsByAge=m.siblingsByAge(famHash, indiHash);
         ArrayList<String> resMaleLastNames=m.maleLastNames(famHash,indiHash);
         ArrayList<String> resUniqueFirstNames=m.uniqueFirstNames(famHash,indiHash);
 
