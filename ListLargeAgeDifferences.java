@@ -14,6 +14,9 @@ public class ListLargeAgeDifferences {
 	int wifeAge;
 	String comparison;
 	int difference;
+	SimpleDateFormat simpleDateFormat =  new SimpleDateFormat("yyyy-MM-dd");
+	
+	static Double MillToYear = 24.0 * 60.0 * 60.0 * 1000.0 * 365.0;
 	
 	private HashMap<String, ArrayList<String>> indiHash = new HashMap<>();
 	private HashMap<String, ArrayList<String>> famHash = new HashMap<>();
@@ -30,48 +33,94 @@ public class ListLargeAgeDifferences {
 	
 	public void ageDifferencesCompare() 
 	{
-		ArrayList<String> indiInfo = new ArrayList<String>();
 		ArrayList<String> famInfo = new ArrayList<String>();
 		
 		for (String famKey : this.famHash.keySet())
 		{
 			famInfo = this.famHash.get(famKey);
+	
+			String hID = famInfo.get(1);
+			String wID = famInfo.get(3);
 			
-			for (String indiKey : this.indiHash.keySet())
+			husAge = findAgeWhenMarried(hID, famInfo.get(5));
+				
+			wifeAge = findAgeWhenMarried(wID, famInfo.get(5));
+				
+			String husName = famInfo.get(2);
+				
+			String wifeName = famInfo.get(4);
+						
+			comparison = birthDateComparison(wifeAge, husAge);
+						
+			difference = returnAgeDifference(wifeAge, husAge);
+						
+			if (comparison.equals("Wife Too Old!"))
 			{
-				indiInfo = this.indiHash.get(indiKey);
-				
-				String hID = famInfo.get(1);
-				String wID = famInfo.get(3);
-				
-				if (indiKey.equals(hID))
-				{
-					husAge = Integer.valueOf(indiInfo.get(5));
-					String husName = famInfo.get(2);
-					
-					if (indiKey.equals(wID))
-					{
-						wifeAge = Integer.valueOf(indiInfo.get(5));
-						String wifeName = famInfo.get(4);
+				System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + wifeName + " is more than double the age of " + husName + "!");
+			}
 						
-						comparison = birthDateComparison(wifeAge, husAge);
-						
-						difference = returnAgeDifference(wifeAge, husAge);
-						
-						if (comparison.equals("Wife Too Old!"))
-						{
-							System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + wifeName + " is more than double the age of " + husName + "!");
-						}
-						
-						if (comparison.equals("Hus Too Old!"))
-						{
-							System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + husName + " is more than double the age of " + wifeName + "!");
-						}
-					}
-				}
-				
+			if (comparison.equals("Hus Too Old!"))
+			{
+				System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + husName + " is more than double the age of " + wifeName + "!");
 			}
 		}
+	}
+	
+	public int findAgeWhenMarried(String Id, String marriedDate)
+	{
+		ArrayList<String> indiInfo = new ArrayList<String>();
+		int Age = 0;
+		String bDate;
+		String [] birthDate;
+		String month;
+		String formattedBirthDate;
+		Date birthday;
+		
+		String [] mDate;
+		String monthNumber;
+		String formattedMarriageDate;
+		Date wedding;
+		
+		for (String indiKey : this.indiHash.keySet())
+		{
+			indiInfo = this.indiHash.get(indiKey);
+			
+			if (indiKey.equals(Id))
+			{
+				bDate = indiInfo.get(3);
+				
+				birthDate = bDate.split(" ");
+				mDate = marriedDate.split(" ");
+				
+				month = dateNumber(birthDate[1]);
+				monthNumber = dateNumber(mDate[1]);
+				
+				formattedBirthDate = birthDate[2] + "-" + month + "-" + birthDate[0];
+				formattedMarriageDate = mDate[2] + "-" + monthNumber + "-" + mDate[0];
+				
+				try 
+				{
+					birthday = simpleDateFormat.parse(formattedBirthDate);
+					wedding = simpleDateFormat.parse(formattedMarriageDate);
+					
+					double diff = Math.abs(wedding.getTime() - birthday.getTime());
+					
+					double age = diff / MillToYear;
+					
+					Age = (int) age;
+					
+					return Age;
+				}
+				
+				catch (ParseException e)
+				{
+					e.printStackTrace();
+					return 0;
+				}
+			}
+		}
+		
+		return Age;
 	}
 	
 	public String birthDateComparison(int wifeAge, int husAge)
@@ -104,5 +153,38 @@ public class ListLargeAgeDifferences {
 		diff = Math.abs(wifeAge - husAge);
 		
 		return diff;
+	}
+	
+	public static String dateNumber(String monthName)
+	{
+		switch (monthName)
+		{
+			case "JAN":
+				return "01";
+			case "FEB":
+				return "02";
+			case "MAR":
+				return "03";
+			case "APR":
+				return "04";
+			case "MAY":
+				return "05";
+			case "JUN":
+				return "06";
+			case "JUL":
+				return "07";
+			case "AUG":
+				return "08";
+			case "SEP":
+				return "09";
+			case "OCT":
+				return "10";
+			case "NOV":
+				return "11";
+			case "DEC":
+				return "12";
+			default:
+				return "00";
+		}
 	}
 }
