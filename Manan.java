@@ -268,6 +268,7 @@ public class Manan
         indiHash.remove("");
         famHash.remove("");
         ArrayList<String> res = new ArrayList<>();
+        ArrayList<String> exists = new ArrayList<>();
         HashMap<String, String> tempHash = new HashMap<>();
         for (String key : famHash.keySet())
         {
@@ -293,10 +294,19 @@ public class Manan
 
                                     if (indiHash.get(key1).get(3).equals(tempHash.get(indiHash.get(key1).get(1))))
                                     {
-                                        System.out.println("ERROR US25: FAMILY: " + key + ": No more than one child with the same name and birth date should appear in a family!");
-                                        System.out.println("SAME CHILD NAME: " + indiHash.get(key1).get(1) + " \tSAME BIRTH DATE: " + indiHash.get(key1).get(3));
-                                        System.out.println();
-                                        res.add("INCORRECT");
+                                        String temp = indiHash.get(key1).get(1) + indiHash.get(key1).get(3);
+                                        if (!exists.contains(temp))
+                                        {
+                                            System.out.println("ERROR US25: FAMILY: " + key + ": No more than one child with the same name and birth date should appear in a family!");
+                                            System.out.println("SAME CHILD NAME: " + indiHash.get(key1).get(1) + " \tSAME BIRTH DATE: " + indiHash.get(key1).get(3));
+                                            System.out.println();
+                                            res.add("INCORRECT");
+                                            exists.add(temp);
+                                        } else
+                                        {
+                                            exists.add(temp);
+                                            res.add("INCORRECT");
+                                        }
                                     } else
                                     {
                                         res.add("CORRECT");
@@ -311,7 +321,6 @@ public class Manan
                     }
                 } else
                 {
-                    //System.out.println("CORRECT hai");
                     res.add("CORRECT");
                 }
             }
