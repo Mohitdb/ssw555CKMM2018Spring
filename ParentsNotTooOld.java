@@ -70,19 +70,29 @@ public class ParentsNotTooOld {
 					System.out.println("Error: Individual " + wID + " named " + motherName + " is younger than her children!");
 				}
 				
-				if (comparison.equals("Child is older than Father!"))
+				else if (comparison.equals("Child is older than Father!"))
 				{
 					System.out.println("Error: Individual " + hID + " named " + fatherName + " is younger than his children!");
 				}
 				
-				if (comparison.equals("Mother is 60 years older than child!"))
+				else if (comparison.equals("Mother is 60 years older than child!"))
 				{
 					System.out.println("Error: Individual " + wID + " named " + motherName + " is " + motherChild + " years older than her youngest child!");
 				}
 				
-				if (comparison.equals("Father is 80 years older than child!"))
+				else if (comparison.equals("Father is 80 years older than child!"))
 				{
 					System.out.println("Error: Individual " + hID + " named " + fatherName + " is " + fatherChild + " years older than his youngest child!");
+				}
+				
+				else if (comparison.equals("Both Parents Too Old!"))
+				{
+					System.out.println("Error: Individual " + hID + " named " + fatherName + " is " + fatherChild + " years older than his youngest child. Individual " + wID + " is " + motherChild + " years older than her youngest child!");
+				}
+				
+				else if (comparison.equals("Child Older than both Parents!"))
+				{
+					System.out.println("Error: Individual " + hID + " named " + fatherName + " and individual " + wID + " named " + motherName +" are younger than their youngest child!");
 				}
 		}
 }
@@ -173,19 +183,34 @@ public class ParentsNotTooOld {
 			result = "Child is older than Mother!";
 		}
 		
-		if (fatherAge < childAge)
+		else if (fatherAge < childAge)
 		{
 			result = "Child is older than Father!";
 		}
 		
-		if (motherChild > 60)
+		else if (motherChild > 60)
 		{
 			result = "Mother is 60 years older than child!";
 		}
 		
-		if (fatherChild > 80)
+		else if (fatherChild > 80)
 		{
 			result = "Father is 80 years older than child!";
+		}
+		
+		else if (motherChild > 60 && fatherChild > 80)
+		{
+			result = "Both Parents Too Old!";
+		}
+		
+		else if (motherAge < childAge && fatherAge < childAge)
+		{
+			result = "Child Older than both Parents!";
+		}
+		
+		else
+		{
+			result = "Error!";
 		}
 		
 		return result;
