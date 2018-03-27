@@ -13,7 +13,7 @@ public class Siblings {
 		this.indiHash = indiHash;
 	}
 	
-	public void listMultBirths() {
+	public ArrayList<ArrayList<String>> listMultBirths() {
 		ArrayList<String> famInfo = new ArrayList<String>();
 		ArrayList<String> indiInfo = new ArrayList<String>();
 		ArrayList<String> sameBday = new ArrayList<String>();
@@ -46,6 +46,7 @@ public class Siblings {
 		for (ArrayList<String> ppl: multBirths) {
 			System.out.println(ppl);
 		}
+		return multBirths;
 	}
 	
 	public void checkSiblings(){
