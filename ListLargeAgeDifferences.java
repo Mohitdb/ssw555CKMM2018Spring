@@ -51,41 +51,44 @@ public class ListLargeAgeDifferences {
 			
 			String marriedDate = famInfo.get(5);
 			
-			mDate = marriedDate.split(" ");
-			
-			monthNumber = dateNumber(mDate[1]);
-			
-			formattedMarriageDate = mDate[2] + "-" + monthNumber + "-" + mDate[0];
-			
-			try 
+			if (!marriedDate.equals(""))
 			{
-				wedding = simpleDateFormat.parse(formattedMarriageDate);
+				mDate = marriedDate.split(" ");
 				
-
-				husAge = findAgeWhenMarried(hID, wedding);
+				monthNumber = dateNumber(mDate[1]);
+				
+				formattedMarriageDate = mDate[2] + "-" + monthNumber + "-" + mDate[0];
+				
+				try 
+				{
+					wedding = simpleDateFormat.parse(formattedMarriageDate);
 					
-				wifeAge = findAgeWhenMarried(wID, wedding);
-				
-				
-				comparison = birthDateComparison(wifeAge, husAge);
-							
-				difference = returnAgeDifference(wifeAge, husAge);
-							
-				if (comparison.equals("Wife Too Old!"))
-				{
-					System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + wifeName + " is more than double the age of " + husName + "!");
+
+					husAge = findAgeWhenMarried(hID, wedding);
+						
+					wifeAge = findAgeWhenMarried(wID, wedding);
+					
+					
+					comparison = birthDateComparison(wifeAge, husAge);
+								
+					difference = returnAgeDifference(wifeAge, husAge);
+								
+					if (comparison.equals("Wife Too Old!"))
+					{
+						System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + wifeName + " is more than double the age of " + husName + "!");
+					}
+								
+					if (comparison.equals("Hus Too Old!"))
+					{
+						System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + husName + " is more than double the age of " + wifeName + "!");
+					}
+					
 				}
-							
-				if (comparison.equals("Hus Too Old!"))
-				{
-					System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + husName + " is more than double the age of " + wifeName + "!");
-				}
 				
-			}
-			
-			catch (ParseException e)
-			{
-				e.printStackTrace();
+				catch (ParseException e)
+				{
+					e.printStackTrace();
+				}
 			}
 			
 		}
@@ -109,29 +112,32 @@ public class ListLargeAgeDifferences {
 			{
 				bDate = indiInfo.get(3);
 				
-				birthDate = bDate.split(" ");
-				
-				month = dateNumber(birthDate[1]);
-				
-				formattedBirthDate = birthDate[2] + "-" + month + "-" + birthDate[0];
-				
-				try 
+				if (!bDate.equals(""))
 				{
-					birthday = simpleDateFormat.parse(formattedBirthDate);
+					birthDate = bDate.split(" ");
 					
-					double diff = Math.abs(marriedDate.getTime() - birthday.getTime());
+					month = dateNumber(birthDate[1]);
 					
-					double age = diff / MillToYear;
+					formattedBirthDate = birthDate[2] + "-" + month + "-" + birthDate[0];
 					
-					Age = (int) age;
+					try 
+					{
+						birthday = simpleDateFormat.parse(formattedBirthDate);
+						
+						double diff = Math.abs(marriedDate.getTime() - birthday.getTime());
+						
+						double age = diff / MillToYear;
+						
+						Age = (int) age;
+						
+						return Age;
+					}
 					
-					return Age;
-				}
-				
-				catch (ParseException e)
-				{
-					e.printStackTrace();
-					return 0;
+					catch (ParseException e)
+					{
+						e.printStackTrace();
+						return 0;
+					}
 				}
 			}
 		}
@@ -145,7 +151,9 @@ public class ListLargeAgeDifferences {
 		
 		if (wifeAge > husAge)
 		{
-			if (wifeAge > husAge*2)
+			
+			int comparison = husAge*2;
+			if (wifeAge > comparison)
 			{
 				tooOld = "Wife Too Old!";
 			}
@@ -153,7 +161,8 @@ public class ListLargeAgeDifferences {
 		
 		if (husAge > wifeAge)
 		{
-			if (husAge > wifeAge*2)
+			int comparison = wifeAge*2;
+			if (husAge > comparison)
 			{
 				tooOld = "Hus Too Old!";
 			}

@@ -19,7 +19,7 @@ public class Siblings {
 		ArrayList<String> sameBday = new ArrayList<String>();
 		ArrayList<ArrayList<String>> multBirths = new ArrayList<ArrayList<String>>();
 		
-		System.out.println("===============Caroline's US32 - List multiple births===============");
+		System.out.println("\n===============Caroline's US32 - List multiple births===============");
 		
 		for (String famKey : this.famHash.keySet()) {
 			famInfo = this.famHash.get(famKey);
@@ -50,7 +50,7 @@ public class Siblings {
 	
 	public void checkSiblings(){
 		ArrayList<String> famInfo = new ArrayList<String>();
-		System.out.println("===============Caroline's US15 - Fewer than 15 siblings===============");
+		System.out.println("\n===============Caroline's US15 - Fewer than 15 siblings===============");
 		for (String famKey : this.famHash.keySet()) {
 			famInfo = this.famHash.get(famKey);
 			String [] numChil = famInfo.get(7).split(" ");
