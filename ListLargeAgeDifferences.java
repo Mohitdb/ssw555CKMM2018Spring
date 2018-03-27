@@ -75,12 +75,12 @@ public class ListLargeAgeDifferences {
 								
 					if (comparison.equals("Wife Too Old!"))
 					{
-						System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + wifeName + " is more than double the age of " + husName + "!");
+						System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + wifeName + " is more than double the age of " + husName + " when they were married!");
 					}
 								
 					if (comparison.equals("Hus Too Old!"))
 					{
-						System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + husName + " is more than double the age of " + wifeName + "!");
+						System.out.println("The age difference between Individuals " + hID + " and " + wID + " named " + husName + ", " + wifeName + " respectively is " + difference +". Where age of " + husName + " is more than double the age of " + wifeName + " when they were married!");
 					}
 					
 				}
@@ -124,15 +124,18 @@ public class ListLargeAgeDifferences {
 					{
 						birthday = simpleDateFormat.parse(formattedBirthDate);
 						
-						double diff = Math.abs(marriedDate.getTime() - birthday.getTime());
-						
-						double age = diff / MillToYear;
-						
-						Age = (int) age;
-						
-						return Age;
+						if (!(birthday.getTime() > marriedDate.getTime()))
+						{
+							double diff = Math.abs(marriedDate.getTime() - birthday.getTime());
+							
+							double age = diff / MillToYear;
+							
+							Age = (int) age;
+							
+							return Age;
+						}
 					}
-					
+
 					catch (ParseException e)
 					{
 						e.printStackTrace();
