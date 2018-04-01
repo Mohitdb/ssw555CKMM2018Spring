@@ -5,10 +5,16 @@
  */
 package GedcomParse;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -423,5 +429,148 @@ public class Mohit {
         }
         return temp;
     }
+    
+    public static List<String> ListOfUpcoming30Days(java.util.Date fromDate,
+                                                             java.util.Date toDate) {
+    List<String> listOfDates = new ArrayList();
+    Calendar startC = Calendar.getInstance(Locale.ENGLISH);
+    startC.setTime(fromDate);
+    Calendar endC = Calendar.getInstance(Locale.ENGLISH);
+    endC.setTime(toDate);
+    while (startC.getTimeInMillis() <= endC.getTimeInMillis()){
+        java.util.Date date = startC.getTime();
+        listOfDates.add(new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH).format(date).trim());
+        startC.add(Calendar.DATE, 1);
+    }
+    return listOfDates;
+}
+    
+    public String[] listUpcomingBirthdays(HashMap<String, ArrayList<String>> indiHashmap)
+    {
+        int r=0;
+        String res[]=new String[256];
+        System.out.println("\n\n=>Mohit Sprint 4 User Story 38: List upcoming Birthdays");
+        {
+                Calendar c = Calendar.getInstance(Locale.ENGLISH);
+                c.setTime(new Date());
+                c.add(Calendar.DATE, 30);
+                Date futureDate = c.getTime();
+                List<String> next30Dates = ListOfUpcoming30Days(new Date(), futureDate);
+            for (String key : indiHashmap.keySet()) 
+            {
+                indivalues=indiHashmap.get(key);
+                String a=indivalues.get(3);
+                if(a.matches("") || a.matches("NA"))
+                {
+                    continue;
+                }
+                String temp[]=a.split(" ");
+                for (String dates: next30Dates )
+                {
+                    String temp2[]=dates.split(" ");
+                    if(Integer.parseInt(temp[0])==Integer.parseInt(temp2[0]) && temp[1].matches(temp2[1].toUpperCase()) && indivalues.get(6).matches("True"))
+                    {
+                        System.out.println("Individual with ID "+indivalues.get(0)+ " is alive and has birthdate "+indivalues.get(3)+". Thus, birthday within the next 30 days");
+                        res[r++]=indivalues.get(0)+"\t"+indivalues.get(3);
+                        break;
+                    }
+                }
+            } 
+        }
+        String temp[]=new String[r];
+        for(int l=0;l<r;l++)
+        {
+            temp[l]=res[l];
+        }
+        return temp;
+    }
+    
+    public String[] listUpcomingAnniversaries(HashMap<String, ArrayList<String>> indiHashmap,HashMap<String, ArrayList<String>> famHashmap)
+    {
+        int r=0;
+        String res[]=new String[256];
+        System.out.println("\n\n=>Mohit Sprint 4 User Story 39: List upcoming anniversaries");
+        Calendar c = Calendar.getInstance(Locale.ENGLISH);
+        c.setTime(new Date());
+        c.add(Calendar.DATE, 30);
+        Date futureDate = c.getTime();
+        List<String> next30Dates = ListOfUpcoming30Days(new Date(), futureDate);
+        for (String key : famHashmap.keySet()) 
+            {
+                famvalues=famHashmap.get(key);
+                String a=famvalues.get(5);
+                if(a.matches("") || a.matches("NA"))
+                {
+                    continue;
+                }
+                String b=famvalues.get(1);
+                String d=famvalues.get(3);
+                String temp[]=a.split(" ");
+                boolean flag=true;
+                for (String dates: next30Dates )
+                {
+                    String temp2[]=dates.split(" ");
+                    for(String key2:indiHashmap.keySet())
+                    {
+                        if(b.matches(key2))
+                        {
+                            indivalues=indiHashmap.get(key2);
+                            if(indivalues.get(6).matches("True"))
+                            {
+                                if(flag==false)
+                                {
+                                    flag=false;
+                                }
+                                else{
+                                    flag=true;
+                                }
+                            }
+                            if(indivalues.get(6).matches("False"))
+                            {
+                                flag=false;
+                            }
+                        }
+                        if(d.matches(key2))
+                        {
+                            indivalues=indiHashmap.get(key2);
+                            if(indivalues.get(6).matches("True"))
+                            {
+                                if(flag==false)
+                                {
+                                    flag=false;
+                                }
+                                else{
+                                    flag=true;
+                                }
+                            }
+                            if(indivalues.get(6).matches("False"))
+                            {
+                                flag=false;
+                            }
+                        }
+                    }
+                    if(famvalues.get(6).matches("") || famvalues.get(6).matches("NA"))
+                    {
+                        flag=true;
+                    }
+                    else{
+                        flag=false;
+                    }
+                    if(Integer.parseInt(temp[0])==Integer.parseInt(temp2[0]) && temp[1].matches(temp2[1].toUpperCase()) && flag==true)// && indivalues.get(6).matches("True"))
+                    {
+                        System.out.println("Family with ID "+famvalues.get(0)+ " has a living married couple having marriage date "+famvalues.get(5)+". Thus, marriage anniversary within the next 30 days");
+                        res[r++]=famvalues.get(0)+"\t"+famvalues.get(5);
+                        break;
+                    }
+                }
+            }
+        String temp[]=new String[r];
+        for(int l=0;l<r;l++)
+        {
+            temp[l]=res[l];
+        }
+        return temp;
+    }
+    
     
 }
