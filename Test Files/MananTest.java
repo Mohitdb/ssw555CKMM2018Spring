@@ -1,5 +1,6 @@
 package GedcomParse;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.junit.Assert;
@@ -437,6 +438,86 @@ public class MananTest
         ArrayList<String> expected = new ArrayList<>();
         expected.add("CORRECT");
         expected.add("INCORRECT");
+        Assert.assertEquals(expected, actual);
+    }
+    
+    @Test
+    public void testRecentBirth() throws ParseException
+    {
+        HashMap<String, ArrayList<String>> hashIndi = new HashMap<>();
+        ArrayList<String> tempArrayList1 = new ArrayList<>();
+        ArrayList<String> tempArrayList2 = new ArrayList<>();
+        ArrayList<String> tempArrayList3 = new ArrayList<>();
+        
+        tempArrayList1.add("1");
+        tempArrayList1.add("Mahesh Shah");
+        tempArrayList1.add("");
+        tempArrayList1.add("25 MAR 2018");
+        tempArrayList1.add("");
+        tempArrayList1.add("");
+        hashIndi.put("1", tempArrayList1);
+
+        tempArrayList2.add("2");
+        tempArrayList2.add("Madhav Shah");
+        tempArrayList2.add("");
+        tempArrayList2.add("6 APR 2018");
+        tempArrayList2.add("");
+        tempArrayList2.add("");
+        hashIndi.put("2", tempArrayList2);
+
+        tempArrayList3.add("3");
+        tempArrayList3.add("Jenny Shah");
+        tempArrayList3.add("");
+        tempArrayList3.add("5 JAN 2018");
+        tempArrayList3.add("");
+        tempArrayList3.add("");
+        hashIndi.put("3", tempArrayList3);
+        
+        ArrayList<String> actual=instance.recentBirth(hashIndi);
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("CORRECT");
+        expected.add("CORRECT");
+        expected.add("INCORRECT");
+        Assert.assertEquals(expected, actual);
+    }
+    
+     @Test
+    public void testRecentDeath() throws ParseException
+    {
+        HashMap<String, ArrayList<String>> hashIndi = new HashMap<>();
+        ArrayList<String> tempArrayList1 = new ArrayList<>();
+        ArrayList<String> tempArrayList2 = new ArrayList<>();
+        ArrayList<String> tempArrayList3 = new ArrayList<>();
+        
+        tempArrayList1.add("1");
+        tempArrayList1.add("Mahesh Shah");
+        tempArrayList1.add("");
+        tempArrayList1.add("");
+        tempArrayList1.add("27 MAR 2018");
+        tempArrayList1.add("");
+        hashIndi.put("1", tempArrayList1);
+
+        tempArrayList2.add("2");
+        tempArrayList2.add("Madhav Shah");
+        tempArrayList2.add("");
+        tempArrayList2.add("");
+        tempArrayList2.add("1 MAR 2015");
+        tempArrayList2.add("");
+        hashIndi.put("2", tempArrayList2);
+
+        tempArrayList3.add("3");
+        tempArrayList3.add("Jenny Shah");
+        tempArrayList3.add("");
+        tempArrayList3.add("");
+        tempArrayList3.add("31 MAR 2018");
+        tempArrayList3.add("");
+        hashIndi.put("3", tempArrayList3);
+        
+        ArrayList<String> actual=instance.recentDeath(hashIndi);
+        ArrayList<String> expected = new ArrayList<>();
+        expected.add("CORRECT");
+        expected.add("INCORRECT");
+        expected.add("CORRECT");
         Assert.assertEquals(expected, actual);
     }
 
