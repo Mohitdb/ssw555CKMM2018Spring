@@ -1,11 +1,13 @@
 package GedcomParse;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.text.SimpleDateFormat;
 
 public class Manan
 {
@@ -328,6 +330,96 @@ public class Manan
         return res;
     }
 
+    ArrayList<String> recentBirth(HashMap<String, ArrayList<String>> indiHash) throws ParseException
+    {
+        indiHash.remove("");
+        ArrayList<String> res = new ArrayList<>();
+        System.out.println("\n====================== Manan's User story US35:List Recent Births ======================");
+        Calendar c = Calendar.getInstance();
+        Date today = c.getTime();
+        System.out.println("Today is:\t\t" + today);
+        c.add(Calendar.DATE, -30);
+        Date dateBefore30Days = c.getTime();
+        System.out.println("Date Before 30 days:\t" + dateBefore30Days + "\n");
+        String[] dateString = dateBefore30Days.toString().split(" ");
+        for (String key : indiHash.keySet())
+        {
+            String bdayYear = "";
+            String bdayMonth = "";
+            String bdayDate = "";
+            try
+            {
+                bdayYear = indiHash.get(key).get(3).split(" ")[2];
+                bdayMonth = indiHash.get(key).get(3).split(" ")[1];
+                bdayDate = indiHash.get(key).get(3).split(" ")[0];
+            } catch (ArrayIndexOutOfBoundsException ne)
+            {
+                continue;
+            }
+            String time = Arrays.toString(dateString).split(" ")[3];
+            String sDate6 = bdayDate + "-" + bdayMonth + "-" + bdayYear + " " + time;
+            SimpleDateFormat formatter6 = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+            Date date6 = formatter6.parse(sDate6);
+            if (!date6.after(today))
+            {
+                if (date6.after(dateBefore30Days))
+                {
+                    System.out.println("Name: " + indiHash.get(key).get(1) + "\t\tBirth Date:" + bdayMonth + " " + bdayDate + " " + bdayYear);
+                    res.add("CORRECT");
+                } else
+                {
+                    res.add("INCORRECT");
+                }
+            }
+        }
+        return res;
+    }
+
+    ArrayList<String> recentDeath(HashMap<String, ArrayList<String>> indiHash) throws ParseException
+    {
+        ArrayList<String> res = new ArrayList<>();
+        indiHash.remove("");
+        System.out.println("\n====================== Manan's User story US36:List Recent Deaths ======================");
+        Calendar c = Calendar.getInstance();
+        Date today = c.getTime();
+        System.out.println("Today is:\t\t" + today);
+        c.add(Calendar.DATE, -30);
+        Date dateBefore30Days = c.getTime();
+        System.out.println("Date Before 30 days:\t" + dateBefore30Days + "\n");
+        String[] dateString = dateBefore30Days.toString().split(" ");
+        for (String key : indiHash.keySet())
+        {
+            String ddayYear = "";
+            String ddayMonth = "";
+            String ddayDate = "";
+            try
+            {
+                ddayYear = indiHash.get(key).get(4).split(" ")[2];
+                ddayMonth = indiHash.get(key).get(4).split(" ")[1];
+                ddayDate = indiHash.get(key).get(4).split(" ")[0];
+            } catch (ArrayIndexOutOfBoundsException ai)
+            {
+                continue;
+            }
+            String time = Arrays.toString(dateString).split(" ")[3];
+            String sDate6 = ddayDate + "-" + ddayMonth + "-" + ddayYear + " " + time;
+            SimpleDateFormat formatter6 = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+            Date date6 = formatter6.parse(sDate6);
+            if (!date6.after(today))
+            {
+                if (date6.after(dateBefore30Days))
+                {
+                    System.out.println("Name: " + indiHash.get(key).get(1) + "\t\tDeath Date:" + ddayMonth + " " + ddayDate + " " + ddayYear);
+                    res.add("CORRECT");
+                } else
+                {
+                    res.add("INCORRECT");
+                }
+            }
+        }
+        return res;
+    }
+
     public String dateCal(String firstFromList, String secondFromList)
     {
         String result = "";
@@ -417,24 +509,4 @@ public class Manan
         return monthInt;
     }
 
-//    void recentBirth(HashMap<String, ArrayList<String>> indiHash)
-//    {
-//        Calendar c=Calendar.getInstance();
-//        c.add(Calendar.DATE, -30);
-//        Date dateBefore30Days = c.getTime();
-//        Date
-//        boolean b=dateBefore30Days.
-////        System.out.println(dateBefore30Days.getDate());
-////        System.out.println(dateBefore30Days.getMonth());
-//        String[] dateString =dateBefore30Days.toString().split(" ");
-//        System.out.println(Arrays.toString(dateString));
-//        String month=dateString[1].toUpperCase();
-//        String date=dateString[2];
-//        String year=dateString[5];
-//        System.out.println("Date:"+date+" Month:"+month+" Year:"+year);
-//        String beforeDate=date+"/"+month+"/"+year;
-//        
-//        
-//
-//    }
 }

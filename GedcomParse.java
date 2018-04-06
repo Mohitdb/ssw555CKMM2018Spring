@@ -42,21 +42,21 @@ public class GedcomParse
             };
     
     @SuppressWarnings("resource")
-    public static void parse() throws IOException
+    public static void parse() throws IOException, ParseException
     {
         
         //read file
         // TODO: Change path for our testing file
         String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\sprint3.ged";
-        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\Manan\\mananSprint3.ged";
+        String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\Manan\\mananSprint1234.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\MohitSprint4.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\GitHub Here\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\sprint3.ged";
 
 
         
 //         FileReader fileReader = new FileReader(karanPath);
-//       FileReader fileReader = new FileReader(mananPath);
-       FileReader fileReader = new FileReader(mohitPath);
+       FileReader fileReader = new FileReader(mananPath);
+//       FileReader fileReader = new FileReader(mohitPath);
 //       FileReader fileReader = new FileReader(carolinePath);
         
         BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -385,6 +385,8 @@ public class GedcomParse
 //        int [] resSiblingsByAge=m.siblingsByAge(famHash, indiHash);
         ArrayList<String> resMaleLastNames=m.maleLastNames(famHash,indiHash);
         ArrayList<String> resUniqueFirstNames=m.uniqueFirstNames(famHash,indiHash);
+        ArrayList<String> resRecentBirth = m.recentBirth(indiHash);
+        ArrayList<String> resRecentDeath = m.recentDeath(indiHash);
 
         //--------------------------Karans Space----------------------------
         MarriedAfterDeath md = new MarriedAfterDeath();
@@ -409,7 +411,7 @@ public class GedcomParse
         
     }
 
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws IOException, ParseException
     {
         parse();
         System.out.println("\n******************** Karan's User story US27: Individual Ages in Table ********************");
@@ -471,7 +473,7 @@ public class GedcomParse
             }
             System.out.println();
         }
-        
+//                System.exit(0);
         //--------------------------Mohits Space----------------------------
 
         
