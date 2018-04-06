@@ -43,7 +43,7 @@ public class CorrespondingEntries
 	{
 		ArrayList<String> indiInfo = new ArrayList<String>();
 		
-		ArrayList<String> Ids = null;
+		ArrayList<String> Ids = new ArrayList<String>();
 		
 		for (String indiKey : this.indiHash.keySet())
 		{
@@ -62,7 +62,7 @@ public class CorrespondingEntries
 	{
 		ArrayList<String> famInfo = new ArrayList<String>();
 		
-		ArrayList<String> Ids = null;
+		ArrayList<String> Ids = new ArrayList<String>();
 		
 		for (String famKey : this.famHash.keySet())
 		{

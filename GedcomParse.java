@@ -54,8 +54,8 @@ public class GedcomParse
 
 
         
-//         FileReader fileReader = new FileReader(karanPath);
-       FileReader fileReader = new FileReader(mananPath);
+         FileReader fileReader = new FileReader(karanPath);
+//       FileReader fileReader = new FileReader(mananPath);
 //       FileReader fileReader = new FileReader(mohitPath);
 //       FileReader fileReader = new FileReader(carolinePath);
         
@@ -400,6 +400,12 @@ public class GedcomParse
         
         ParentsNotTooOld pa = new ParentsNotTooOld();
         pa.ParentsNotTooOld(indiHash, famHash);
+        
+        CorrespondingEntries ce = new CorrespondingEntries();
+        ce.CorrespondingEntries(indiHash, famHash);
+        
+        UniqueFamiliesBySpouses fs = new UniqueFamiliesBySpouses();
+        fs.uniqueFamiliesBySpouses(famHash);
         
         //--------------------------Carolines Space-------------------------
         
