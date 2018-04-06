@@ -12,7 +12,7 @@ public class UniqueFamiliesBySpouses
 	{	
 		System.out.println("\n******************** Karan's User story US24: Unique Families By Spouses **********************\n");
 		
-		ArrayList<String> result = new ArrayList<String>;
+		ArrayList<String> result = new ArrayList<String>();
 		
 		this.famHash = famHash;
 		
@@ -35,7 +35,7 @@ public class UniqueFamiliesBySpouses
 		ArrayList<String> wIds = new ArrayList<String>();
 		ArrayList<String> weddingDates = new ArrayList<String>();
 		
-		ArrayList<String> result = new ArrayList<String>;
+		ArrayList<String> result = new ArrayList<String>();
 		
 		for (String famKey : this.famHash.keySet())
 		{
@@ -52,9 +52,9 @@ public class UniqueFamiliesBySpouses
 			
 			for (int i = 0; i < weddingDates.size(); i++)
 			{
-				if (marriedDate.equals(weddingDates.get(i)) && hID.equals(hIds.get(i)) && wID.equals(wIds.get(i))))
+				if (marriedDate.equals(weddingDates.get(i)) && hID.equals(hIds.get(i)) && wID.equals(wIds.get(i)))
 				{
-					result.add("Error: Family ID " + famID + " with Husband " + hID + " and Wife " + wID + " is a duplicate of " + famIds[i] + "!";
+					result.add("Error: Family ID " + famID + " with Husband " + hID + " and Wife " + wID + " is a duplicate of " + famIds.get(i) + "!");
 				}
 				
 				else 

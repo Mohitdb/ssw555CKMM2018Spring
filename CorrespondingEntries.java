@@ -49,7 +49,7 @@ public class CorrespondingEntries
 		{
 			indiInfo = this.indiHash.get(indiKey);
 			
-			while (indiKey != null)
+			if (indiKey != null)
 			{
 				Ids.add(indiKey);
 			}
@@ -72,17 +72,17 @@ public class CorrespondingEntries
 			String wID = famInfo.get(3);
 			String[] cID = famInfo.get(7).split(" ");
 			
-			while (!hID.equals(" "))
+			if (!hID.equals(" "))
 			{
 				Ids.add(hID);
 			}
 			
-			while (!wID.equals(" "))
+			if (!wID.equals(" "))
 			{
 				Ids.add(wID);
 			}
 			
-			while(cID != null)
+			if (cID != null)
 			{
 				for (int i = 0; i < cID.length; i++)
 				{
@@ -104,7 +104,7 @@ public class CorrespondingEntries
 		{
 			indiInfo = this.indiHash.get(indiKey);
 			
-			while (!indiKey.equals(" "))
+			if (!indiKey.equals(" "))
 			{
 				for (int i = 0; i < famIds.size(); i++)
 				{
@@ -114,7 +114,7 @@ public class CorrespondingEntries
 					}
 				}
 				
-				result = "Individual " + indiKey + "named " + indiInfo.get(1) + " is not in the Families Table!";
+				result = "Individual " + indiKey + " named " + indiInfo.get(1) + " is not in the Families Table!";
 			}
 		}
 		
@@ -135,7 +135,7 @@ public class CorrespondingEntries
 			String wID = famInfo.get(3);
 			String[] cID = famInfo.get(7).split(" ");
 			
-			while (!hID.equals(" "))
+			if (!hID.equals(" "))
 			{
 				for (int i = 0; i < indiIds.size(); i++)
 				{
@@ -148,7 +148,7 @@ public class CorrespondingEntries
 				result = "Individual " + hID + " named " + famInfo.get(2) + "is not in Individuals List!";
 			}
 			
-			while (!wID.equals(" "))
+			if (!wID.equals(" "))
 			{
 				for (int i = 0; i < indiIds.size(); i++)
 				{
@@ -164,7 +164,7 @@ public class CorrespondingEntries
 			
 			for (int j = 0; j < cID.length; j++)
 			{
-				while (!cID[j].equals(" "))
+				if (!cID[j].equals(" "))
 				{
 					for (int i = 0; i < indiIds.size(); i++)
 					{
