@@ -145,7 +145,7 @@ public class CorrespondingEntries
 					}
 				}
 				
-				result = "Individual " + hID + " named " + famInfo.get(2) + "is not in Individuals List!";
+				result = "Individual " + hID + " named " + famInfo.get(2) + " is not in Individuals List!";
 			}
 			
 			if (!wID.equals(" "))
@@ -158,7 +158,7 @@ public class CorrespondingEntries
 					}
 				}
 				
-				result = "Individual " + wID + " named " + famInfo.get(4) + "is not in Individuals List!";
+				result = "Individual " + wID + " named " + famInfo.get(4) + " is not in Individuals List!";
 			}
 			
 			
@@ -174,7 +174,7 @@ public class CorrespondingEntries
 						}
 					}
 					
-					result = "Individual " + cID[j] + " named " + nameFromId(cID[j]) + "is not in Individuals List!";
+					result = "Individual " + cID[j] + " named " + nameFromId(cID[j]) + " is not in Individuals List!";
 				}
 			}
 		}
