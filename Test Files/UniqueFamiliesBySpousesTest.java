@@ -71,8 +71,8 @@ class UniqueFamiliesBySpousesTest {
 		
 		ArrayList<String> results = new ArrayList<String>();
 		
-		results.add("Error: Family ID  F4 with Husband  I6 and Wife I7 named John Sweeney and Kristine Sweeney is a duplicate!");
-		results.add("Error: Family ID  F5 with Husband  I1 and Wife I2 named Justin Sweeney and Pam Janson is a duplicate!");
+		results.add("Error: Family with Husband  I6 and Wife I7 named John Sweeney and Kristine Sweeney is a duplicate!");
+		results.add("Error: Family F5 with Husband  I1 and Wife I2 named Justin Sweeney and Pam Janson is a duplicate!");
 		
 		UniqueFamiliesBySpouses ufs = new UniqueFamiliesBySpouses();
 		

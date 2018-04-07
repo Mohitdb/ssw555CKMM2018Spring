@@ -121,7 +121,7 @@ public class CorrespondingEntries
 			if (!indiKey.equals(" "))
 			{
 				boolean inFam = false;
-				for (int i = 0; i < famIds.size()-1; i++)
+				for (int i = 0; i < famIds.size(); i++)
 				{
 					if (indiKey.equals(famIds.get(i)))
 					{
@@ -162,7 +162,7 @@ public class CorrespondingEntries
 			if (!hID.equals(""))
 			{
 				boolean inIndi = false;
-				for (int i = 0; i < indiIds.size()-1; i++)
+				for (int i = 0; i < indiIds.size(); i++)
 				{
 					if (hID.equals(indiIds.get(i)))
 					{
@@ -186,7 +186,7 @@ public class CorrespondingEntries
 			if (!wID.equals(""))
 			{
 				boolean inIndi = false;
-				for (int i = 0; i < indiIds.size()-1; i++)
+				for (int i = 0; i < indiIds.size(); i++)
 				{
 					if (wID.equals(indiIds.get(i)))
 					{
@@ -216,7 +216,7 @@ public class CorrespondingEntries
 					
 					if (!cID[j].equals(""))
 					{
-						for (int i = 0; i < indiIds.size()-1; i++)
+						for (int i = 0; i < indiIds.size(); i++)
 						{
 							if (cID[j].equals(indiIds.get(i)))
 							{
