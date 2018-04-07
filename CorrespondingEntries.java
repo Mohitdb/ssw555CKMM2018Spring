@@ -10,7 +10,7 @@ public class CorrespondingEntries
 	
 	public void CorrespondingEntries(HashMap<String, ArrayList<String>> indiHash, HashMap<String, ArrayList<String>> famHash)
 	{	
-		System.out.println("\n******************** Karan's User story US26: Corresponding Entries **********************");
+		System.out.println("\n******************** Karan's User story US26: Corresponding Entries **********************\n");
 		
 		this.indiHash = indiHash;
 		this.famHash = famHash;
@@ -24,18 +24,30 @@ public class CorrespondingEntries
 		
 		ArrayList<String> fams = famIds(famHash);
 		
-		String individualsInFam = indiInFam(fams, indiHash);
+		ArrayList<String> individualsInFam = indiInFam(fams, indiHash);
 		
-		String famsInIndi = famInIndi(individuals, famHash);
+		ArrayList<String> famsInIndi = famInIndi(individuals, famHash);
 		
-		if (!individualsInFam.equals(" "))
+		if (!individualsInFam.isEmpty())
 		{
-			System.out.println(individualsInFam);
+			for (String s: individualsInFam)
+			{
+				if (!s.equals(""))
+				{
+					System.out.println(s);
+				}
+			}
 		}
 		
-		if (!famsInIndi.equals(" "))
+		if (!famsInIndi.isEmpty())
 		{
-			System.out.println(famsInIndi);
+			for (String c: famsInIndi)
+			{
+				if (!c.equals(""))
+				{
+					System.out.println(c);
+				}
+			}
 		}
 	}
 	
@@ -96,11 +108,11 @@ public class CorrespondingEntries
 		return Ids;
 	}
 	
-	public String indiInFam(ArrayList<String> famIds, HashMap<String, ArrayList<String>> indiHash)
+	public ArrayList<String> indiInFam(ArrayList<String> famIds, HashMap<String, ArrayList<String>> indiHash)
 	{
 		ArrayList<String> indiInfo = new ArrayList<String>();
 		
-		String result = "";
+		ArrayList<String> result = new ArrayList<String>();
 		
 		for (String indiKey : this.indiHash.keySet())
 		{
@@ -108,31 +120,36 @@ public class CorrespondingEntries
 			
 			if (!indiKey.equals(" "))
 			{
+				boolean inFam = false;
 				for (int i = 0; i < famIds.size(); i++)
 				{
 					if (indiKey.equals(famIds.get(i)))
 					{
-						result = "";
+						inFam = true;
 						break;
-					}
-					
-					else 
-					{
-						result = "Error: Individual " + indiKey + " named " + indiInfo.get(1) + " is not in the Families Table!";
 					}
 				}
 				
+				if (inFam == true)
+				{
+					result.add("");
+				}
+				
+				else
+				{
+					result.add("Error: Individual " + indiKey + " named " + indiInfo.get(1) + " is not in the Families Table!");
+				}
 			}
 		}
 		
 		return result;
 	}
 	
-	public String famInIndi(ArrayList<String> indiIds, HashMap<String, ArrayList<String>> famHash)
+	public ArrayList<String> famInIndi(ArrayList<String> indiIds, HashMap<String, ArrayList<String>> famHash)
 	{
 		ArrayList<String> famInfo = new ArrayList<String>();
 		
-		String result = "";
+		ArrayList<String> result = new ArrayList<String>();
 		
 		for (String famKey : this.famHash.keySet())
 		{
@@ -144,36 +161,48 @@ public class CorrespondingEntries
 			
 			if (!hID.equals(" "))
 			{
+				boolean inIndi = false;
 				for (int i = 0; i < indiIds.size(); i++)
 				{
 					if (hID.equals(indiIds.get(i)))
 					{
-						result = "";
+						inIndi = true;
 						break;
 					}
 					
-					else
-					{
-						result = "Error: Individual " + hID + " named " + famInfo.get(2) + " is not in the Individuals Table!";
-					}
 				}
 				
+				if (inIndi == true)
+				{
+					result.add("");
+				}
+				
+				else 
+				{
+					result.add("Error: Individual " + hID + " named " + famInfo.get(2) + " is not in the Individuals Table!");
+				}
 			}
 			
 			if (!wID.equals(" "))
 			{
+				boolean inIndi = false;
 				for (int i = 0; i < indiIds.size(); i++)
 				{
 					if (wID.equals(indiIds.get(i)))
 					{
-						result = "";
+						inIndi = true;
 						break;
 					}
-					
-					else 
-					{
-						result = "Error: Individual " + wID + " named " + famInfo.get(4) + " is not in the Individuals Table!";
-					}
+				}
+				
+				if (inIndi == true)
+				{
+					result.add("");
+				}
+				
+				else
+				{
+					result.add("Error: Individual " + wID + " named " + famInfo.get(4) + " is not in the Individuals Table!");
 				}
 				
 			}
@@ -183,20 +212,26 @@ public class CorrespondingEntries
 				String[] cID = cIDs.split(" ");
 				for (int j = 0; j < cID.length; j++)
 				{
+					boolean inIndi = false;
 					for (int i = 0; i < indiIds.size(); i++)
 					{
 						if (cID[j].equals(indiIds.get(i)))
 						{
-							result = "";
+							inIndi = true;
 							break;
 						}
 							
-						else 
-						{
-							result = "Error: Individual " + cID[j] + " named " + nameFromId(cID[j]) + " is not in the Individuals Table!";
-						}
 					}
-		
+					
+					if (inIndi == true)
+					{
+						result.add("");
+					}
+					
+					else 
+					{
+						result.add("Error: Individual " + cID[j] + " named " + nameFromId(cID[j]) + " is not in the Individuals Table!");
+					}
 				}
 			}
 		}
