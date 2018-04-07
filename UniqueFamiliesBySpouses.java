@@ -49,12 +49,10 @@ public class UniqueFamiliesBySpouses
 			String wifeName = famInfo.get(4);
 			
 			String marriedDate = famInfo.get(5);
-			
-			for (int i = 0; i < weddingDates.size(); i++)
-			{
-				if (marriedDate.equals(weddingDates.get(i)) && hID.equals(hIds.get(i)) && wID.equals(wIds.get(i)))
+	
+				if (weddingDates.contains(marriedDate) && hIds.contains(hID) && wIds.contains(wID))
 				{
-					result.add("Error: Family ID " + famID + " with Husband " + hID + " and Wife " + wID + " is a duplicate of " + famIds.get(i) + "!");
+					result.add("Error: Family ID " + famID + " with Husband " + hID + " and Wife " + wID + " named " + husName + " and " + wifeName + " is a duplicate!");
 				}
 				
 				else 
@@ -64,7 +62,6 @@ public class UniqueFamiliesBySpouses
 					wIds.add(wID);
 					weddingDates.add(marriedDate);
 				}
-			}
 			
 		}
 		

@@ -114,7 +114,7 @@ public class CorrespondingEntries
 					}
 				}
 				
-				result = "Individual " + indiKey + " named " + indiInfo.get(1) + " is not in the Families Table!";
+				result = "Error: Individual " + indiKey + " named " + indiInfo.get(1) + " is not in the Families Table!";
 			}
 		}
 		
@@ -145,7 +145,7 @@ public class CorrespondingEntries
 					}
 				}
 				
-				result = "Individual " + hID + " named " + famInfo.get(2) + " is not in Individuals List!";
+				result = "Error: Individual " + hID + " named " + famInfo.get(2) + " is not in Individuals List!";
 			}
 			
 			if (!wID.equals(" "))
@@ -158,7 +158,7 @@ public class CorrespondingEntries
 					}
 				}
 				
-				result = "Individual " + wID + " named " + famInfo.get(4) + " is not in Individuals List!";
+				result = "Error: Individual " + wID + " named " + famInfo.get(4) + " is not in Individuals List!";
 			}
 			
 			
@@ -174,7 +174,7 @@ public class CorrespondingEntries
 						}
 					}
 					
-					result = "Individual " + cID[j] + " named " + nameFromId(cID[j]) + " is not in Individuals List!";
+					result = "Error: Individual " + cID[j] + " named " + nameFromId(cID[j]) + " is not in Individuals List!";
 				}
 			}
 		}
