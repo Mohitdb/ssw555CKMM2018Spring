@@ -121,7 +121,7 @@ public class CorrespondingEntries
 			if (!indiKey.equals(" "))
 			{
 				boolean inFam = false;
-				for (int i = 0; i < famIds.size(); i++)
+				for (int i = 0; i < famIds.size()-1; i++)
 				{
 					if (indiKey.equals(famIds.get(i)))
 					{
@@ -159,10 +159,10 @@ public class CorrespondingEntries
 			String wID = famInfo.get(3);
 			String cIDs = famInfo.get(7);
 			
-			if (!hID.equals(" "))
+			if (!hID.equals(""))
 			{
 				boolean inIndi = false;
-				for (int i = 0; i < indiIds.size(); i++)
+				for (int i = 0; i < indiIds.size()-1; i++)
 				{
 					if (hID.equals(indiIds.get(i)))
 					{
@@ -179,14 +179,14 @@ public class CorrespondingEntries
 				
 				else 
 				{
-					result.add("Error: Individual " + hID + " named " + famInfo.get(2) + " is not in the Individuals Table!");
+					result.add("Error: Individual " + hID + " is not in the Individuals Table!");
 				}
 			}
 			
-			if (!wID.equals(" "))
+			if (!wID.equals(""))
 			{
 				boolean inIndi = false;
-				for (int i = 0; i < indiIds.size(); i++)
+				for (int i = 0; i < indiIds.size()-1; i++)
 				{
 					if (wID.equals(indiIds.get(i)))
 					{
@@ -202,7 +202,7 @@ public class CorrespondingEntries
 				
 				else
 				{
-					result.add("Error: Individual " + wID + " named " + famInfo.get(4) + " is not in the Individuals Table!");
+					result.add("Error: Individual " + wID + " is not in the Individuals Table!");
 				}
 				
 			}
@@ -213,24 +213,28 @@ public class CorrespondingEntries
 				for (int j = 0; j < cID.length; j++)
 				{
 					boolean inIndi = false;
-					for (int i = 0; i < indiIds.size(); i++)
+					
+					if (!cID[j].equals(""))
 					{
-						if (cID[j].equals(indiIds.get(i)))
+						for (int i = 0; i < indiIds.size()-1; i++)
 						{
-							inIndi = true;
-							break;
+							if (cID[j].equals(indiIds.get(i)))
+							{
+								inIndi = true;
+								break;
+							}
+								
 						}
-							
-					}
-					
-					if (inIndi == true)
-					{
-						result.add("");
-					}
-					
-					else 
-					{
-						result.add("Error: Individual " + cID[j] + " named " + nameFromId(cID[j]) + " is not in the Individuals Table!");
+						
+						if (inIndi == true)
+						{
+							result.add("");
+						}
+						
+						else 
+						{
+							result.add("Error: Individual " + cID[j] + " is not in the Individuals Table!");
+						}
 					}
 				}
 			}
