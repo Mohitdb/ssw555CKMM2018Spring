@@ -10,7 +10,7 @@ public class CorrespondingEntries
 	
 	public void CorrespondingEntries(HashMap<String, ArrayList<String>> indiHash, HashMap<String, ArrayList<String>> famHash)
 	{	
-		System.out.println("\n******************** Karan's User story US26: Corresponding Entries **********************\n");
+		System.out.println("\n******************** Karan's User story US26: Corresponding Entries **********************");
 		
 		this.indiHash = indiHash;
 		this.famHash = famHash;
@@ -70,7 +70,7 @@ public class CorrespondingEntries
 			
 			String hID = famInfo.get(1);
 			String wID = famInfo.get(3);
-			String[] cID = famInfo.get(7).split(" ");
+			String cIDs = famInfo.get(7);
 			
 			if (!hID.equals(" "))
 			{
@@ -82,8 +82,10 @@ public class CorrespondingEntries
 				Ids.add(wID);
 			}
 			
-			if (cID != null)
+			if (!cIDs.equals(""))
 			{
+				String[] cID = cIDs.split(" ");
+				
 				for (int i = 0; i < cID.length; i++)
 				{
 					Ids.add(cID[i]);
@@ -111,10 +113,15 @@ public class CorrespondingEntries
 					if (indiKey.equals(famIds.get(i)))
 					{
 						result = "";
+						break;
+					}
+					
+					else 
+					{
+						result = "Error: Individual " + indiKey + " named " + indiInfo.get(1) + " is not in the Families Table!";
 					}
 				}
 				
-				result = "Error: Individual " + indiKey + " named " + indiInfo.get(1) + " is not in the Families Table!";
 			}
 		}
 		
@@ -133,7 +140,7 @@ public class CorrespondingEntries
 			
 			String hID = famInfo.get(1);
 			String wID = famInfo.get(3);
-			String[] cID = famInfo.get(7).split(" ");
+			String cIDs = famInfo.get(7);
 			
 			if (!hID.equals(" "))
 			{
@@ -142,10 +149,15 @@ public class CorrespondingEntries
 					if (hID.equals(indiIds.get(i)))
 					{
 						result = "";
+						break;
+					}
+					
+					else
+					{
+						result = "Error: Individual " + hID + " named " + famInfo.get(2) + " is not in the Individuals Table!";
 					}
 				}
 				
-				result = "Error: Individual " + hID + " named " + famInfo.get(2) + " is not in the Individuals Table!";
 			}
 			
 			if (!wID.equals(" "))
@@ -155,26 +167,36 @@ public class CorrespondingEntries
 					if (wID.equals(indiIds.get(i)))
 					{
 						result = "";
+						break;
+					}
+					
+					else 
+					{
+						result = "Error: Individual " + wID + " named " + famInfo.get(4) + " is not in the Individuals Table!";
 					}
 				}
 				
-				result = "Error: Individual " + wID + " named " + famInfo.get(4) + " is not in the Individuals Table!";
 			}
 			
-			
-			for (int j = 0; j < cID.length; j++)
+			if (!cIDs.equals(" "))
 			{
-				if (!cID[j].equals(" "))
+				String[] cID = cIDs.split(" ");
+				for (int j = 0; j < cID.length; j++)
 				{
 					for (int i = 0; i < indiIds.size(); i++)
 					{
 						if (cID[j].equals(indiIds.get(i)))
 						{
 							result = "";
+							break;
+						}
+							
+						else 
+						{
+							result = "Error: Individual " + cID[j] + " named " + nameFromId(cID[j]) + " is not in the Individuals Table!";
 						}
 					}
-					
-					result = "Error: Individual " + cID[j] + " named " + nameFromId(cID[j]) + " is not in the Individuals Table!";
+		
 				}
 			}
 		}

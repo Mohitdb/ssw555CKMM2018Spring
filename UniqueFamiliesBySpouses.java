@@ -52,7 +52,7 @@ public class UniqueFamiliesBySpouses
 	
 				if (weddingDates.contains(marriedDate) && hIds.contains(hID) && wIds.contains(wID))
 				{
-					result.add("Error: Family ID " + famID + " with Husband " + hID + " and Wife " + wID + " named " + husName + " and " + wifeName + " is a duplicate!");
+					result.add("Error: Family ID " + famKey + " with Husband " + hID + " and Wife " + wID + " named " + husName + " and " + wifeName + " is a duplicate!");
 				}
 				
 				else 
