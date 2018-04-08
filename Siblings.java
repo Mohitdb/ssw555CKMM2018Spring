@@ -52,7 +52,7 @@ public class Siblings {
 	public void lessThan5Births(){
 		ArrayList<ArrayList<String>> multBirths = listMultBirths();
 		
-		System.out.println("\n===============Caroline's US15 - Multiple births <= 5 ===============");
+		System.out.println("\n===============Caroline's US14 - Multiple births <= 5 ===============");
 		
 		for (ArrayList<String> ppl: multBirths) {
 			if(ppl.size() > 5) {
