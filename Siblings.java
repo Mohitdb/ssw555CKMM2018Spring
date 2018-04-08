@@ -49,6 +49,18 @@ public class Siblings {
 		return multBirths;
 	}
 	
+	public void lessThan5Births(){
+		ArrayList<ArrayList<String>> multBirths = listMultBirths();
+		
+		System.out.println("\n===============Caroline's US15 - Multiple births <= 5 ===============");
+		
+		for (ArrayList<String> ppl: multBirths) {
+			if(ppl.size() > 5) {
+				System.out.println("ERROR US14: Family containing " + ppl + " has more than 5 children born at the same time" );
+			}	
+		}
+	}
+	
 	public void checkSiblings(){
 		ArrayList<String> famInfo = new ArrayList<String>();
 		System.out.println("\n===============Caroline's US15 - Fewer than 15 siblings===============");
