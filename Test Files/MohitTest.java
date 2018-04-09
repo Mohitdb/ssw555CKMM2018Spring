@@ -237,4 +237,82 @@ public class MohitTest {
         Assert.assertArrayEquals( expected1, res);
     }
     
+    @Test
+    public void testlistUpcomingBirthdays()
+    {
+        HashMap<String, ArrayList<String>> individual = new HashMap<>();
+        ArrayList<String> indivalues=new ArrayList<>();
+        Mohit m=new Mohit();
+        String indid[]=new String[]{"I1","I2","I3","I4","I5","I6"};
+        String indname[]=new String[]{"DAVID","JANICE","JON","PREETI","DAVID","SASHA"};
+        String indgender[]=new String[]{"M","F","M","F","M","F"};
+        String indbdate[]=new String[]{"22 APR 1980","2 JUN 1979","30 APR 2000","4 NOV 2000","31 APR JUN 1980","25 APR 2007"};
+        String indisalive[]=new String[]{"True","True","True","True","True","True"};
+        String indddate[]=new String[]{"","","","","",""};
+        for(int i=0;i<6;i++)
+        {
+            indivalues.clear();
+            indivalues.add(indid[i]);
+            indivalues.add(indname[i]);
+            indivalues.add(indgender[i]);
+            indivalues.add(indbdate[i]);
+            indivalues.add(indddate[i]);
+            indivalues.add(null);
+            indivalues.add(indisalive[i]);
+            individual.put(indid[i], new ArrayList(indivalues));
+        }
+        String expected1[]=new String[]{"I1\t22 APR 1980","I3\t30 APR 2000","I6\t25 APR 2007"};
+        String res[]=m.listUpcomingBirthdays(individual);
+        Assert.assertArrayEquals( expected1, res);
+    }
+    
+    @Test public void testlistUpcomingAnniversaries()
+    {
+        HashMap<String, ArrayList<String>> individual = new HashMap<>();
+        HashMap<String, ArrayList<String>> family = new HashMap<>();
+        ArrayList<String> famvalues=new ArrayList<>();
+        ArrayList<String> indivalues=new ArrayList<>();
+        Mohit m=new Mohit();
+        String indid[]=new String[]{"I1","I2","I3","I4","I5","I6"};
+        String indname[]=new String[]{"DAVID","JANICE","JON","PREETI","STEVE","SASHA"};
+        String indgender[]=new String[]{"M","F","M","F","M","F"};
+        String indbdate[]=new String[]{"29 FEB 1981","29 FEB 1980","3 JUL 2000","4 NOV 2000","21 JUL 2006","20 JUN 2007"};
+        String indisalive[]=new String[]{"true","true","true","true","true","true"};
+        String indddate[]=new String[]{"","","","","",""};
+        String familyid[]=new String[]{"F1","F2","F3"};
+        String husbid[]=new String[]{"I1","I3","I5"};
+        String husbname[]=new String[]{"DAVID","JON","STEVE"};
+        String wifeid[]=new String[]{"I2","I4","I6"};
+        String wifename[]=new String[]{"JANICE","PREETI","SASHA"};
+        String marrdate[]=new String[]{"25 APR 1990","30 APR 2000","20 JUL 2005"};
+        String divdate[]=new String[]{"","",""};
+        String expected1[]=new String[]{"F1\t25 APR 1990","F2\t30 APR 2000"};
+        for(int i=0;i<6;i++)
+        {
+            indivalues.clear();
+            indivalues.add(indid[i]);
+            indivalues.add(indname[i]);
+            indivalues.add(indgender[i]);
+            indivalues.add(indbdate[i]);
+            indivalues.add(indddate[i]);
+            indivalues.add(null);
+            indivalues.add(indisalive[i]);
+            individual.put(indid[i], new ArrayList(indivalues));
+        }
+        for(int i=0;i<3;i++)
+        {
+            famvalues.clear();
+            famvalues.add(familyid[i]);
+            famvalues.add(husbid[i]);
+            famvalues.add(husbname[i]);
+            famvalues.add(wifeid[i]);
+            famvalues.add(wifename[i]);
+            famvalues.add(marrdate[i]);
+            famvalues.add(divdate[i]);
+            family.put(familyid[i], new ArrayList(famvalues));
+        }
+        String res[]=m.listUpcomingAnniversaries(individual,family);
+        Assert.assertArrayEquals( expected1, res);
+    }
+    
 }
