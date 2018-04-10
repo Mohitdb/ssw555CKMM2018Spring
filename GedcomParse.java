@@ -413,7 +413,11 @@ public class GedcomParse
        sb.checkSiblings();
        sb.listMultBirths();
        sb.lessThan5Births(); 
-        
+       
+       
+        DateChecker dc =new DateChecker(famHash, indiHash);
+        dc.checkFamInfo();
+        dc.checkIndivInfo();
         
     }
 
