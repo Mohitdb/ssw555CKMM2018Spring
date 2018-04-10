@@ -32,11 +32,13 @@ public class Siblings {
 				if(!childrenIDs[i].toString().equals("")) {
 					String child = childrenIDs[i];
 					sameBday.add(indiHash.get(child).get(1));
-					for(int j = i+1; j < childrenIDs.length; j++) {	
-						if(indiHash.get(child).get(3).equals(indiHash.get(childrenIDs[j]).get(3))) {
-							sameBday.add(indiHash.get(childrenIDs[j]).get(1));
-							childrenIDs[j] = "";
-						}
+					for(int j = i+1; j < childrenIDs.length; j++) {
+						if(!childrenIDs[j].toString().equals("")) {
+							if(indiHash.get(child).get(3).equals(indiHash.get(childrenIDs[j]).get(3))) {
+								sameBday.add(indiHash.get(childrenIDs[j]).get(1));
+								childrenIDs[j] = "";
+							}
+						}	
 					}
 				}
 				if(sameBday.size() > 1) {
