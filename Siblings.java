@@ -7,6 +7,7 @@ public class Siblings {
 
 	HashMap<String, ArrayList<String>> famHash;
 	HashMap<String, ArrayList<String>> indiHash;
+	ArrayList<ArrayList<String>> listOfMultBirths;
 	
 	public Siblings(HashMap<String, ArrayList<String>> famHash, HashMap<String, ArrayList<String>> indiHash) {
 		this.famHash = famHash;

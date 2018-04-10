@@ -47,7 +47,7 @@ public class GedcomParse
         
         //read file
         // TODO: Change path for our testing file
-        String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\sprint3.ged";
+        String carolinePath = "C:\\Users\\Caroline Squillante\\workspace\\gedDistributor\\src\\carolinesprint4.ged";
         String mananPath = "D:\\HIGHER STUDIES\\Stevens\\MS SEM 2\\CS 555 Agile methods for software dev\\GedcomParse\\Gedcom Files\\Manan\\mananSprint1234.ged";
         String mohitPath = "C:\\Users\\mohit\\Documents\\NetBeansProjects\\GedcomParse\\build\\classes\\gedcomparse\\MohitSprint4.ged";
         String karanPath = "C:\\Users\\Class2018\\Desktop\\Agile\\Group Work\\GitHub Here\\ssw555CKMM2018Spring\\ssw555CKMM2018Spring\\Gedcom Files\\KaranSprint4.ged";
@@ -411,8 +411,8 @@ public class GedcomParse
         
        Siblings sb = new Siblings(famHash, indiHash);
        sb.checkSiblings();
-       sb.listMultBirths();
-       sb.lessThan5Births(); 
+       //sb.listMultBirths();
+       //sb.lessThan5Births(); 
        
        
         DateChecker dc =new DateChecker(famHash, indiHash);
